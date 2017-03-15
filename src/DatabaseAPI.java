@@ -21,7 +21,8 @@ public class DatabaseAPI
         {
             DatabaseAPI db = new DatabaseAPI();
             db.selectAllSubjectDistinct();
-            db.selectAllCourseNumDistinct("CSCE");
+            db.selectAllCourseNumDistinct("MATH");
+            db.selectCourseProfessors("MATH", 152);
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -54,10 +55,11 @@ public class DatabaseAPI
     {
         //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
         String query1 = "SELECT DISTINCT CourseSubject FROM TamuGrades";
-        System.out.println("Selecting Distinct From Subject");
+        System.out.println("\nSelecting Distinct From Subject");
         Statement selectDistinctSubject = conn.createStatement();
         ResultSet result1 = selectDistinctSubject.executeQuery(query1);
 
+        //printing out the result of the SQL query
         int count = 1;
         while(result1.next())
         {
@@ -67,6 +69,8 @@ public class DatabaseAPI
             count++;
         }
 
+        System.out.println();
+
         String query2 = "SELECT COUNT(DISTINCT CourseSubject) FROM TamuGrades";
         System.out.println("Counting number of subjects in Database");
         Statement countCourses = conn.createStatement();
@@ -74,6 +78,7 @@ public class DatabaseAPI
 
         System.out.println("Getting number of subjects");
 
+        //printing out the result of the SQL query
         while(result2.next())
         {
             int numSubjects = result2.getInt(1);
@@ -81,23 +86,27 @@ public class DatabaseAPI
         }
     }
 
+    //lists all course numbers under a specific subject
     public void selectAllCourseNumDistinct(String courseSubject) throws SQLException
     {
         //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
         String query1 = "SELECT DISTINCT CourseNum FROM TamuGrades " +
                 "WHERE CourseSubject=\"" + courseSubject + "\"";
-        System.out.println("Selecting Distinct From CourseNum");
-        Statement selectDistinctSubject = conn.createStatement();
-        ResultSet result1 = selectDistinctSubject.executeQuery(query1);
+        System.out.println("\nSelecting Distinct From CourseNum");
+        Statement selectDistinctCourseNum = conn.createStatement();
+        ResultSet result1 = selectDistinctCourseNum.executeQuery(query1);
 
+        //printing out the result of the SQL query
         int count = 1;
         while(result1.next())
         {
             int courseNum = result1.getInt("CourseNum");
             // System.out.println(count + " " + subject);
-            System.out.printf("%d\t%s\n", count, courseNum);
+            System.out.printf("%d\t%d\n", count, courseNum);
             count++;
         }
+
+        System.out.println();
 
         String query2 = "SELECT COUNT(DISTINCT CourseNum) AS total FROM TamuGrades " +
                 "WHERE CourseSubject=\"" + courseSubject + "\"";
@@ -108,6 +117,7 @@ public class DatabaseAPI
 
         System.out.println("Getting number of Course Numbers");
 
+        //printing out the result of the SQL query
         while(result2.next())
         {
             int numCourseNums = result2.getInt(1);
@@ -116,6 +126,43 @@ public class DatabaseAPI
         }
     }
 
+    //lists all professors under a specific subject and course number
+    public void selectCourseProfessors(String courseSubject, int courseNum) throws SQLException
+    {
+        //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
+        String query1 = "SELECT DISTINCT Professor From TamuGrades " +
+                "WHERE CourseSubject=\"" + courseSubject + "\" AND CourseNum=" + courseNum;
+        System.out.println("\nLooking for professors of this subject and course");
+        Statement getProfessors = conn.createStatement();
+        ResultSet result1 = getProfessors.executeQuery(query1);
+
+        //printing out the result of the SQL query
+        int count = 1;
+        while(result1.next())
+        {
+            String professor = result1.getString("Professor");
+            System.out.printf("%d\t%s\n", count, professor);
+            count++;
+        }
+
+        System.out.println();
+
+        String query2 = "SELECT COUNT(DISTINCT Professor) AS total FROM TamuGrades " +
+                "WHERE CourseSubject=\"" + courseSubject + "\" AND CourseNum=" + courseNum;
+        System.out.println("Counting number of professors teaching this course");
+        Statement countProfessors = conn.createStatement();
+        ResultSet result2 = countProfessors.executeQuery(query2);
+
+        //printing out the result of the SQL query
+        while(result2.next())
+        {
+            int totalNumProfessors = result2.getInt(1);
+            System.out.println("Number of Professors teaching this course = "
+                    + totalNumProfessors + "\n");
+        }
+    }
+
+    //inserts all of the information given into the database table
     public void insert(String Subject, int courseNum, int sectionNum, Double avgGPA,
                        String professor, int numA, int numB, int numC, int numD, int numF, int numQdrop,
                        String termSemester, int termYear, boolean honors) // throws java.sql.SQLException
