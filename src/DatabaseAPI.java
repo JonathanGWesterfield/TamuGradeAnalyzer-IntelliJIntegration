@@ -23,6 +23,12 @@ public class DatabaseAPI
             db.selectAllSubjectDistinct();
             db.selectAllCourseNumDistinct("MATH");
             db.selectCourseProfessors("MATH", 152);
+            db.selectNumA("CSCE", 121, "MOORE");
+            db.selectNumB("CSCE", 121, "MOORE");
+            db.selectNumC("CSCE", 121, "MOORE");
+            db.selectNumD("CSCE", 121, "MOORE");
+            db.selectNumF("CSCE", 121, "MOORE");
+            db.selectNumQDrop("CSCE", 121, "MOORE");
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -162,6 +168,120 @@ public class DatabaseAPI
         }
     }
 
+    // counts total number of A's given by a professor in a specific subject and course number
+    public int selectNumA(String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        int totalNumA = 0;
+        String query = "SELECT SUM(NumA) AS total FROM TamuGrades WHERE " +
+                "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
+                courseNum + " AND Professor=\"" + professor + "\"";
+        System.out.println("\nCounting number of A's given by this professor in this course");
+        Statement countNumA = conn.createStatement();
+        ResultSet result = countNumA.executeQuery(query);
+
+        while(result.next())
+        {
+            totalNumA = result.getInt(1);
+            System.out.println("The total number of A's is " + totalNumA);
+        }
+        return totalNumA;
+    }
+
+    // counts total number of B's given by a professor in a specific subject and course number
+    public int selectNumB(String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        int totalNumB = 0;
+        String query = "SELECT SUM(NumB) AS total FROM TamuGrades WHERE " +
+                "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
+                courseNum + " AND Professor=\"" + professor + "\"";
+        System.out.println("\nCounting number of B's given by this professor in this course");
+        Statement countNumA = conn.createStatement();
+        ResultSet result = countNumA.executeQuery(query);
+
+        while(result.next())
+        {
+            totalNumB = result.getInt(1);
+            System.out.println("The total number of B's is " + totalNumB);
+        }
+        return totalNumB;
+    }
+
+    // counts total number of C's given by a professor in a specific subject and course number
+    public int selectNumC(String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        int totalNumC = 0;
+        String query = "SELECT SUM(NumC) AS total FROM TamuGrades WHERE " +
+                "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
+                courseNum + " AND Professor=\"" + professor + "\"";
+        System.out.println("\nCounting number of C's given by this professor in this course");
+        Statement countNumC = conn.createStatement();
+        ResultSet result = countNumC.executeQuery(query);
+
+        while(result.next())
+        {
+            totalNumC = result.getInt(1);
+            System.out.println("The total number of C's is " + totalNumC);
+        }
+        return totalNumC;
+    }
+
+    // counts total number of D's given by a professor in a specific subject and course number
+    public int selectNumD(String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        int totalNumD = 0;
+        String query = "SELECT SUM(NumD) AS total FROM TamuGrades WHERE " +
+                "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
+                courseNum + " AND Professor=\"" + professor + "\"";
+        System.out.println("\nCounting number of D's given by this professor in this course");
+        Statement countNumD = conn.createStatement();
+        ResultSet result = countNumD.executeQuery(query);
+
+        while(result.next())
+        {
+            totalNumD = result.getInt(1);
+            System.out.println("The total number of D's is " + totalNumD);
+        }
+        return totalNumD;
+    }
+
+    // counts total number of D's given by a professor in a specific subject and course number
+    public int selectNumF(String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        int totalNumF = 0;
+        String query = "SELECT SUM(NumF) AS total FROM TamuGrades WHERE " +
+                "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
+                courseNum + " AND Professor=\"" + professor + "\"";
+        System.out.println("\nCounting number of F's given by this professor in this course");
+        Statement countNumF = conn.createStatement();
+        ResultSet result = countNumF.executeQuery(query);
+
+        while(result.next())
+        {
+            totalNumF = result.getInt(1);
+            System.out.println("The total number of D's is " + totalNumF);
+        }
+        return totalNumF;
+    }
+
+    // counts total number of QDrops given by a professor in a specific subject and course number
+    public int selectNumQDrop(String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        int totalQDrop = 0;
+        String query = "SELECT SUM(Num_QDrop) AS total FROM TamuGrades WHERE " +
+                "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
+                courseNum + " AND Professor=\"" + professor + "\"";
+        System.out.println("\nCounting number of Q Drops given by this professor in this course");
+        Statement countQDrop = conn.createStatement();
+        ResultSet result = countQDrop.executeQuery(query);
+
+        while(result.next())
+        {
+            totalQDrop = result.getInt(1);
+            System.out.println("The total number of Q Drops is " + totalQDrop);
+        }
+        return totalQDrop;
+    }
+
     //inserts all of the information given into the database table
     public void insert(String Subject, int courseNum, int sectionNum, Double avgGPA,
                        String professor, int numA, int numB, int numC, int numD, int numF, int numQdrop,
@@ -197,28 +317,4 @@ public class DatabaseAPI
         System.out.println("\nDatabase connection closed");
     }
 
-    /* REDUNDANT CODE
-     public Connection createDBConn(String connString, String username, String password)// throws java.sql.SQLException
-    {
-
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection connection1 = DriverManager.getConnection(connString, username, password);
-        System.out.println("Database connection established");
-        return connection1;
-
-        //Try Catch block and return NULL is for testing only, exception propagates through the stack
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection1 = DriverManager.getConnection(connString, username, password);
-            System.out.println("Database connection established");
-            return connection1;
-        }
-        catch (Exception e)
-        {
-            System.err.println("Could not connect to TamuData database");
-            e.printStackTrace();
-        }
-        return null;
-    } REDUNDANT CODE  */
 }
