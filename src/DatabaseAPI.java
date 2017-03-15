@@ -5,14 +5,12 @@
 import java.io.IOException;
 import java.sql.*;
 
-public class DatabaseAPI {
-
-
+public class DatabaseAPI
+{
     private String connectionString = "jdbc:mysql://localhost:8889/TamuData";
     private String password = "Chrome11"; // on laptop password is "root"
     private String username = "root";
     private Connection conn;
-
 
     public static void main(String[] args) {
         String connectionString = "jdbc:mysql://localhost:8889/TamuData";
@@ -23,6 +21,7 @@ public class DatabaseAPI {
         {
             DatabaseAPI db = new DatabaseAPI();
             db.selectAllSubjectDistinct();
+            db.selectAllCourseNumDistinct("CSCE");
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -56,8 +55,8 @@ public class DatabaseAPI {
         //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
         String query1 = "SELECT DISTINCT CourseSubject FROM TamuGrades";
         System.out.println("Selecting Distinct From Subject");
-        Statement selectDistintSubject = conn.createStatement();
-        ResultSet result1 = selectDistintSubject.executeQuery(query1);
+        Statement selectDistinctSubject = conn.createStatement();
+        ResultSet result1 = selectDistinctSubject.executeQuery(query1);
 
         int count = 1;
         while(result1.next())
@@ -82,6 +81,41 @@ public class DatabaseAPI {
         }
     }
 
+    public void selectAllCourseNumDistinct(String courseSubject) throws SQLException
+    {
+        //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
+        String query1 = "SELECT DISTINCT CourseNum FROM TamuGrades " +
+                "WHERE CourseSubject=\"" + courseSubject + "\"";
+        System.out.println("Selecting Distinct From CourseNum");
+        Statement selectDistinctSubject = conn.createStatement();
+        ResultSet result1 = selectDistinctSubject.executeQuery(query1);
+
+        int count = 1;
+        while(result1.next())
+        {
+            int courseNum = result1.getInt("CourseNum");
+            // System.out.println(count + " " + subject);
+            System.out.printf("%d\t%s\n", count, courseNum);
+            count++;
+        }
+
+        String query2 = "SELECT COUNT(DISTINCT CourseNum) AS total FROM TamuGrades " +
+                "WHERE CourseSubject=\"" + courseSubject + "\"";
+        System.out.println("Counting number of course numbers in Database where " +
+                "subject is " + courseSubject);
+        Statement countCourses = conn.createStatement();
+        ResultSet result2 = countCourses.executeQuery(query2);
+
+        System.out.println("Getting number of Course Numbers");
+
+        while(result2.next())
+        {
+            int numCourseNums = result2.getInt(1);
+            System.out.println("Number of CourseNums in database = " + numCourseNums +
+                " where Course Subject is " + courseSubject);
+        }
+    }
+
     public void insert(String Subject, int courseNum, int sectionNum, Double avgGPA,
                        String professor, int numA, int numB, int numC, int numD, int numF, int numQdrop,
                        String termSemester, int termYear, boolean honors) // throws java.sql.SQLException
@@ -89,10 +123,10 @@ public class DatabaseAPI {
         try
         {
             //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
-            String query = "INSERT INTO TamuGrades " /*TamuRawData*/ + "VALUES (\"" + Subject + "\", " + courseNum + ", " + sectionNum
-                    + ", " + avgGPA + ", \"" + professor + "\", " + numA + ", " + numB + ", " + numC + ", "
-                    + numD + ", " + numF + ", " + numQdrop + ", \"" + termSemester + "\", " + termYear
-                    + ", " + honors + ") ";
+            String query = "INSERT INTO TamuGrades " /*TamuRawData*/ + "VALUES (\"" + Subject + "\", " +
+                    courseNum + ", " + sectionNum + ", " + avgGPA + ", \"" + professor + "\", "
+                    + numA + ", " + numB + ", " + numC + ", " + numD + ", " + numF
+                    + ", " + numQdrop + ", \"" + termSemester + "\", " + termYear + ", " + honors + ") ";
             System.out.println("Inserting query\n" + query);
             PreparedStatement insertStatement = conn.prepareStatement(query);
             insertStatement.execute();
@@ -140,10 +174,4 @@ public class DatabaseAPI {
         }
         return null;
     } REDUNDANT CODE  */
-
 }
-
-
-
-
-
