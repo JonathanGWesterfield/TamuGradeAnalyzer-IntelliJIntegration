@@ -1,5 +1,7 @@
 /**
  * Created by JonathanWesterfield on 2/10/17.
+ * This class is nothing but functions that allow the user to access the database
+ * through the application. As such it is very long and has very many functions
  */
 
 import java.io.IOException;
@@ -29,6 +31,7 @@ public class DatabaseAPI
             db.selectNumD("CSCE", 121, "MOORE");
             db.selectNumF("CSCE", 121, "MOORE");
             db.selectNumQDrop("CSCE", 121, "MOORE");
+            db.getTotalNumStudentsTaught("CSCE", 121, "MOORE");
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -263,6 +266,27 @@ public class DatabaseAPI
         return totalNumF;
     }
 
+    //FIXME: ADD A public int countNumSemestersTaught()
+
+    public int getTotalNumStudentsTaught(String subject, int courseNum,
+                                         String professor) throws SQLException
+    {
+        String query = "SELECT SUM(Num_QDrop + NumA + NumB + NumC + NumD + NumF) FROM" +
+                " TamuGrades WHERE CourseSubject=\"" + subject + "\" AND CourseNum=" + courseNum +
+                 " AND Professor=\"" + professor + "\"";
+        System.out.println("\nCounting number of students this professor has taught");
+        Statement getTotalStudents = conn.createStatement();
+        ResultSet result = getTotalStudents.executeQuery(query);
+
+        int totalStudents = 0;
+        while(result.next())
+        {
+            totalStudents = result.getInt(1);
+            System.out.println("The total number of students this professor has taught is " + totalStudents);
+        }
+        return totalStudents;
+    }
+
     // counts total number of QDrops given by a professor in a specific subject and course number
     public int selectNumQDrop(String courseSubject, int courseNum, String professor) throws SQLException
     {
@@ -281,6 +305,8 @@ public class DatabaseAPI
         }
         return totalQDrop;
     }
+
+    //FIXME: ADD FUNCTION THAT CALCULATES TOTAL NUMBER OF A'S, B'S, ETC FOR A TEACHER
 
     //inserts all of the information given into the database table
     public void insert(String Subject, int courseNum, int sectionNum, Double avgGPA,
