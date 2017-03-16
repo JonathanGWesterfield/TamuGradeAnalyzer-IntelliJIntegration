@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a35f547-0a74-4c71-9349-327ef0987db3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Tamu Grade Analyzer/DatabaseAPI.class" afterPath="$PROJECT_DIR$/out/production/Tamu Grade Analyzer/DatabaseAPI.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Tamu Grade Analyzer/main.class" afterPath="$PROJECT_DIR$/out/production/Tamu Grade Analyzer/main.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DatabaseAPI.java" afterPath="$PROJECT_DIR$/src/DatabaseAPI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.java" afterPath="$PROJECT_DIR$/src/main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,8 +36,8 @@
       <file leaf-file-name="PDFReader.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/PDFReader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="119" column="40" lean-forward="false" selection-start-line="119" selection-start-column="40" selection-end-line="119" selection-end-column="40" />
+            <state relative-caret-position="358">
+              <caret line="111" column="59" lean-forward="true" selection-start-line="111" selection-start-column="59" selection-end-line="111" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -635,7 +631,14 @@
       <option name="project" value="LOCAL" />
       <updated>1489642904914</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Did a lot of nothing but need to commit because of intellij's workspace.xml file being broken if i don't commit the changes">
+      <created>1489691068722</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1489691068722</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -652,7 +655,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="-373" width="1080" height="1898" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -663,10 +666,10 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17054264" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17054264" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15895954" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -729,7 +732,8 @@
     <MESSAGE value="Added a function that counts how many students a professor has taught for a particular subject and course number. Counts the total number of students since they started teaching the class (or as far back as the database has records)" />
     <MESSAGE value="Changed selectAllSubjectDistinct, selectAllCourseNumDIstinct and selectCourseProfessors to output arraylists instead of simply printing them out. This should help later one when making lists in the user interface." />
     <MESSAGE value="Changed all functions that had 'select' in them to 'get'. Ex - 'selectAllSubjectDistinct' is now 'getAllSubjectDistinct'" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed all functions that had 'select' in them to 'get'. Ex - 'selectAllSubjectDistinct' is now 'getAllSubjectDistinct'" />
+    <MESSAGE value="Did a lot of nothing but need to commit because of intellij's workspace.xml file being broken if i don't commit the changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Did a lot of nothing but need to commit because of intellij's workspace.xml file being broken if i don't commit the changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1173,8 +1177,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PDFReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="119" column="40" lean-forward="false" selection-start-line="119" selection-start-column="40" selection-end-line="119" selection-end-column="40" />
+        <state relative-caret-position="358">
+          <caret line="111" column="59" lean-forward="true" selection-start-line="111" selection-start-column="59" selection-end-line="111" selection-end-column="59" />
           <folding />
         </state>
       </provider>
