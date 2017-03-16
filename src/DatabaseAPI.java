@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.*;
 
+//TODO: add a function that counts how many semesters a professor has taught a particular course
 public class DatabaseAPI
 {
     private String connectionString = "jdbc:mysql://localhost:8889/TamuData";
@@ -290,7 +291,7 @@ public class DatabaseAPI
         return totalNumF;
     }
 
-    //FIXME: ADD A public int countNumSemestersTaught()
+    //TODO: ADD A public int countNumSemestersTaught()
 
     public int getTotalNumStudentsTaught(String subject, int courseNum,
                                          String professor) throws SQLException

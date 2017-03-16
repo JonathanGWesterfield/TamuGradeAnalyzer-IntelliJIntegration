@@ -18,7 +18,7 @@ public class main
             InfoCondenser condense = new InfoCondenser();
             String condensedFilename = condense.condenser("resources/GradeData.dat");
             DatabaseAPI db = new DatabaseAPI();
-            unpackAndInsert(condensedFilename, db);
+            //unpackAndInsert(condensedFilename, db);
             db.closeDBConn();
         }
         catch (FileNotFoundException | ClassNotFoundException e)
