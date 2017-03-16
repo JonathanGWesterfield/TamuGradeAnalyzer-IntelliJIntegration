@@ -4,9 +4,12 @@
  * through the application. As such it is very long and has very many functions
  */
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
+import java.io.*;
 
 //TODO: add a function that counts how many semesters a professor has taught a particular course
 public class DatabaseAPI
@@ -331,8 +334,6 @@ public class DatabaseAPI
         return totalQDrop;
     }
 
-    //FIXME: ADD FUNCTION THAT CALCULATES TOTAL NUMBER OF A'S, B'S, ETC FOR A TEACHER
-
     //inserts all of the information given into the database table
     public void insert(String Subject, int courseNum, int sectionNum, Double avgGPA,
                        String professor, int numA, int numB, int numC, int numD, int numF, int numQdrop,
@@ -351,13 +352,27 @@ public class DatabaseAPI
         }
         catch(SQLException e)
         {
-            System.out.println("Could not create insert statement");
-            e.printStackTrace();
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionMessage = sw.toString();
+            if(exceptionMessage.contains("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException"))
+            {
+                System.out.println("\n" + e);
+                System.out.println("\nThis entry is already in the table\nIGNORING");
+            }
+            else
+            {
+                System.out.println("\n" + e);
+                System.out.println("Could not create insert statement");
+                e.printStackTrace();
+            }
         }
         catch(Exception e)
         {
-            System.err.println("Could not Insert into Database");
-            e.printStackTrace();
+            // System.out.println("\n" + e);
+            System.err.println("Could not Insert into Database because something strange happened");
+            // e.printStackTrace();
         }
     }
 
