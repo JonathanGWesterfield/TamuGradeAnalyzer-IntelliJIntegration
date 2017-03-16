@@ -53,6 +53,7 @@ public class DatabaseAPI
             db.getNumF("CSCE", 121, "MOORE");
             db.getNumQDrop("CSCE", 121, "MOORE");
             db.getTotalNumStudentsTaught("CSCE", 121, "MOORE");
+            System.out.println(db.getNumSemestersTaught("CSCE", 121, "MOORE"));
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -334,6 +335,28 @@ public class DatabaseAPI
         return totalQDrop;
     }
 
+    // Counts the number of semesters a professor has taught a class for a specific subject
+    // and specific course number
+    public int getNumSemestersTaught(String subject, int courseNum, String professor) throws SQLException
+    {
+        String query = "SELECT COUNT(DISTINCT Semester_Term, Semester_Year) FROM " +
+                "TamuGrades WHERE CourseSubject=\"" + subject + "\" and CourseNum=" +
+                courseNum + " AND Professor=\"" + professor +"\"";
+        Statement getSemestersTaught = conn.createStatement();
+        ResultSet result = getSemestersTaught.executeQuery(query);
+
+        int totalSemestersTaught = 0;
+        while(result.next())
+        {
+            totalSemestersTaught = result.getInt(1);
+            System.out.println(professor + " has taught this course a minimum " +
+                    "of " + totalSemestersTaught + " times!\nIt is possible he " +
+                    "has taught more semesters but this is as many as the database has");
+        }
+
+        return totalSemestersTaught;
+    }
+
     //inserts all of the information given into the database table
     public void insert(String Subject, int courseNum, int sectionNum, Double avgGPA,
                        String professor, int numA, int numB, int numC, int numD, int numF, int numQdrop,
@@ -352,10 +375,12 @@ public class DatabaseAPI
         }
         catch(SQLException e)
         {
+            // this small block turns the exception into a string to be compared
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
             String exceptionMessage = sw.toString();
+
             if(exceptionMessage.contains("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrity" +
                     "ConstraintViolationException"))
             {
@@ -385,8 +410,7 @@ public class DatabaseAPI
     }
 
 }
-/*TODO: What is needed make the database on the laptop CONSTRAINT so that duplicate rows aren't
-added is
+/*TODO: What is needed make the database on the laptop CONSTRAINT so that duplicate rows aren't added is
 <BEGIN;
 
 ALTER IGNORE TABLE TamuGrades ADD CONSTRAINT TamuGrades_unique
