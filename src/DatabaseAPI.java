@@ -6,6 +6,7 @@
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DatabaseAPI
 {
@@ -22,16 +23,32 @@ public class DatabaseAPI
         try
         {
             DatabaseAPI db = new DatabaseAPI();
-            db.selectAllSubjectDistinct();
-            db.selectAllCourseNumDistinct("MATH");
-            db.selectCourseProfessors("MATH", 152);
+            ArrayList<String> subjects = db.selectAllSubjectDistinct();
+            for(int i = 0; i < subjects.size(); i++)
+            {
+                System.out.println(subjects.get(i));
+            }
+
+            ArrayList<Integer> courseNumbers = db.selectAllCourseNumDistinct("MATH");
+            for(int i = 0; i < courseNumbers.size(); i++)
+            {
+                System.out.println(courseNumbers.get(i));
+            }
+
+            ArrayList<String> professors = db.selectCourseProfessors("CSCE", 121);
+            for(int i = 0; i < professors.size(); i++)
+            {
+                System.out.println(professors.get(i));
+            }
+
+            /*db.selectCourseProfessors("MATH", 152);
             db.selectNumA("CSCE", 121, "MOORE");
             db.selectNumB("CSCE", 121, "MOORE");
             db.selectNumC("CSCE", 121, "MOORE");
             db.selectNumD("CSCE", 121, "MOORE");
             db.selectNumF("CSCE", 121, "MOORE");
             db.selectNumQDrop("CSCE", 121, "MOORE");
-            db.getTotalNumStudentsTaught("CSCE", 121, "MOORE");
+            db.getTotalNumStudentsTaught("CSCE", 121, "MOORE");*/
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -59,21 +76,22 @@ public class DatabaseAPI
         return;
     }
 
-    /* shows a list of all subjects */
-    public void selectAllSubjectDistinct() throws SQLException
+    /* returns an arraylist of all subjects in database in alphabetical order*/
+    public ArrayList<String> selectAllSubjectDistinct() throws SQLException
     {
         //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
-        String query1 = "SELECT DISTINCT CourseSubject FROM TamuGrades";
+        String query1 = "SELECT DISTINCT CourseSubject FROM TamuGrades ORDER BY CourseSubject ASC";
         System.out.println("\nSelecting Distinct From Subject");
         Statement selectDistinctSubject = conn.createStatement();
         ResultSet result1 = selectDistinctSubject.executeQuery(query1);
 
         //printing out the result of the SQL query
         int count = 1;
+        ArrayList<String> allSubjects = new ArrayList<String>();
         while(result1.next())
         {
             String subject = result1.getString("CourseSubject");
-            // System.out.println(count + " " + subject);
+            allSubjects.add(subject);
             System.out.printf("%d\t%s\n", count, subject);
             count++;
         }
@@ -93,10 +111,11 @@ public class DatabaseAPI
             int numSubjects = result2.getInt(1);
             System.out.println("Number of Subjects in database = " + numSubjects);
         }
+        return allSubjects;
     }
 
-    //lists all course numbers under a specific subject
-    public void selectAllCourseNumDistinct(String courseSubject) throws SQLException
+    //returns an arraylist of all course numbers under a specific subject
+    public ArrayList<Integer> selectAllCourseNumDistinct(String courseSubject) throws SQLException
     {
         //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
         String query1 = "SELECT DISTINCT CourseNum FROM TamuGrades " +
@@ -107,10 +126,11 @@ public class DatabaseAPI
 
         //printing out the result of the SQL query
         int count = 1;
+        ArrayList<Integer> allCourseNums = new ArrayList<Integer>();
         while(result1.next())
         {
             int courseNum = result1.getInt("CourseNum");
-            // System.out.println(count + " " + subject);
+            allCourseNums.add(courseNum);
             System.out.printf("%d\t%d\n", count, courseNum);
             count++;
         }
@@ -133,23 +153,26 @@ public class DatabaseAPI
             System.out.println("Number of CourseNums in database = " + numCourseNums +
                 " where Course Subject is " + courseSubject);
         }
+        return allCourseNums;
     }
 
-    //lists all professors under a specific subject and course number
-    public void selectCourseProfessors(String courseSubject, int courseNum) throws SQLException
+    // Returns an arraylist of the professors in alphabetical order
+    public ArrayList<String> selectCourseProfessors(String courseSubject, int courseNum) throws SQLException
     {
         //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
-        String query1 = "SELECT DISTINCT Professor From TamuGrades " +
-                "WHERE CourseSubject=\"" + courseSubject + "\" AND CourseNum=" + courseNum;
+        String query1 = "SELECT DISTINCT Professor FROM TamuGrades WHERE CourseSubject=\""
+                 + courseSubject + "\" AND CourseNum=" + courseNum + " ORDER BY Professor ASC";
         System.out.println("\nLooking for professors of this subject and course");
         Statement getProfessors = conn.createStatement();
         ResultSet result1 = getProfessors.executeQuery(query1);
 
         //printing out the result of the SQL query
         int count = 1;
+        ArrayList<String> allCourseProfessors = new ArrayList<>();
         while(result1.next())
         {
             String professor = result1.getString("Professor");
+            allCourseProfessors.add(professor);
             System.out.printf("%d\t%s\n", count, professor);
             count++;
         }
@@ -169,6 +192,7 @@ public class DatabaseAPI
             System.out.println("Number of Professors teaching this course = "
                     + totalNumProfessors + "\n");
         }
+        return allCourseProfessors;
     }
 
     // counts total number of A's given by a professor in a specific subject and course number
