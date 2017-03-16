@@ -6,7 +6,7 @@
 
 import java.io.IOException;
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class DatabaseAPI
 {
@@ -23,32 +23,32 @@ public class DatabaseAPI
         try
         {
             DatabaseAPI db = new DatabaseAPI();
-            ArrayList<String> subjects = db.selectAllSubjectDistinct();
+            ArrayList<String> subjects = db.getAllSubjectDistinct();
             for(int i = 0; i < subjects.size(); i++)
             {
                 System.out.println(subjects.get(i));
             }
 
-            ArrayList<Integer> courseNumbers = db.selectAllCourseNumDistinct("MATH");
+            ArrayList<Integer> courseNumbers = db.getAllCourseNumDistinct("MATH");
             for(int i = 0; i < courseNumbers.size(); i++)
             {
                 System.out.println(courseNumbers.get(i));
             }
 
-            ArrayList<String> professors = db.selectCourseProfessors("CSCE", 121);
+            ArrayList<String> professors = db.getCourseProfessors("CSCE", 121);
             for(int i = 0; i < professors.size(); i++)
             {
                 System.out.println(professors.get(i));
             }
 
-            /*db.selectCourseProfessors("MATH", 152);
-            db.selectNumA("CSCE", 121, "MOORE");
-            db.selectNumB("CSCE", 121, "MOORE");
-            db.selectNumC("CSCE", 121, "MOORE");
-            db.selectNumD("CSCE", 121, "MOORE");
-            db.selectNumF("CSCE", 121, "MOORE");
-            db.selectNumQDrop("CSCE", 121, "MOORE");
-            db.getTotalNumStudentsTaught("CSCE", 121, "MOORE");*/
+            db.getCourseProfessors("MATH", 152);
+            db.getNumA("CSCE", 121, "MOORE");
+            db.getNumB("CSCE", 121, "MOORE");
+            db.getNumC("CSCE", 121, "MOORE");
+            db.getNumD("CSCE", 121, "MOORE");
+            db.getNumF("CSCE", 121, "MOORE");
+            db.getNumQDrop("CSCE", 121, "MOORE");
+            db.getTotalNumStudentsTaught("CSCE", 121, "MOORE");
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -77,7 +77,7 @@ public class DatabaseAPI
     }
 
     /* returns an arraylist of all subjects in database in alphabetical order*/
-    public ArrayList<String> selectAllSubjectDistinct() throws SQLException
+    public ArrayList<String> getAllSubjectDistinct() throws SQLException
     {
         //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
         String query1 = "SELECT DISTINCT CourseSubject FROM TamuGrades ORDER BY CourseSubject ASC";
@@ -115,7 +115,7 @@ public class DatabaseAPI
     }
 
     //returns an arraylist of all course numbers under a specific subject
-    public ArrayList<Integer> selectAllCourseNumDistinct(String courseSubject) throws SQLException
+    public ArrayList<Integer> getAllCourseNumDistinct(String courseSubject) throws SQLException
     {
         //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
         String query1 = "SELECT DISTINCT CourseNum FROM TamuGrades " +
@@ -157,7 +157,7 @@ public class DatabaseAPI
     }
 
     // Returns an arraylist of the professors in alphabetical order
-    public ArrayList<String> selectCourseProfessors(String courseSubject, int courseNum) throws SQLException
+    public ArrayList<String> getCourseProfessors(String courseSubject, int courseNum) throws SQLException
     {
         //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
         String query1 = "SELECT DISTINCT Professor FROM TamuGrades WHERE CourseSubject=\""
@@ -196,7 +196,7 @@ public class DatabaseAPI
     }
 
     // counts total number of A's given by a professor in a specific subject and course number
-    public int selectNumA(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumA(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumA = 0;
         String query = "SELECT SUM(NumA) AS total FROM TamuGrades WHERE " +
@@ -215,7 +215,7 @@ public class DatabaseAPI
     }
 
     // counts total number of B's given by a professor in a specific subject and course number
-    public int selectNumB(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumB(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumB = 0;
         String query = "SELECT SUM(NumB) AS total FROM TamuGrades WHERE " +
@@ -234,7 +234,7 @@ public class DatabaseAPI
     }
 
     // counts total number of C's given by a professor in a specific subject and course number
-    public int selectNumC(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumC(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumC = 0;
         String query = "SELECT SUM(NumC) AS total FROM TamuGrades WHERE " +
@@ -253,7 +253,7 @@ public class DatabaseAPI
     }
 
     // counts total number of D's given by a professor in a specific subject and course number
-    public int selectNumD(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumD(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumD = 0;
         String query = "SELECT SUM(NumD) AS total FROM TamuGrades WHERE " +
@@ -272,7 +272,7 @@ public class DatabaseAPI
     }
 
     // counts total number of D's given by a professor in a specific subject and course number
-    public int selectNumF(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumF(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumF = 0;
         String query = "SELECT SUM(NumF) AS total FROM TamuGrades WHERE " +
@@ -312,7 +312,7 @@ public class DatabaseAPI
     }
 
     // counts total number of QDrops given by a professor in a specific subject and course number
-    public int selectNumQDrop(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumQDrop(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalQDrop = 0;
         String query = "SELECT SUM(Num_QDrop) AS total FROM TamuGrades WHERE " +
