@@ -356,7 +356,8 @@ public class DatabaseAPI
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
             String exceptionMessage = sw.toString();
-            if(exceptionMessage.contains("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException"))
+            if(exceptionMessage.contains("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrity" +
+                    "ConstraintViolationException"))
             {
                 System.out.println("\n" + e);
                 System.out.println("\nThis entry is already in the table\nIGNORING");
@@ -384,3 +385,13 @@ public class DatabaseAPI
     }
 
 }
+/*TODO: What is needed make the database on the laptop CONSTRAINT so that duplicate rows aren't
+added is
+<BEGIN;
+
+ALTER IGNORE TABLE TamuGrades ADD CONSTRAINT TamuGrades_unique
+UNIQUE (CourseSubject, CourseNum, SectionNum, Avg_GPA, Professor,
+NumA, Numb, NumC, NumD, NumF, Num_QDrop, Semester_Term, Semester_Year, Honors);>
+
+then use the command <COMMIT>
+ */
