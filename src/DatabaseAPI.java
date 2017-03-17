@@ -381,7 +381,7 @@ public class DatabaseAPI
         ArrayList<String> data = new ArrayList<String>();
         while(result.next())
         {
-            String resultprofessor = result.getString("Professor");
+            String resultProfessor = result.getString("Professor");
             String NumA = result.getString("NumA");
             String NumB = result.getString("NumB");
             String NumC = result.getString("NumC");
@@ -391,10 +391,10 @@ public class DatabaseAPI
             String semester = result.getString("Semester_Term");
             String year = result.getString("Semester_Year");
 
-            System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n", resultprofessor,
+            System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n", resultProfessor,
                     NumA, NumB, NumC, NumD, NumF, Num_QDrop, semester, year);
 
-            data.add(resultprofessor);
+            data.add(resultProfessor);
             data.add(NumA);
             data.add(NumB);
             data.add(NumC);
