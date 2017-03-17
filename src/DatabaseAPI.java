@@ -4,9 +4,14 @@
  * through the application. As such it is very long and has very many functions
  */
 
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+
 import java.io.IOException;
 import java.sql.*;
+import java.util.*;
+import java.io.*;
 
+//TODO: add a function that counts how many semesters a professor has taught a particular course
 public class DatabaseAPI
 {
     private String connectionString = "jdbc:mysql://localhost:8889/TamuData";
@@ -22,16 +27,45 @@ public class DatabaseAPI
         try
         {
             DatabaseAPI db = new DatabaseAPI();
-            db.selectAllSubjectDistinct();
-            db.selectAllCourseNumDistinct("MATH");
-            db.selectCourseProfessors("MATH", 152);
-            db.selectNumA("CSCE", 121, "MOORE");
-            db.selectNumB("CSCE", 121, "MOORE");
-            db.selectNumC("CSCE", 121, "MOORE");
-            db.selectNumD("CSCE", 121, "MOORE");
-            db.selectNumF("CSCE", 121, "MOORE");
-            db.selectNumQDrop("CSCE", 121, "MOORE");
+            ArrayList<String> subjects = db.getAllSubjectDistinct();
+            for(int i = 0; i < subjects.size(); i++)
+            {
+                System.out.println(subjects.get(i));
+            }
+
+            ArrayList<Integer> courseNumbers = db.getAllCourseNumDistinct("MATH");
+            for(int i = 0; i < courseNumbers.size(); i++)
+            {
+                System.out.println(courseNumbers.get(i));
+            }
+
+            ArrayList<String> professors = db.getCourseProfessors("CSCE", 121);
+            for(int i = 0; i < professors.size(); i++)
+            {
+                System.out.println(professors.get(i));
+            }
+
+            db.getCourseProfessors("MATH", 152);
+            db.getNumA("CSCE", 121, "MOORE");
+            db.getNumB("CSCE", 121, "MOORE");
+            db.getNumC("CSCE", 121, "MOORE");
+            db.getNumD("CSCE", 121, "MOORE");
+            db.getNumF("CSCE", 121, "MOORE");
+            db.getNumQDrop("CSCE", 121, "MOORE");
             db.getTotalNumStudentsTaught("CSCE", 121, "MOORE");
+            System.out.println("Number Semesters " + db.getNumSemestersTaught("CSCE", 121, "MOORE"));
+
+            ArrayList<String> rawData = db.getProfRawData("CSCE", 121, "MOORE");
+            for(int i = 0; i < rawData.size(); i++)
+            {
+                if(i % 9 == 0)
+                {
+                    //System.out.println();
+                    System.out.print("\n" + rawData.get(i) + " ");
+                }
+                else
+                    System.out.print(rawData.get(i) + " ");
+            }
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -59,21 +93,22 @@ public class DatabaseAPI
         return;
     }
 
-    /* shows a list of all subjects */
-    public void selectAllSubjectDistinct() throws SQLException
+    /* returns an arraylist of all subjects in database in alphabetical order*/
+    public ArrayList<String> getAllSubjectDistinct() throws SQLException
     {
         //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
-        String query1 = "SELECT DISTINCT CourseSubject FROM TamuGrades";
+        String query1 = "SELECT DISTINCT CourseSubject FROM TamuGrades ORDER BY CourseSubject ASC";
         System.out.println("\nSelecting Distinct From Subject");
         Statement selectDistinctSubject = conn.createStatement();
         ResultSet result1 = selectDistinctSubject.executeQuery(query1);
 
         //printing out the result of the SQL query
         int count = 1;
+        ArrayList<String> allSubjects = new ArrayList<String>();
         while(result1.next())
         {
             String subject = result1.getString("CourseSubject");
-            // System.out.println(count + " " + subject);
+            allSubjects.add(subject);
             System.out.printf("%d\t%s\n", count, subject);
             count++;
         }
@@ -93,10 +128,11 @@ public class DatabaseAPI
             int numSubjects = result2.getInt(1);
             System.out.println("Number of Subjects in database = " + numSubjects);
         }
+        return allSubjects;
     }
 
-    //lists all course numbers under a specific subject
-    public void selectAllCourseNumDistinct(String courseSubject) throws SQLException
+    //returns an arraylist of all course numbers under a specific subject
+    public ArrayList<Integer> getAllCourseNumDistinct(String courseSubject) throws SQLException
     {
         //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
         String query1 = "SELECT DISTINCT CourseNum FROM TamuGrades " +
@@ -107,10 +143,11 @@ public class DatabaseAPI
 
         //printing out the result of the SQL query
         int count = 1;
+        ArrayList<Integer> allCourseNums = new ArrayList<Integer>();
         while(result1.next())
         {
             int courseNum = result1.getInt("CourseNum");
-            // System.out.println(count + " " + subject);
+            allCourseNums.add(courseNum);
             System.out.printf("%d\t%d\n", count, courseNum);
             count++;
         }
@@ -133,23 +170,26 @@ public class DatabaseAPI
             System.out.println("Number of CourseNums in database = " + numCourseNums +
                 " where Course Subject is " + courseSubject);
         }
+        return allCourseNums;
     }
 
-    //lists all professors under a specific subject and course number
-    public void selectCourseProfessors(String courseSubject, int courseNum) throws SQLException
+    // Returns an arraylist of the professors in alphabetical order
+    public ArrayList<String> getCourseProfessors(String courseSubject, int courseNum) throws SQLException
     {
         //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
-        String query1 = "SELECT DISTINCT Professor From TamuGrades " +
-                "WHERE CourseSubject=\"" + courseSubject + "\" AND CourseNum=" + courseNum;
+        String query1 = "SELECT DISTINCT Professor FROM TamuGrades WHERE CourseSubject=\""
+                 + courseSubject + "\" AND CourseNum=" + courseNum + " ORDER BY Professor ASC";
         System.out.println("\nLooking for professors of this subject and course");
         Statement getProfessors = conn.createStatement();
         ResultSet result1 = getProfessors.executeQuery(query1);
 
         //printing out the result of the SQL query
         int count = 1;
+        ArrayList<String> allCourseProfessors = new ArrayList<>();
         while(result1.next())
         {
             String professor = result1.getString("Professor");
+            allCourseProfessors.add(professor);
             System.out.printf("%d\t%s\n", count, professor);
             count++;
         }
@@ -169,10 +209,11 @@ public class DatabaseAPI
             System.out.println("Number of Professors teaching this course = "
                     + totalNumProfessors + "\n");
         }
+        return allCourseProfessors;
     }
 
     // counts total number of A's given by a professor in a specific subject and course number
-    public int selectNumA(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumA(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumA = 0;
         String query = "SELECT SUM(NumA) AS total FROM TamuGrades WHERE " +
@@ -191,7 +232,7 @@ public class DatabaseAPI
     }
 
     // counts total number of B's given by a professor in a specific subject and course number
-    public int selectNumB(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumB(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumB = 0;
         String query = "SELECT SUM(NumB) AS total FROM TamuGrades WHERE " +
@@ -210,7 +251,7 @@ public class DatabaseAPI
     }
 
     // counts total number of C's given by a professor in a specific subject and course number
-    public int selectNumC(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumC(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumC = 0;
         String query = "SELECT SUM(NumC) AS total FROM TamuGrades WHERE " +
@@ -229,7 +270,7 @@ public class DatabaseAPI
     }
 
     // counts total number of D's given by a professor in a specific subject and course number
-    public int selectNumD(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumD(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumD = 0;
         String query = "SELECT SUM(NumD) AS total FROM TamuGrades WHERE " +
@@ -248,7 +289,7 @@ public class DatabaseAPI
     }
 
     // counts total number of D's given by a professor in a specific subject and course number
-    public int selectNumF(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumF(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumF = 0;
         String query = "SELECT SUM(NumF) AS total FROM TamuGrades WHERE " +
@@ -266,7 +307,7 @@ public class DatabaseAPI
         return totalNumF;
     }
 
-    //FIXME: ADD A public int countNumSemestersTaught()
+    //TODO: add a function to display raw data for a professor
 
     public int getTotalNumStudentsTaught(String subject, int courseNum,
                                          String professor) throws SQLException
@@ -288,7 +329,7 @@ public class DatabaseAPI
     }
 
     // counts total number of QDrops given by a professor in a specific subject and course number
-    public int selectNumQDrop(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumQDrop(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalQDrop = 0;
         String query = "SELECT SUM(Num_QDrop) AS total FROM TamuGrades WHERE " +
@@ -306,7 +347,65 @@ public class DatabaseAPI
         return totalQDrop;
     }
 
-    //FIXME: ADD FUNCTION THAT CALCULATES TOTAL NUMBER OF A'S, B'S, ETC FOR A TEACHER
+    // Counts the number of semesters a professor has taught a class for a specific subject
+    // and specific course number
+    public int getNumSemestersTaught(String subject, int courseNum, String professor) throws SQLException
+    {
+        String query = "SELECT COUNT(DISTINCT Semester_Term, Semester_Year) FROM " +
+                "TamuGrades WHERE CourseSubject=\"" + subject + "\" and CourseNum=" +
+                courseNum + " AND Professor=\"" + professor +"\"";
+        Statement getSemestersTaught = conn.createStatement();
+        ResultSet result = getSemestersTaught.executeQuery(query);
+
+        int totalSemestersTaught = 0;
+        while(result.next())
+        {
+            totalSemestersTaught = result.getInt(1);
+            System.out.println(professor + " has taught this course a minimum " +
+                    "of " + totalSemestersTaught + " times!\nIt is possible he " +
+                    "has taught more semesters but this is as many as the database has");
+        }
+
+        return totalSemestersTaught;
+    }
+
+    public ArrayList<String> getProfRawData(String subject, int courseNum, String professor) throws SQLException
+    {
+        String query = "SELECT professor, NumA, NumB, NumC, NumD, NumF, Num_QDrop, " +
+                "Semester_Term, Semester_Year FROM TamuGrades WHERE " +
+                "CourseSubject=\"" + subject + "\" AND CourseNum=" + courseNum + " AND " +
+                "professor=\"" + professor + "\" ORDER BY Semester_Year, Semester_Term ASC";
+        Statement getRawData = conn.createStatement();
+        ResultSet result = getRawData.executeQuery(query);
+
+        ArrayList<String> data = new ArrayList<String>();
+        while(result.next())
+        {
+            String resultProfessor = result.getString("Professor");
+            String NumA = result.getString("NumA");
+            String NumB = result.getString("NumB");
+            String NumC = result.getString("NumC");
+            String NumD = result.getString("NumD");
+            String NumF = result.getString("NumF");
+            String Num_QDrop = result.getString("Num_QDrop");
+            String semester = result.getString("Semester_Term");
+            String year = result.getString("Semester_Year");
+
+            System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n", resultProfessor,
+                    NumA, NumB, NumC, NumD, NumF, Num_QDrop, semester, year);
+
+            data.add(resultProfessor);
+            data.add(NumA);
+            data.add(NumB);
+            data.add(NumC);
+            data.add(NumD);
+            data.add(NumF);
+            data.add(Num_QDrop);
+            data.add(semester);
+            data.add(year);
+        }
+        return data;
+    }
 
     //inserts all of the information given into the database table
     public void insert(String Subject, int courseNum, int sectionNum, Double avgGPA,
@@ -326,13 +425,30 @@ public class DatabaseAPI
         }
         catch(SQLException e)
         {
-            System.out.println("Could not create insert statement");
-            e.printStackTrace();
+            // this small block turns the exception into a string to be compared
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            String exceptionMessage = sw.toString();
+
+            if(exceptionMessage.contains("com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrity" +
+                    "ConstraintViolationException"))
+            {
+                System.out.println("\n" + e);
+                System.out.println("\nThis entry is already in the table\nIGNORING");
+            }
+            else
+            {
+                System.out.println("\n" + e);
+                System.out.println("Could not create insert statement");
+                e.printStackTrace();
+            }
         }
         catch(Exception e)
         {
-            System.err.println("Could not Insert into Database");
-            e.printStackTrace();
+            // System.out.println("\n" + e);
+            System.err.println("Could not Insert into Database because something strange happened");
+            // e.printStackTrace();
         }
     }
 
@@ -344,3 +460,12 @@ public class DatabaseAPI
     }
 
 }
+/*TODO: What is needed make the database on the laptop CONSTRAINT so that duplicate rows aren't added is
+<BEGIN;
+
+ALTER IGNORE TABLE TamuGrades ADD CONSTRAINT TamuGrades_unique
+UNIQUE (CourseSubject, CourseNum, SectionNum, Avg_GPA, Professor,
+NumA, Numb, NumC, NumD, NumF, Num_QDrop, Semester_Term, Semester_Year, Honors);>
+
+then use the command <COMMIT>
+ */
