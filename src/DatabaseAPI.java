@@ -53,7 +53,19 @@ public class DatabaseAPI
             db.getNumF("CSCE", 121, "MOORE");
             db.getNumQDrop("CSCE", 121, "MOORE");
             db.getTotalNumStudentsTaught("CSCE", 121, "MOORE");
-            System.out.println(db.getNumSemestersTaught("CSCE", 121, "MOORE"));
+            System.out.println("Number Semesters " + db.getNumSemestersTaught("CSCE", 121, "MOORE"));
+
+            ArrayList<String> rawData = db.getProfRawData("CSCE", 121, "MOORE");
+            for(int i = 0; i < rawData.size(); i++)
+            {
+                if(i % 9 == 0)
+                {
+                    //System.out.println();
+                    System.out.print("\n" + rawData.get(i) + " ");
+                }
+                else
+                    System.out.print(rawData.get(i) + " ");
+            }
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -295,7 +307,7 @@ public class DatabaseAPI
         return totalNumF;
     }
 
-    //TODO: ADD A public int countNumSemestersTaught()
+    //TODO: add a function to display raw data for a professor
 
     public int getTotalNumStudentsTaught(String subject, int courseNum,
                                          String professor) throws SQLException
@@ -355,6 +367,44 @@ public class DatabaseAPI
         }
 
         return totalSemestersTaught;
+    }
+
+    public ArrayList<String> getProfRawData(String subject, int courseNum, String professor) throws SQLException
+    {
+        String query = "SELECT professor, NumA, NumB, NumC, NumD, NumF, Num_QDrop, " +
+                "Semester_Term, Semester_Year FROM TamuGrades WHERE " +
+                "CourseSubject=\"" + subject + "\" AND CourseNum=" + courseNum + " AND " +
+                "professor=\"" + professor + "\" ORDER BY Semester_Year, Semester_Term ASC";
+        Statement getRawData = conn.createStatement();
+        ResultSet result = getRawData.executeQuery(query);
+
+        ArrayList<String> data = new ArrayList<String>();
+        while(result.next())
+        {
+            String resultprofessor = result.getString("Professor");
+            String NumA = result.getString("NumA");
+            String NumB = result.getString("NumB");
+            String NumC = result.getString("NumC");
+            String NumD = result.getString("NumD");
+            String NumF = result.getString("NumF");
+            String Num_QDrop = result.getString("Num_QDrop");
+            String semester = result.getString("Semester_Term");
+            String year = result.getString("Semester_Year");
+
+            System.out.printf("%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t\n", resultprofessor,
+                    NumA, NumB, NumC, NumD, NumF, Num_QDrop, semester, year);
+
+            data.add(resultprofessor);
+            data.add(NumA);
+            data.add(NumB);
+            data.add(NumC);
+            data.add(NumD);
+            data.add(NumF);
+            data.add(Num_QDrop);
+            data.add(semester);
+            data.add(year);
+        }
+        return data;
     }
 
     //inserts all of the information given into the database table
