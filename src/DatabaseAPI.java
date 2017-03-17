@@ -302,7 +302,7 @@ public class DatabaseAPI
         while(result.next())
         {
             totalNumF = result.getInt(1);
-            System.out.println("The total number of D's is " + totalNumF);
+            System.out.println("The total number of F's is " + totalNumF);
         }
         return totalNumF;
     }
