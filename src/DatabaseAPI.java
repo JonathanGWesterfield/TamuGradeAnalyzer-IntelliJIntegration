@@ -374,7 +374,7 @@ public class DatabaseAPI
         String query = "SELECT professor, NumA, NumB, NumC, NumD, NumF, Num_QDrop, " +
                 "Semester_Term, Semester_Year FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + subject + "\" AND CourseNum=" + courseNum + " AND " +
-                "professor=\"" + professor + "\" ORDER BY Semester_Year, Semester_Term ASC";
+                "professor=\"" + professor + "\" ORDER BY Semester_Year, Semester_Term DESC";
         Statement getRawData = conn.createStatement();
         ResultSet result = getRawData.executeQuery(query);
 
