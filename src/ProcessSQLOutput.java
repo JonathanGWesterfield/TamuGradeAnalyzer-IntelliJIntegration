@@ -14,7 +14,7 @@ public class ProcessSQLOutput
         {
             DatabaseAPI db = new DatabaseAPI();
             ProcessSQLOutput process = new ProcessSQLOutput();
-            double avgGPA = process.getAvgGPA(db, "CSCE", 121, "MOORE");
+            double avgGPA = process.getAvgGPA(db, "CSCE", 121, "MOORE"); // change back to double
             double percentA = process.getPercentA(db, "CSCE", 121, "MOORE");
             double percentB = process.getPercentB(db, "CSCE", 121, "MOORE");
             double percentC = process.getPercentC(db, "CSCE", 121, "MOORE");
@@ -22,7 +22,10 @@ public class ProcessSQLOutput
             double percentF = process.getPercentF(db, "CSCE", 121, "MOORE");
             double percentQDrops = process.getPercentQDrop(db, "CSCE", 121, "MOORE");
 
-            System.out.print(percentA + percentB + percentC + percentD + percentF + percentQDrops);
+            System.out.print("Total percentage out of: ");
+            System.out.println(percentA + percentB + percentC + percentD + percentF + percentQDrops);
+            double totalPercentage = process.gettotalPercentageOutOf(db, "CSCE", 121, "MOORE");
+
 
         }
         catch(SQLException e)
@@ -57,93 +60,105 @@ public class ProcessSQLOutput
 
         return averageGPA;
     }
-    //TODO: Add function that calculates percentage of each grade letter given overall
 
     // gets the percentage of A's out of all students taught in by this professor for this course
-    // rounds the output to 3 decimal places
-    public double getPercentA(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
+    public int getPercentA(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
     {
         double numA = db.getNumA(courseSubject, courseNum, professor);
         double totalStudents = db.getTotalNumStudentsTaught(courseSubject, courseNum, professor);
 
         double percentA = (numA / totalStudents) * 100;
-        percentA = (double)Math.round(percentA * 1000d) / 1000d;
-        System.out.println("Percentage of A's " + percentA + "%");
+        int intpercentA = (int)Math.round(percentA);
+        System.out.println("Percentage of A's " + intpercentA + "%");
 
-        return percentA;
+        return intpercentA;
     }
 
     // gets the percentage of B's out of all students taught in by this professor for this course
-    // rounds the output to 3 decimal places
-    public double getPercentB(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
+    public int getPercentB(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
     {
         double numB = db.getNumB(courseSubject, courseNum, professor);
         double totalStudents = db.getTotalNumStudentsTaught(courseSubject, courseNum, professor);
 
         double percentB = (numB / totalStudents) * 100;
-        percentB = (double)Math.round(percentB * 1000d) / 1000d;
-        System.out.println("Percentage of B's " + percentB + "%");
+        int intpercentB = (int)Math.round(percentB);
+        System.out.println("Percentage of B's " + intpercentB + "%");
 
-        return percentB;
+        return intpercentB;
     }
 
     // gets the percentage of C's out of all students taught in by this professor for this course
-    // rounds the output to 3 decimal places
-    public double getPercentC(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
+    public int getPercentC(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
     {
         double numC = db.getNumC(courseSubject, courseNum, professor);
         double totalStudents = db.getTotalNumStudentsTaught(courseSubject, courseNum, professor);
 
         double percentC = (numC / totalStudents) * 100;
-        percentC = (double)Math.round(percentC * 1000d) / 1000d;
-        System.out.println("Percentage of C's " + percentC + "%");
+        int intpercentC = (int)Math.round(percentC);
+        System.out.println("Percentage of C's " + intpercentC + "%");
 
-        return percentC;
+        return intpercentC;
     }
 
     // gets the percentage of D's out of all students taught in by this professor for this course
-    // rounds the output to 3 decimal places
-    public double getPercentD(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
+    public int getPercentD(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
     {
         double numD = db.getNumD(courseSubject, courseNum, professor);
         double totalStudents = db.getTotalNumStudentsTaught(courseSubject, courseNum, professor);
 
         double percentD = (numD / totalStudents) * 100;
-        percentD = (double)Math.round(percentD * 1000d) / 1000d;
-        System.out.println("Percentage of D's " + percentD + "%");
+        int intpercentD = (int)Math.round(percentD);
+        System.out.println("Percentage of D's " + intpercentD + "%");
 
-        return percentD;
+        return intpercentD;
     }
     // gets the percentage of F's out of all students taught in by this professor for this course
-    // rounds the output to 3 decimal places
-    public double getPercentF(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
+    public int getPercentF(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
     {
         double numF = db.getNumF(courseSubject, courseNum, professor);
         double totalStudents = db.getTotalNumStudentsTaught(courseSubject, courseNum, professor);
 
         double percentF = (numF / totalStudents) * 100;
-        percentF = (double)Math.round(percentF * 1000d) / 1000d;
-        System.out.println("Percentage of F's " + percentF + "%");
+        int intpercentF = (int)Math.round(percentF);
+        System.out.println("Percentage of F's " + intpercentF + "%");
 
-        return percentF;
+        return intpercentF;
     }
 
     // gets the percentage of A's out of all students taught in by this professor for this course
-    // rounds the output to 3 decimal places
-    public double getPercentQDrop(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
+    public int getPercentQDrop(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
     {
-        double numQDrop = db.getNumA(courseSubject, courseNum, professor);
+        double numQDrop = db.getNumQDrop(courseSubject, courseNum, professor);
         double totalStudents = db.getTotalNumStudentsTaught(courseSubject, courseNum, professor);
 
         double percentQDrop = (numQDrop / totalStudents) * 100;
-        percentQDrop = (double)Math.round(percentQDrop * 1000d) / 1000d;
-        System.out.println("Percentage of Q Drops " + percentQDrop + "%");
+        int intpercentQDrop = (int)Math.round(percentQDrop);
+        System.out.println("Percentage of Q Drops " + intpercentQDrop + "%");
 
-        return percentQDrop;
+        return intpercentQDrop;
     }
 
+    // calculates the total percentage of everything added up
+    public double gettotalPercentageOutOf(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        double numA = db.getNumA(courseSubject, courseNum, professor);
+        double numB = db.getNumB(courseSubject, courseNum, professor);
+        double numC = db.getNumC(courseSubject, courseNum, professor);
+        double numD = db.getNumD(courseSubject, courseNum, professor);
+        double numF = db.getNumF(courseSubject, courseNum, professor);
+        double numQDrop = db.getNumQDrop(courseSubject, courseNum, professor);
+        double totalStudents = db.getTotalNumStudentsTaught(courseSubject, courseNum, professor);
 
+        double percentA = (numA / totalStudents) * 100;
+        double percentB = (numB / totalStudents) * 100;
+        double percentC = (numC / totalStudents) * 100;
+        double percentD = (numD / totalStudents) * 100;
+        double percentF = (numF / totalStudents) * 100;
+        double percentQDrop = (numQDrop / totalStudents) * 100;
 
+        double totalPercentage = percentA + percentB + percentC + percentD + percentF + percentQDrop;
+        System.out.println("\nTotal percentage = " + totalPercentage);
 
-
+        return totalPercentage;
+    }
 }
