@@ -24,7 +24,7 @@ public class ProcessSQLOutput
 
             System.out.print("Total percentage out of: ");
             System.out.println(percentA + percentB + percentC + percentD + percentF + percentQDrops);
-            double totalPercentage = process.gettotalPercentageOutOf(db, "CSCE", 121, "MOORE");
+            double totalPercentage = process.getTotalPercentageOutOf(db, "CSCE", 121, "MOORE");
 
 
         }
@@ -139,7 +139,7 @@ public class ProcessSQLOutput
     }
 
     // calculates the total percentage of everything added up
-    public double gettotalPercentageOutOf(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
+    public double getTotalPercentageOutOf(DatabaseAPI db, String courseSubject, int courseNum, String professor) throws SQLException
     {
         double numA = db.getNumA(courseSubject, courseNum, professor);
         double numB = db.getNumB(courseSubject, courseNum, professor);
