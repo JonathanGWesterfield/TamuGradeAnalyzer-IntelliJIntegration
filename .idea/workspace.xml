@@ -38,8 +38,8 @@
       <file leaf-file-name="ProcessSQLOutput.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ProcessSQLOutput.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="21" column="44" lean-forward="false" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+            <state relative-caret-position="227">
+              <caret line="85" column="0" lean-forward="true" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -65,6 +65,7 @@
       <find>makematchver</find>
       <find>true</find>
       <find>double</find>
+      <find>intpercent</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -987,8 +988,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ProcessSQLOutput.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="21" column="44" lean-forward="false" selection-start-line="21" selection-start-column="44" selection-end-line="21" selection-end-column="44" />
+        <state relative-caret-position="227">
+          <caret line="85" column="0" lean-forward="true" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
