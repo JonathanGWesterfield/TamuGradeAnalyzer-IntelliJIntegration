@@ -2,9 +2,13 @@
  * Created by JonathanWesterfield on 2/10/17.
  * This class is nothing but functions that allow the user to access the database
  * through the application. As such it is very long and has very many functions
+ *
+ * Functions: getAllSubjectDistinct,  getAllCourseNumDistinct, getCourseProfessors, getNumA,
+ * getNumB, getNumC, getNumD, getNumF, getNumQDrop, getNumSemestersTaught, getProfRawData,
+ * insert, and closeDBConn
  */
 
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+// import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import java.io.IOException;
 import java.sql.*;
