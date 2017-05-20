@@ -373,6 +373,11 @@ public class DatabaseAPI
         return totalSemestersTaught;
     }
 
+    /*public double getSemesterGPA(String subject,int courseNum, String professor, String term,) throw SQLException
+    {
+        String query = "SELECT Acg_GPA"
+    }*/ //TODO: add a function(s) that get the number of A's, B's, etc for a certain semester
+
     public ArrayList<String> getProfRawData(String subject, int courseNum, String professor) throws SQLException
     {
         String query = "SELECT professor, NumA, NumB, NumC, NumD, NumF, Num_QDrop, " +
