@@ -19,17 +19,58 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DatabaseAPI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DatabaseAPI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DatabaseAPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-450">
-              <caret line="8" column="67" lean-forward="false" selection-start-line="8" selection-start-column="67" selection-end-line="8" selection-end-column="67" />
+            <state relative-caret-position="6295">
+              <caret line="423" column="65" lean-forward="false" selection-start-line="423" selection-start-column="59" selection-end-line="423" selection-end-column="65" />
               <folding>
+                <element signature="e#0#20214#0" expanded="true" />
                 <element signature="imports" expanded="true" />
                 <element signature="e#4287#4295#0" expanded="true" />
                 <element signature="e#5882#5891#0" expanded="true" />
                 <element signature="e#16500#16508#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="29" column="9" lean-forward="false" selection-start-line="28" selection-start-column="28" selection-end-line="29" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PDFReader.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/PDFReader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InfoCondenser.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/InfoCondenser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="177" column="78" lean-forward="false" selection-start-line="177" selection-start-column="78" selection-end-line="177" selection-end-column="78" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DuplicateVerification.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DuplicateVerification.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1235">
+              <caret line="125" column="31" lean-forward="false" selection-start-line="125" selection-start-column="31" selection-end-line="125" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -51,6 +92,8 @@
       <find>nasr-el</find>
       <find>makematchver</find>
       <find>true</find>
+      <find>getnumsem</find>
+      <find>avgGPA</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -71,12 +114,12 @@
       <list>
         <option value="$PROJECT_DIR$/resources/GradeData.dat" />
         <option value="$PROJECT_DIR$/resources/CondensedData.dat" />
-        <option value="$PROJECT_DIR$/src/InfoCondenser.java" />
         <option value="$PROJECT_DIR$/src/DuplicateVerification.java" />
         <option value="$PROJECT_DIR$/src/PDFReader.java" />
         <option value="$PROJECT_DIR$/resources/PDFMatchVerification.dat" />
         <option value="$PROJECT_DIR$/src/main.java" />
         <option value="$PROJECT_DIR$/src/DatabaseAPI.java" />
+        <option value="$PROJECT_DIR$/src/InfoCondenser.java" />
       </list>
     </option>
   </component>
@@ -391,6 +434,44 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <setting name="useSbt" value="false" />
+      <setting name="useUiWithSbt" value="false" />
+      <classRegexps />
+      <testRegexps />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Specs2RunConfiguration" factoryName="Specs2">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <setting name="useSbt" value="false" />
+      <setting name="useUiWithSbt" value="false" />
+      <classRegexps />
+      <testRegexps />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -417,6 +498,25 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="uTestRunConfiguration" factoryName="utest">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <setting name="useSbt" value="false" />
+      <setting name="useUiWithSbt" value="false" />
+      <classRegexps />
+      <testRegexps />
+      <envs />
       <method />
     </configuration>
     <configuration default="false" name="Unnamed" type="Applet" factoryName="Applet">
@@ -533,6 +633,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="-569" width="1080" height="1897" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -549,7 +650,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22105263" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1088632" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19171484" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968834" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -632,6 +733,7 @@
         <state relative-caret-position="527">
           <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
           <folding>
+            <element signature="e#0#20214#0" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="e#4287#4295#0" expanded="true" />
             <element signature="e#5882#5891#0" expanded="true" />
@@ -722,6 +824,7 @@
         <state relative-caret-position="340">
           <caret line="22" column="51" lean-forward="false" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
           <folding>
+            <element signature="e#0#20214#0" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="e#4287#4295#0" expanded="true" />
             <element signature="e#5882#5891#0" expanded="true" />
@@ -772,6 +875,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="e#0#20214#0" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="e#4287#4295#0" expanded="true" />
             <element signature="e#5882#5891#0" expanded="true" />
@@ -913,48 +1017,52 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/InsertToTable.java" />
-    <entry file="file://$PROJECT_DIR$/src/PDFReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1111">
-          <caret line="192" column="0" lean-forward="false" selection-start-line="192" selection-start-column="0" selection-end-line="192" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/GradeData.dat" />
-    <entry file="file://$PROJECT_DIR$/src/DuplicateVerification.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1111">
-          <caret line="125" column="31" lean-forward="false" selection-start-line="125" selection-start-column="31" selection-end-line="125" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/PDFMatchVerification.dat" />
+    <entry file="file://$PROJECT_DIR$/resources/CondensedData.dat" />
     <entry file="file://$PROJECT_DIR$/src/InfoCondenser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="33" column="61" lean-forward="false" selection-start-line="33" selection-start-column="61" selection-end-line="33" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state relative-caret-position="294">
+          <caret line="177" column="78" lean-forward="false" selection-start-line="177" selection-start-column="78" selection-end-line="177" selection-end-column="78" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/PDFMatchVerification.dat" />
-    <entry file="file://$PROJECT_DIR$/resources/CondensedData.dat" />
+    <entry file="file://$PROJECT_DIR$/src/DuplicateVerification.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1235">
+          <caret line="125" column="31" lean-forward="false" selection-start-line="125" selection-start-column="31" selection-end-line="125" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/DatabaseAPI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-450">
-          <caret line="8" column="67" lean-forward="false" selection-start-line="8" selection-start-column="67" selection-end-line="8" selection-end-column="67" />
+        <state relative-caret-position="6295">
+          <caret line="423" column="65" lean-forward="false" selection-start-line="423" selection-start-column="59" selection-end-line="423" selection-end-column="65" />
           <folding>
+            <element signature="e#0#20214#0" expanded="true" />
             <element signature="imports" expanded="true" />
             <element signature="e#4287#4295#0" expanded="true" />
             <element signature="e#5882#5891#0" expanded="true" />
             <element signature="e#16500#16508#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="29" column="9" lean-forward="false" selection-start-line="28" selection-start-column="28" selection-end-line="29" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PDFReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>

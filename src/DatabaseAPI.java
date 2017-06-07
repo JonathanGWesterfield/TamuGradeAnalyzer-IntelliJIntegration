@@ -17,6 +17,10 @@ import java.lang.*;
 import java.lang.String;
 import java.io.*;
 
+
+//TODO: create function to calculate the averageGPA for a professor for the last 5 years
+
+//TODO: create a function to get the average GPA for each semester for the last 5 years (for line graph)
 public class DatabaseAPI
 {
     private String connectionString = "jdbc:mysql://localhost:8889/TamuData";
