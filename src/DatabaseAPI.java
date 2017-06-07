@@ -18,7 +18,7 @@ import java.lang.String;
 import java.io.*;
 
 
-//TODO: create function to calculate the averageGPA for a professor for the last 5 years
+//TODO: create function to calculate the averageGPA for a professor (TEST IT OUT)
 
 //TODO: create a function to get the average GPA for each semester for the last 5 years (for line graph)
 public class DatabaseAPI
@@ -36,7 +36,7 @@ public class DatabaseAPI
         try
         {
             DatabaseAPI db = new DatabaseAPI();
-            ArrayList<String> subjects = db.getAllSubjectDistinct();
+            /*ArrayList<String> subjects = db.getAllSubjectDistinct();
             for(int i = 0; i < subjects.size(); i++)
             {
                 System.out.println(subjects.get(i));
@@ -74,7 +74,9 @@ public class DatabaseAPI
                 }
                 else
                     System.out.print(rawData.get(i) + " ");
-            }
+            } */
+
+            double avgGPA = db.getAvgGPA("CSCE", 121, "MOORE");
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -314,6 +316,31 @@ public class DatabaseAPI
             System.out.println("The total number of D's is " + totalNumF);
         }
         return totalNumF;
+    }
+
+    public double getAvgGPA(String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        int numA = getNumA(courseSubject, courseNum, professor);
+        int numB = getNumB(courseSubject, courseNum, professor);
+        int numC = getNumC(courseSubject, courseNum, professor);
+        int numD = getNumD(courseSubject, courseNum, professor);
+        int numF = getNumF(courseSubject, courseNum, professor);
+        int total = numA + numB + numC + numD + numF;
+
+        numA *= 4;
+        numB *= 3;
+        numC *= 2;
+        numD *= 1; // redundant but is there to help see the pattern
+        numF *= 0; // again redundant but is to help see the pattern
+
+        int totalPoints = numA + numB + numC + numD + numF;
+
+        total /= totalPoints;
+
+        System.out.println("The average GPA is: " + total);
+
+        return total;
+
     }
 
     //TODO: add a function to display raw data for a professor
