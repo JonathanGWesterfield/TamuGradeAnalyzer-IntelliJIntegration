@@ -9,9 +9,10 @@ import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
+import java.lang.*;
+import java.lang.String;
 import java.io.*;
 
-//TODO: add a function that counts how many semesters a professor has taught a particular course
 public class DatabaseAPI
 {
     private String connectionString = "jdbc:mysql://localhost:8889/TamuData";
