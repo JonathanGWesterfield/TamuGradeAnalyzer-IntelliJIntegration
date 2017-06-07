@@ -4,6 +4,10 @@
  * through the application. As such it is very long and has very many functions
  */
 
+/* Contains the functions: getAllSubjectDistinct, getAllCourseNumDistinct, getCourseProfessors,
+ * getNumA, getNumB, getNumC, getNumD, getNumF, getNumQDrop, getTotalNumStudentsTaught,
+ * getNumSemestersTaught, getProfRawData and the insert into table */
+
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 import java.io.IOException;
