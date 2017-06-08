@@ -459,6 +459,7 @@ public class DatabaseAPI
         return totalPoints;
     }
 
+    //TODO: TEST WHAT HAPPENS WHEN SEARCHING FOR A YEAR THAT DOES NOT EXIST OR NO RECORD OF TEACHER
     // calculates the average GPA for a class for a specific semester
     public double getAvgGPASem(String courseSubject, int courseNum, String professor,
                                String term, int year) throws SQLException
@@ -648,7 +649,7 @@ public class DatabaseAPI
     }
 
 }
-/*TODO: What is needed make the database on the laptop CONSTRAINT so that duplicate rows aren't added is
+/*What is needed make the database on the laptop CONSTRAINT so that duplicate rows aren't added is:
 <BEGIN;
 
 ALTER IGNORE TABLE TamuGrades ADD CONSTRAINT TamuGrades_unique
