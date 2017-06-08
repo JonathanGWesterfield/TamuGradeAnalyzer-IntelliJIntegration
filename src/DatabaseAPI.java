@@ -5,7 +5,7 @@
  */
 
 /* Contains the functions: getAllSubjectDistinct, getAllCourseNumDistinct, getCourseProfessors,
- * getNumA, getNumB, getNumC, getNumD, getNumF, getNumQDrop, getAvgGPA, getTotalNumStudentsTaught,
+ * getNumASem, getNumBSem, getNumCSem, getNumDSem, getNumFSem, getNumA, getNumB, getNumC, getNumD, getNumF, getNumQDrop, getAvgGPA, getTotalNumStudentsTaught,
  * getNumSemestersTaught, getProfRawData and the insert into table */
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
@@ -457,7 +457,42 @@ public class DatabaseAPI
         System.out.println("The average GPA is: " + totalPoints);
 
         return totalPoints;
+    }
 
+    // calculates the average GPA for a class for a specific semester
+    public double getAvgGPASem(String courseSubject, int courseNum, String professor,
+                               String term, int year) throws SQLException
+    {
+        //gets the total number of A's, B's, etc. for this professor
+        int numASem = getNumASem(courseSubject, courseNum, professor, term, year);
+        int numBSem = getNumBSem(courseSubject, courseNum, professor, term, year);
+        int numCSem = getNumCSem(courseSubject, courseNum, professor, term, year);
+        int numDSem = getNumDSem(courseSubject, courseNum, professor, term, year);
+        int numFSem = getNumFSem(courseSubject, courseNum, professor, term, year);
+        int total = numASem + numBSem + numCSem + numDSem + numFSem;
+
+        System.out.println("Calculated the average GPA for " + term + " "
+                        + year + ".");
+
+        // weights the numbers
+        numASem *= 4;
+        numBSem *= 3;
+        numCSem *= 2;
+        numDSem *= 1; // redundant but is there to help see the pattern
+        numFSem *= 0; // again redundant but is to help see the pattern
+
+        System.out.printf("Weighted Numbers:\nNumA: %d\nNumB: %d\nNumC: %d\n", numASem, numBSem, numCSem);
+        System.out.printf("NumD: %d\nNumF: %d\n" ,numDSem, numFSem);
+
+        // adds the weighted points
+        double totalPoints = numASem + numBSem + numCSem + numDSem + numFSem;
+
+        // divides by the total to get the average
+        totalPoints /= total;
+
+        System.out.println("The average for " + term + " " + year + "GPA is: " + totalPoints);
+
+        return totalPoints;
     }
 
     public int getTotalNumStudentsTaught(String subject, int courseNum,
@@ -622,3 +657,17 @@ NumA, Numb, NumC, NumD, NumF, Num_QDrop, Semester_Term, Semester_Year, Honors);>
 
 then use the command <COMMIT>
  */
+
+
+// is the code for listing all of the raw data in case I want to use it in a different file
+/* ArrayList<String> rawData = db.getProfRawData("CSCE", 121, "MOORE");
+            for(int i = 0; i < rawData.size(); i++)
+            {
+                if(i % 10 == 0)
+                {
+                    //System.out.println();
+                    System.out.print("\n" + rawData.get(i) + " ");
+                }
+                else
+                    System.out.print(rawData.get(i) + " ");
+            } */
