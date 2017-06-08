@@ -17,9 +17,6 @@ import java.lang.*;
 import java.lang.String;
 import java.io.*;
 
-
-//TODO: create function to calculate the averageGPA for a professor (TEST IT OUT)
-
 //TODO: create a function to get the average GPA for each semester for the last 5 years (for line graph)
 public class DatabaseAPI
 {
@@ -63,12 +60,12 @@ public class DatabaseAPI
             db.getNumQDrop("CSCE", 121, "MOORE");
             db.getTotalNumStudentsTaught("CSCE", 121, "MOORE");
             System.out.println("Number Semesters " + db.getNumSemestersTaught("CSCE", 121, "MOORE"));
-            */
+
 
             ArrayList<String> rawData = db.getProfRawData("CSCE", 121, "MOORE");
             for(int i = 0; i < rawData.size(); i++)
             {
-                if(i % 9 == 0)
+                if(i % 10 == 0)
                 {
                     //System.out.println();
                     System.out.print("\n" + rawData.get(i) + " ");
@@ -77,7 +74,8 @@ public class DatabaseAPI
                     System.out.print(rawData.get(i) + " ");
             }
 
-            double avgGPA = db.getAvgGPA("CSCE", 121, "MOORE");
+            double avgGPA = db.getAvgGPA("CSCE", 121, "MOORE");*/
+            db.getNumASem("CSCE", 121, "MOORE", "fall", 2015);
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -224,6 +222,116 @@ public class DatabaseAPI
         return allCourseProfessors;
     }
 
+    // gets the number of A's for a class for a certain semester and year
+    public int getNumASem(String courseSubject, int courseNum, String professor,
+                          String term, int year) throws SQLException
+    {
+        int totalNumA = 0;
+        String query = "SELECT SUM(NumA) AS total FROM TamuGrades WHERE " +
+                "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
+                courseNum + " AND Professor=\"" + professor + "\" AND Semester_Term=\"" +
+                term + "\" AND Semester_Year=" + year;
+        System.out.println("\nCounting number of A's given by this professor in this course");
+        Statement countNumA = conn.createStatement();
+        ResultSet result = countNumA.executeQuery(query);
+
+        while(result.next())
+        {
+            totalNumA = result.getInt(1);
+            System.out.println("The total number of A's for " + term + " "
+                    + year + " is " + totalNumA);
+        }
+        return totalNumA;
+    }
+
+    // gets the number of B's for a class for a certain semester and year
+    public int getNumBSem(String courseSubject, int courseNum, String professor,
+                          String term, int year) throws SQLException
+    {
+        int totalNumB = 0;
+        String query = "SELECT SUM(NumB) AS total FROM TamuGrades WHERE " +
+                "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
+                courseNum + " AND Professor=\"" + professor + "\" AND Semester_Term=\"" +
+                term + "\" AND Semester_Year=" + year;
+        System.out.println("\nCounting number of B's given by this professor in this course");
+        Statement countNumA = conn.createStatement();
+        ResultSet result = countNumA.executeQuery(query);
+
+        while(result.next())
+        {
+            totalNumB = result.getInt(1);
+            System.out.println("The total number of B's for " + term + " "
+                    + year + " is " + totalNumB);
+        }
+        return totalNumB;
+    }
+
+    // gets the number of C's for a class for a certain semester and year
+    public int getNumCSem(String courseSubject, int courseNum, String professor,
+                          String term, int year) throws SQLException
+    {
+        int totalNumC = 0;
+        String query = "SELECT SUM(NumC) AS total FROM TamuGrades WHERE " +
+                "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
+                courseNum + " AND Professor=\"" + professor + "\" AND Semester_Term=\"" +
+                term + "\" AND Semester_Year=" + year;
+        System.out.println("\nCounting number of C's given by this professor in this course");
+        Statement countNumA = conn.createStatement();
+        ResultSet result = countNumA.executeQuery(query);
+
+        while(result.next())
+        {
+            totalNumC = result.getInt(1);
+            System.out.println("The total number of C's for " + term + " "
+                    + year + " is " + totalNumC);
+        }
+        return totalNumC;
+    }
+
+    // gets the number of D's for a class for a certain semester and year
+    public int getNumDSem(String courseSubject, int courseNum, String professor,
+                          String term, int year) throws SQLException
+    {
+        int totalNumD = 0;
+        String query = "SELECT SUM(NumD) AS total FROM TamuGrades WHERE " +
+                "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
+                courseNum + " AND Professor=\"" + professor + "\" AND Semester_Term=\"" +
+                term + "\" AND Semester_Year=" + year;
+        System.out.println("\nCounting number of D's given by this professor in this course");
+        Statement countNumA = conn.createStatement();
+        ResultSet result = countNumA.executeQuery(query);
+
+        while(result.next())
+        {
+            totalNumD = result.getInt(1);
+            System.out.println("The total number of D's for " + term + " "
+                    + year + " is " + totalNumD);
+        }
+        return totalNumD;
+    }
+
+    // gets the number of F's for a class for a certain semester and year
+    public int getNumFSem(String courseSubject, int courseNum, String professor,
+                          String term, int year) throws SQLException
+    {
+        int totalNumF = 0;
+        String query = "SELECT SUM(NumF) AS total FROM TamuGrades WHERE " +
+                "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
+                courseNum + " AND Professor=\"" + professor + "\" AND Semester_Term=\"" +
+                term + "\" AND Semester_Year=" + year;
+        System.out.println("\nCounting number of F's given by this professor in this course");
+        Statement countNumA = conn.createStatement();
+        ResultSet result = countNumA.executeQuery(query);
+
+        while(result.next())
+        {
+            totalNumF = result.getInt(1);
+            System.out.println("The total number of F's for " + term + " "
+                    + year + " is " + totalNumF);
+        }
+        return totalNumF;
+    }
+
     // counts total number of A's given by a professor in a specific subject and course number
     public int getNumA(String courseSubject, int courseNum, String professor) throws SQLException
     {
@@ -352,8 +460,6 @@ public class DatabaseAPI
 
     }
 
-    //TODO: add a function to display raw data for a professor
-
     public int getTotalNumStudentsTaught(String subject, int courseNum,
                                          String professor) throws SQLException
     {
@@ -417,7 +523,7 @@ public class DatabaseAPI
     public ArrayList<String> getProfRawData(String subject, int courseNum, String professor) throws SQLException
     {
         String query = "SELECT professor, NumA, NumB, NumC, NumD, NumF, Num_QDrop, " +
-                "Semester_Term, Semester_Year FROM TamuGrades WHERE " +
+                "Avg_GPA, Semester_Term, Semester_Year FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + subject + "\" AND CourseNum=" + courseNum + " AND " +
                 "professor=\"" + professor + "\" ORDER BY Semester_Year, Semester_Term DESC";
         Statement getRawData = conn.createStatement();
@@ -432,6 +538,7 @@ public class DatabaseAPI
             String NumC = result.getString("NumC");
             String NumD = result.getString("NumD");
             String NumF = result.getString("NumF");
+            String avgGPA = result.getString("Avg_GPA");
             String Num_QDrop = result.getString("Num_QDrop");
             String semester = result.getString("Semester_Term");
             String year = result.getString("Semester_Year");
@@ -446,6 +553,7 @@ public class DatabaseAPI
             data.add(NumD);
             data.add(NumF);
             data.add(Num_QDrop);
+            data.add(avgGPA);
             data.add(semester);
             data.add(year);
         }
