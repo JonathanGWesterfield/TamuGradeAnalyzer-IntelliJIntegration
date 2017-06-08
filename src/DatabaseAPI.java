@@ -5,7 +5,7 @@
  */
 
 /* Contains the functions: getAllSubjectDistinct, getAllCourseNumDistinct, getCourseProfessors,
- * getNumA, getNumB, getNumC, getNumD, getNumF, getNumQDrop, getTotalNumStudentsTaught,
+ * getNumA, getNumB, getNumC, getNumD, getNumF, getNumQDrop, getAvgGPA, getTotalNumStudentsTaught,
  * getNumSemestersTaught, getProfRawData and the insert into table */
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
@@ -24,7 +24,7 @@ import java.io.*;
 public class DatabaseAPI
 {
     private String connectionString = "jdbc:mysql://localhost:8889/TamuData";
-    private String password = "Chrome11"; // on laptop password is "root"
+    private String password = "root"; //Chrome11"; // on laptop password is "root"
     private String username = "root";
     private Connection conn;
 
@@ -63,6 +63,7 @@ public class DatabaseAPI
             db.getNumQDrop("CSCE", 121, "MOORE");
             db.getTotalNumStudentsTaught("CSCE", 121, "MOORE");
             System.out.println("Number Semesters " + db.getNumSemestersTaught("CSCE", 121, "MOORE"));
+            */
 
             ArrayList<String> rawData = db.getProfRawData("CSCE", 121, "MOORE");
             for(int i = 0; i < rawData.size(); i++)
@@ -74,7 +75,7 @@ public class DatabaseAPI
                 }
                 else
                     System.out.print(rawData.get(i) + " ");
-            } */
+            }
 
             double avgGPA = db.getAvgGPA("CSCE", 121, "MOORE");
             db.closeDBConn();
@@ -318,8 +319,10 @@ public class DatabaseAPI
         return totalNumF;
     }
 
+    // calculates the average GPA for the professor of this subject and course
     public double getAvgGPA(String courseSubject, int courseNum, String professor) throws SQLException
     {
+        //gets the total number of A's, B's, etc. for this professor
         int numA = getNumA(courseSubject, courseNum, professor);
         int numB = getNumB(courseSubject, courseNum, professor);
         int numC = getNumC(courseSubject, courseNum, professor);
@@ -327,19 +330,25 @@ public class DatabaseAPI
         int numF = getNumF(courseSubject, courseNum, professor);
         int total = numA + numB + numC + numD + numF;
 
+        // weights the numbers
         numA *= 4;
         numB *= 3;
         numC *= 2;
         numD *= 1; // redundant but is there to help see the pattern
         numF *= 0; // again redundant but is to help see the pattern
 
-        int totalPoints = numA + numB + numC + numD + numF;
+        System.out.printf("Weighted Numbers:\nNumA: %d\nNumB: %d\nNumC: %d\n", numA, numB, numC);
+        System.out.printf("NumD: %d\nNumF: %d\n" ,numD, numF);
 
-        total /= totalPoints;
+        // adds the weighted points
+        double totalPoints = numA + numB + numC + numD + numF;
 
-        System.out.println("The average GPA is: " + total);
+        // divides by the total to get the average
+        totalPoints /= total;
 
-        return total;
+        System.out.println("The average GPA is: " + totalPoints);
+
+        return totalPoints;
 
     }
 
