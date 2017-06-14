@@ -5,7 +5,8 @@
  */
 
 /* Contains the functions: getAllSubjectDistinct, getAllCourseNumDistinct, getCourseProfessors,
- * getNumASem, getNumBSem, getNumCSem, getNumDSem, getNumFSem, getNumA, getNumB, getNumC, getNumD, getNumF, getNumQDrop, getAvgGPA, getTotalNumStudentsTaught,
+ * getNumASem, getNumBSem, getNumCSem, getNumDSem, getNumFSem, getNumA, getNumB, getNumC, getNumD, getNumF,
+ * getNumQDrop, getAvgGPA, getAvgGPASem, getTotalNumStudentsTaught,
  * getNumSemestersTaught, getProfRawData and the insert into table */
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
@@ -75,7 +76,8 @@ public class DatabaseAPI
             }
 
             double avgGPA = db.getAvgGPA("CSCE", 121, "MOORE");*/
-            db.getNumASem("CSCE", 121, "MOORE", "fall", 2015);
+            db.getNumASem("CSCE", 121, "MOORE", "fall", 2012);
+            db.getPastSemesterGPAs("CSCE", 121, "MOORE");
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -485,15 +487,61 @@ public class DatabaseAPI
         System.out.printf("Weighted Numbers:\nNumA: %d\nNumB: %d\nNumC: %d\n", numASem, numBSem, numCSem);
         System.out.printf("NumD: %d\nNumF: %d\n" ,numDSem, numFSem);
 
+        // in case the records don't exist and return 0
+        if(total == 0)
+        {
+            System.out.println("The average for " + term + " " + year + " GPA is: " + total);
+            return 0;
+        }
+
+
         // adds the weighted points
         double totalPoints = numASem + numBSem + numCSem + numDSem + numFSem;
 
         // divides by the total to get the average
         totalPoints /= total;
 
-        System.out.println("The average for " + term + " " + year + "GPA is: " + totalPoints);
+        System.out.println("The average for " + term + " " + year + " GPA is: " + totalPoints);
+
 
         return totalPoints;
+    }
+
+    // returns an array of the average GPAs for the last 5 years. Is sized accordingly in case a
+    // professor has taught for less than 5 years
+    public ArrayList<Double> getPastSemesterGPAs(String courseSubject, int courseNum, String professor)
+            throws SQLException
+    {
+        ArrayList<Double> GPAList = new ArrayList<Double>();
+
+        int year = Calendar.getInstance().get(Calendar.YEAR) - 5;
+
+        for(int i = 0; i < 5; i++) // goes back 5 years in the database
+        {
+            // decision structure for getting the GPA of both terms of a year
+            for(int j = 0; j < 2; j++)
+            {
+                if(j == 0 && getAvgGPASem(courseSubject, courseNum, professor, "SPRING", year) != 0)
+                {
+                    // Gets the grades for that year during the spring
+                    GPAList.add(getAvgGPASem(courseSubject, courseNum, professor, "SPRING", year));
+                }
+                if(j == 1 && getAvgGPASem(courseSubject, courseNum, professor, "FALL", year) != 0)
+                {
+                    // Gets the grades for that year during the fall
+                    GPAList.add(getAvgGPASem(courseSubject, courseNum, professor, "FALL", year));
+                }
+            }
+            year++;
+        }
+        //prints the contents of GPAList to make sure they are correct
+        System.out.println("\nThe recorded GPA's for each semester are:");
+        for(int i = 0; i < GPAList.size(); i++)
+        {
+            System.out.println(GPAList.get(i));
+        }
+
+        return GPAList;
     }
 
     public int getTotalNumStudentsTaught(String subject, int courseNum,
