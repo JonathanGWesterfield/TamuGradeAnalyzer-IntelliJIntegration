@@ -6,8 +6,9 @@
 
 /* Contains the functions: getAllSubjectDistinct, getAllCourseNumDistinct, getCourseProfessors,
  * getNumASem, getNumBSem, getNumCSem, getNumDSem, getNumFSem, getNumA, getNumB, getNumC, getNumD, getNumF,
- * getNumQDrop, getAvgGPA, getAvgGPASem, getTotalNumStudentsTaught,
- * getNumSemestersTaught, getProfRawData and the insert into table */
+ * getNumQDrop, getAvgGPA, getAvgGPASem, getTotalNumStudentsTaught, getPercentA, getPercentB,
+  * getPercentC, getPercentD, getPercentF, getPercentQDrops,  getNumSemestersTaught,
+  * getProfRawData and the insert into table */
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
@@ -460,6 +461,62 @@ public class DatabaseAPI
 
         return totalPoints;
     }
+
+    // Calculates the percentage of A's given by a teacher
+    public double getPercentA(String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        int total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
+        int numA = getNumA(courseSubject, courseNum, professor);
+
+        return ((numA / total) * 100);
+    }
+
+    // Calculates the percentage of B's given by a teacher
+    public double getPercentB(String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        int total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
+        int numB = getNumB(courseSubject, courseNum, professor);
+
+        return ((numB / total) * 100);
+    }
+
+    // Calculates the percentage of C's given by a teacher
+    public double getPercentC(String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        int total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
+        int numC = getNumC(courseSubject, courseNum, professor);
+
+        return ((numC / total) * 100);
+    }
+
+    // Calculates the percentage of D's given by a teacher
+    public double getPercentD(String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        int total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
+        int numD = getNumD(courseSubject, courseNum, professor);
+
+        return ((numD / total) * 100);
+    }
+
+    // Calculates the percentage of F's given by a teacher
+    public double getPercentF(String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        int total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
+        int numF = getNumF(courseSubject, courseNum, professor);
+
+        return ((numF / total) * 100);
+    }
+
+    // Calculates the percentage of Q Drops for a teacher
+    public double getPercentQDrops(String courseSubject, int courseNum, String professor) throws SQLException
+    {
+        int total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
+        int numQDrops = getNumQDrop(courseSubject, courseNum, professor);
+
+        return ((numQDrops / total) * 100);
+    }
+
+
 
     //TODO: TEST WHAT HAPPENS WHEN SEARCHING FOR A YEAR THAT DOES NOT EXIST OR NO RECORD OF TEACHER
     // calculates the average GPA for a class for a specific semester
