@@ -46,9 +46,8 @@ public class GradeBarChart extends Application
         try
         {
             DatabaseAPI db = new DatabaseAPI();
-            JavaFXGraphs jv = new JavaFXGraphs();
 
-            BarChart<String, Number> bc = jv.gradeBarChart("CSCE", 121, "MOORE", db);
+            BarChart<String, Number> bc = GradeBarChart.gradeBarChart("CSCE", 121, "MOORE", db);
 
             Scene scene = new Scene(bc, 800, 600);
             primaryStage.setScene(scene);
@@ -124,35 +123,6 @@ public class GradeBarChart extends Application
 
         bc.getData().add(grades);
 
-        //for(Node n:bc.lookupAll(".default-color0.chart-bar")) {
-        //  n.setStyle("-fx-bar-fill: maroon;");
-        //}
-
-        //for(Node n:bc.lookupAll(".default-color1.chart-bar")) {
-        //  n.setStyle("-fx-bar-fill: green;");
-        //}
-
-        /* possible animation code for the barchart
-        Timeline tl = new Timeline();
-        tl.getKeyFrames().add(
-                new KeyFrame(Duration.millis(500),
-                        new EventHandler<ActionEvent>() {
-                            @Override public void handle(ActionEvent actionEvent) {
-                                for (XYChart.Series<String, Number> grades : bc.getData()) {
-                                    for (XYChart.Data<String, Number> data : grades.getData()) {
-                                        data.setYValue(Math.random() * 1000);
-                                    }
-                                }
-                            }
-                        }
-                ));
-        tl.setCycleCount(Animation.INDEFINITE);
-        tl.setAutoReverse(true);
-        tl.play();
-        xAxis.setAnimated(false);
-        */
-
-
         return bc;
     }
 
@@ -189,4 +159,35 @@ public class GradeBarChart extends Application
             }
         });
     }*/
+
+
+     /*for(Node n:bc.lookupAll(".default-color0.chart-bar")) {
+          n.setStyle("-fx-bar-fill: maroon;");
+        }
+
+        for(Node n:bc.lookupAll(".default-color1.chart-bar")) {
+          n.setStyle("-fx-bar-fill: green;");
+        }
+
+        // possible animation code for the barchart
+        // must be put inside the barchart function
+
+        Timeline tl = new Timeline();
+        tl.getKeyFrames().add(
+                new KeyFrame(Duration.millis(500),
+                        new EventHandler<ActionEvent>() {
+                            @Override public void handle(ActionEvent actionEvent) {
+                                for (XYChart.Series<String, Number> grades : bc.getData()) {
+                                    for (XYChart.Data<String, Number> data : grades.getData()) {
+                                        data.setYValue(Math.random() * 1000);
+                                    }
+                                }
+                            }
+                        }
+                ));
+        tl.setCycleCount(Animation.INDEFINITE);
+        tl.setAutoReverse(true);
+        tl.play();
+        xAxis.setAnimated(false);
+        */
 }
