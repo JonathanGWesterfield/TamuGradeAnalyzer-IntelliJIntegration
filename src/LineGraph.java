@@ -28,7 +28,7 @@ public class LineGraph extends Application
 
     }
 
-    public LineChart<Number, Number> LineAvgGPA(String courseSubject, int courseNum, String professor)
+    public LineChart<String, Number> LineAvgGPA(String courseSubject, int courseNum, String professor)
     {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
@@ -45,6 +45,10 @@ public class LineGraph extends Application
         GPAArray.setName("Average GPA");
 
         //TODO: create for loop to go through and insert the data into the graph
+
+        avgGPA.getData().add(GPAArray);
+
+        return avgGPA;
     }
 }
 
