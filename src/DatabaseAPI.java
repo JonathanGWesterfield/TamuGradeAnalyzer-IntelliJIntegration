@@ -465,8 +465,10 @@ public class DatabaseAPI
     // Calculates the percentage of A's given by a teacher
     public double getPercentA(String courseSubject, int courseNum, String professor) throws SQLException
     {
-        int total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
-        int numA = getNumA(courseSubject, courseNum, professor);
+        double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
+        double numA = getNumA(courseSubject, courseNum, professor);
+
+        System.out.println("\nThe percentage of A's for this course is " + ((numA / total) * 100));
 
         return ((numA / total) * 100);
     }
@@ -474,8 +476,10 @@ public class DatabaseAPI
     // Calculates the percentage of B's given by a teacher
     public double getPercentB(String courseSubject, int courseNum, String professor) throws SQLException
     {
-        int total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
-        int numB = getNumB(courseSubject, courseNum, professor);
+        double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
+        double numB = getNumB(courseSubject, courseNum, professor);
+
+        System.out.println("\nThe percentage of B's for this course is " + ((numB / total) * 100));
 
         return ((numB / total) * 100);
     }
@@ -483,8 +487,10 @@ public class DatabaseAPI
     // Calculates the percentage of C's given by a teacher
     public double getPercentC(String courseSubject, int courseNum, String professor) throws SQLException
     {
-        int total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
-        int numC = getNumC(courseSubject, courseNum, professor);
+        double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
+        double numC = getNumC(courseSubject, courseNum, professor);
+
+        System.out.println("\nThe percentage of C's for this course is " + ((numC / total) * 100));
 
         return ((numC / total) * 100);
     }
@@ -492,8 +498,10 @@ public class DatabaseAPI
     // Calculates the percentage of D's given by a teacher
     public double getPercentD(String courseSubject, int courseNum, String professor) throws SQLException
     {
-        int total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
-        int numD = getNumD(courseSubject, courseNum, professor);
+        double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
+        double numD = getNumD(courseSubject, courseNum, professor);
+
+        System.out.println("\nThe percentage of D's for this course is " + ((numD / total) * 100));
 
         return ((numD / total) * 100);
     }
@@ -501,8 +509,10 @@ public class DatabaseAPI
     // Calculates the percentage of F's given by a teacher
     public double getPercentF(String courseSubject, int courseNum, String professor) throws SQLException
     {
-        int total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
-        int numF = getNumF(courseSubject, courseNum, professor);
+        double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
+        double numF = getNumF(courseSubject, courseNum, professor);
+
+        System.out.println("\nThe percentage of F's for this course is " + ((numF / total) * 100));
 
         return ((numF / total) * 100);
     }
@@ -510,8 +520,10 @@ public class DatabaseAPI
     // Calculates the percentage of Q Drops for a teacher
     public double getPercentQDrops(String courseSubject, int courseNum, String professor) throws SQLException
     {
-        int total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
-        int numQDrops = getNumQDrop(courseSubject, courseNum, professor);
+        double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
+        double numQDrops = getNumQDrop(courseSubject, courseNum, professor);
+
+        System.out.println("\nThe percentage of Q drops for this course is " + ((numQDrops / total) * 100));
 
         return ((numQDrops / total) * 100);
     }
