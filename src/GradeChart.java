@@ -1,65 +1,67 @@
 /**
- * Created by jonathanw on 6/13/17.
+ * Created by jonathanw on 6/16/17.
  */
 
-import javafx.application.*;
-import javax.swing.JOptionPane;
-import javafx.stage.*;
-import javafx.scene.*;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
-import javafx.scene.control.Alert.*;
-import javafx.event.*;
+import com.sun.javaws.jnl.LibraryDesc;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+import javafx.scene.paint.*;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.XYChart;
-import javafx.util.*;
-import javafx.animation.*;
-import javafx.scene.text.*;
-import javafx.beans.value.*;
-import javafx.beans.*;
-import javafx.geometry.*;
-
-
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.*;
 
-public class GradeBarChart extends Application
+
+public class GradeChart
 {
-
-    public static void main(String[] args)
+    public GradeChart()
     {
-        launch(args);
-
+        //Default empty constructor
     }
 
-    public GradeBarChart()
+    public static LineChart<String, Number> LineAvgGPA(String courseSubject, int courseNum, String professor,
+                                                       DatabaseAPI db) throws SQLException
     {
-        // empty default constructor
-    }
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis("GPA", 0f, 4f, .25);
 
+        xAxis.setLabel("Semester");
+        // yAxis.setLabel("GPA"); redundant line since constructor takes care of this
 
-    @Override public void start(Stage primaryStage)
-    {
-        try
+        final LineChart<String, Number> avgGPA =
+                new LineChart<String, Number>(xAxis, yAxis);
+
+        avgGPA.setAnimated(true);
+
+        avgGPA.setTitle("Professor GPA in Recent Years");
+
+        XYChart.Series GPAArray = new XYChart.Series();
+        GPAArray.setName("Average GPA");
+
+        //TODO: create for loop to go through and insert the data into the graph
+
+        ArrayList<Double> GPAList = db.getPastSemesterGPAs(courseSubject,courseNum, professor);
+        ArrayList<String> pastSemesters = db.getPastSemesters(courseSubject,courseNum, professor);
+
+        for(int i = 0; i < GPAList.size(); i++)
         {
-            DatabaseAPI db = new DatabaseAPI();
-
-            BarChart<String, Number> bc = GradeBarChart.gradeBarChart("CSCE", 121, "MOORE", db);
-
-            Scene scene = new Scene(bc, 800, 600);
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            GPAArray.getData().add(new XYChart.Data(pastSemesters.get(i), GPAList.get(i)));
         }
-        catch (ClassNotFoundException | SQLException e)
-        {
-            e.printStackTrace();
-            System.out.println("The DatabaseAPI class could not be found, thus the database\n");
-        }
+
+        avgGPA.getData().add(GPAArray);
+
+        return avgGPA;
     }
-    // creates a bar chart and returns a Bar chart to add to the scene/stage
+
+    // creates a bar chart with the percentage of A's, B's, C's etc.
     public static BarChart<String, Number> gradeBarChart(String courseSubject, int courseNum,
                                                          String professor, DatabaseAPI db) throws SQLException
     {
@@ -159,35 +161,4 @@ public class GradeBarChart extends Application
             }
         });
     }*/
-
-
-     /*for(Node n:bc.lookupAll(".default-color0.chart-bar")) {
-          n.setStyle("-fx-bar-fill: maroon;");
-        }
-
-        for(Node n:bc.lookupAll(".default-color1.chart-bar")) {
-          n.setStyle("-fx-bar-fill: green;");
-        }
-
-        // possible animation code for the barchart
-        // must be put inside the barchart function
-
-        Timeline tl = new Timeline();
-        tl.getKeyFrames().add(
-                new KeyFrame(Duration.millis(500),
-                        new EventHandler<ActionEvent>() {
-                            @Override public void handle(ActionEvent actionEvent) {
-                                for (XYChart.Series<String, Number> grades : bc.getData()) {
-                                    for (XYChart.Data<String, Number> data : grades.getData()) {
-                                        data.setYValue(Math.random() * 1000);
-                                    }
-                                }
-                            }
-                        }
-                ));
-        tl.setCycleCount(Animation.INDEFINITE);
-        tl.setAutoReverse(true);
-        tl.play();
-        xAxis.setAnimated(false);
-        */
 }

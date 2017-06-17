@@ -613,6 +613,42 @@ public class DatabaseAPI
         return GPAList;
     }
 
+    // gets the semester terms to match the output of the getPastSemesterGPAs function
+    public ArrayList<String> getPastSemesters(String courseSubject, int courseNum, String professor)
+            throws SQLException
+    {
+        ArrayList<String> semesterList = new ArrayList<>();
+
+        int year = Calendar.getInstance().get(Calendar.YEAR) - 5;
+
+        for(int i = 0; i < 5; i++) // goes back 5 years in the database
+        {
+            // decision structure for getting the GPA of both terms of a year
+            for(int j = 0; j < 2; j++)
+            {
+                if(j == 0 && getAvgGPASem(courseSubject, courseNum, professor, "SPRING", year) != 0)
+                {
+                    // gets the term for that gpa to match the output of the getPastSemesterGPAs function
+                    semesterList.add("Spring " + year);
+                }
+                if(j == 1 && getAvgGPASem(courseSubject, courseNum, professor, "FALL", year) != 0)
+                {
+                    // Gets the grades for that year during the fall
+                    semesterList.add("Fall " + year);
+                }
+            }
+            year++;
+        }
+        //prints the contents of GPAList to make sure they are correct
+        System.out.println("\nThe recorded GPA's for each semester are:");
+        for(int i = 0; i < semesterList.size(); i++)
+        {
+            System.out.println(semesterList.get(i) + "\n");
+        }
+
+        return semesterList;
+    }
+
     public int getTotalNumStudentsTaught(String subject, int courseNum,
                                          String professor) throws SQLException
     {
