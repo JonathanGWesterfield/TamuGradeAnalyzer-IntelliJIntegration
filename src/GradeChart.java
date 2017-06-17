@@ -5,23 +5,41 @@
 import com.sun.javaws.jnl.LibraryDesc;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
+import javafx.scene.chart.*;
+import javafx.scene.chart.XYChart.*;
+import javafx.scene.*;
 import javafx.scene.paint.*;
 import javafx.scene.control.*;
+import javafx.scene.text.*;
 import javafx.stage.Stage;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.XYChart;
 import java.sql.*;
 import java.util.*;
 
 
-public class GradeChart
+public class GradeChart extends Application
 {
+
+    public static void main(String[] args)
+    {
+        launch(args);
+    }
+
+    @Override public void start(Stage primaryStage)
+    {
+        try
+        {
+            DatabaseAPI db = new DatabaseAPI();
+            BarChart grades = GradeChart.gradeBarChart("CSCE", 121, "MOORE", db);
+            Scene scene = new Scene(grades, 350, 305);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        }
+        catch (ClassNotFoundException | SQLException e)
+        {
+            System.out.println("Could not load something and this is broke");
+        }
+    }
+
     public GradeChart()
     {
         //Default empty constructor
@@ -46,8 +64,6 @@ public class GradeChart
         XYChart.Series GPAArray = new XYChart.Series();
         GPAArray.setName("Average GPA");
 
-        //TODO: create for loop to go through and insert the data into the graph
-
         ArrayList<Double> GPAList = db.getPastSemesterGPAs(courseSubject,courseNum, professor);
         ArrayList<String> pastSemesters = db.getPastSemesters(courseSubject,courseNum, professor);
 
@@ -61,15 +77,19 @@ public class GradeChart
         return avgGPA;
     }
 
+    //TODO: store percentage info in this class so database doesn't have to be called again
+    // also add the passing percentage of the class
+
+    // Would probably work best if the barchart was 350x350 or 350x305
     // creates a bar chart with the percentage of A's, B's, C's etc.
     public static BarChart<String, Number> gradeBarChart(String courseSubject, int courseNum,
                                                          String professor, DatabaseAPI db) throws SQLException
     {
-        final String numA = "A's";
-        final String numB = "B's";
-        final String numC = "C's";
-        final String numD = "D's";
-        final String numF = "F's";
+        final String numA = "A";
+        final String numB = "B";
+        final String numC = "C";
+        final String numD = "D";
+        final String numF = "F";
         final String numQDrop = "Q Drops";
 
         double percentA = db.getPercentA(courseSubject, courseNum, professor);
@@ -83,6 +103,8 @@ public class GradeChart
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
 
+        CustomStackedBarChart custStacked = new CustomStackedBarChart(xAxis, yAxis);
+
         // creates the graph array
         BarChart<String,Number> bc =
                 new BarChart<String,Number>(xAxis,yAxis);
@@ -91,7 +113,7 @@ public class GradeChart
 
         // sets the graph labels
         xAxis.setLabel("Grades");
-        yAxis.setLabel(" Percentage of Total Grades");
+        yAxis.setLabel(" Percentage of Total Grades ");
 
         XYChart.Series grades = new XYChart.Series();
 
@@ -122,6 +144,9 @@ public class GradeChart
         grades.getData().add(dataD);
         grades.getData().add(dataF);
         grades.getData().add(dataQ);
+
+
+
 
         bc.getData().add(grades);
 
