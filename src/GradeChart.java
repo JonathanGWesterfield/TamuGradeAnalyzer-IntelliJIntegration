@@ -2,28 +2,40 @@
  * Created by jonathanw on 6/16/17.
  */
 
-import com.sun.javaws.jnl.LibraryDesc;
-import javafx.application.Application;
+import javafx.application.*;
+import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.chart.XYChart.*;
 import javafx.scene.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.control.*;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
 import java.sql.*;
+import java.text.DecimalFormat;
 import java.util.*;
 
 
 public class GradeChart extends Application
 {
-    double percentA;
-    double percentB;
-    double percentC;
-    double percentD;
-    double percentF;
-    double percentQDrop;
+    private double percentA;
+    private double percentB;
+    private double percentC;
+    private double percentD;
+    private double percentF;
+    private double percentQDrop;
+
+    private String courseSubject;
+    private String professor;
+    private int courseNum;
+
+    private DatabaseAPI db;
+
+    private VBox percentagesDisplay;
+    private LineChart<String, Number> lineChart;
+    private BarChart<String, Number> barChart;
 
     public static void main(String[] args)
     {
@@ -35,62 +47,67 @@ public class GradeChart extends Application
         try
         {
             DatabaseAPI db = new DatabaseAPI();
-            BarChart grades = gradeBarChart("CSCE", 121, "MOORE", db);
-            Scene scene = new Scene(grades, 305, 305);
+
+
+            GradeChart charts = new GradeChart("CSCE", 121, "MOORE", db);
+            BarChart grades = charts.getBarChart();
+
+            //HBox percentages = charts.getPercentagesDisplay();
+
+            // Scene scene = new Scene(grades, 305, 305);
+
+            Scene scene = new Scene(charts.getPercentagesDisplay(), 185, 208);
+
             primaryStage.setScene(scene);
             primaryStage.show();
         }
         catch (ClassNotFoundException | SQLException e)
         {
             System.out.println("Could not load something and this is broke");
+            e.printStackTrace();
         }
     }
 
-    public GradeChart(String courseSubject, int courseNum, String professor) throws SQLException, ClassNotFoundException
+    public GradeChart()
     {
-        DatabaseAPI db = new DatabaseAPI();
+        // default empty constructor
+    }
+
+    // constructor for this class the takes in all the data
+    public GradeChart(String courseSubject, int courseNum, String professor, DatabaseAPI db) throws SQLException, ClassNotFoundException
+    {
+        this.db = db;
+        this.courseSubject = courseSubject;
+        this.courseNum = courseNum;
+        this.professor = professor;
         this.percentA = db.getPercentA(courseSubject, courseNum, professor);
         this.percentB = db.getPercentB(courseSubject, courseNum, professor);
         this.percentC = db.getPercentC(courseSubject, courseNum, professor);
         this.percentD = db.getPercentD(courseSubject, courseNum, professor);
         this.percentF = db.getPercentF(courseSubject, courseNum, professor);
         this.percentQDrop = db.getPercentQDrops(courseSubject, courseNum, professor);
+
+        this.lineChart = LineAvgGPA();
+        this.barChart = gradeBarChart();
+        this.percentagesDisplay = displayPercentages();
+
+
     }
 
-    public double getPercentA()
-    {
-        return percentA;
-    }
-
-    public double getPercentB()
-    {
-        return percentB;
-    }
-
-    public double getPercentC()
-    {
-        return percentC;
-    }
-
-    public double getPercentD()
-    {
-        return percentD;
-    }
-
-    public double getPercentF()
-    {
-        return percentF;
-    }
-
-    public double getPercentQDrop()
-    {
-        return percentQDrop;
-    }
+    // class getters
+    public double getPercentA() { return percentA; }
+    public double getPercentB() { return percentB; }
+    public double getPercentC() { return percentC; }
+    public double getPercentD() { return percentD; }
+    public double getPercentF() { return percentF; }
+    public double getPercentQDrop() { return percentQDrop; }
+    public VBox getPercentagesDisplay() { return percentagesDisplay; }
+    public LineChart<String, Number> getLineChart() { return lineChart; }
+    public BarChart<String, Number> getBarChart() { return barChart; }
 
 
     // is static because all of its informaiton is based off of the databaseAPI so it stores nothing
-    public static LineChart<String, Number> LineAvgGPA(String courseSubject, int courseNum, String professor,
-                                                       DatabaseAPI db) throws SQLException
+    public LineChart<String, Number> LineAvgGPA() throws SQLException
     {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis("GPA", 0f, 4f, .25);
@@ -121,13 +138,11 @@ public class GradeChart extends Application
         return avgGPA;
     }
 
-    //TODO: store percentage info in this class so database doesn't have to be called again
     // also add the passing percentage of the class
 
     // Would probably work best if the barchart was 350x350
     // creates a bar chart with the percentage of A's, B's, C's etc.
-    public BarChart<String, Number> gradeBarChart(String courseSubject, int courseNum,
-                                                         String professor, DatabaseAPI db) throws SQLException
+    public BarChart<String, Number> gradeBarChart() throws SQLException
     {
         final String numA = "A";
         final String numB = "B";
@@ -139,8 +154,6 @@ public class GradeChart extends Application
         // creates the axis of the graph
         CategoryAxis xAxis = new CategoryAxis();
         NumberAxis yAxis = new NumberAxis();
-
-        CustomStackedBarChart custStacked = new CustomStackedBarChart(xAxis, yAxis);
 
         // creates the graph array
         BarChart<String,Number> bc =
@@ -156,25 +169,15 @@ public class GradeChart extends Application
 
         grades.setName("Grade Percentages"); // was commented out because it is redundant
 
+        // adds the data to the chart
         XYChart.Data dataA = new XYChart.Data(numA, percentA);
-        // JavaFXGraphs.displayLabelForData(dataA);
-
         XYChart.Data dataB = new XYChart.Data(numB, percentB);
-        // JavaFXGraphs.displayLabelForData(dataB);
-
         XYChart.Data dataC = new XYChart.Data(numC, percentC);
-        // JavaFXGraphs.displayLabelForData(dataC);
-
         XYChart.Data dataD = new XYChart.Data(numD, percentD);
-        // JavaFXGraphs.displayLabelForData(dataD);
-
         XYChart.Data dataF = new XYChart.Data(numF, percentF);
-        // JavaFXGraphs.displayLabelForData(dataF);
-
         XYChart.Data dataQ = new XYChart.Data(numQDrop, percentQDrop);
-        // JavaFXGraphs.displayLabelForData(dataQ);
 
-
+        // adds the inputs to the bar graph to be displayed
         grades.getData().add(dataA);
         grades.getData().add(dataB);
         grades.getData().add(dataC);
@@ -185,6 +188,28 @@ public class GradeChart extends Application
         bc.getData().add(grades);
 
         return bc;
+    }
+
+    // displays all of the percentages for the course. Needs to be 185x208
+    public VBox displayPercentages()
+    {
+        VBox percentages = new VBox(10);
+        percentages.setPadding(new Insets(15, 12,15,12));
+        DecimalFormat df = new DecimalFormat("##.0");
+
+        double percentPassing = percentA + percentB + percentC;
+
+        Label perA = new Label("Percent A:  " + df.format(getPercentA()) + "%");
+        Label perB = new Label("Percent B:  " + df.format(getPercentB()) + "%");
+        Label perC = new Label("Percent C:  " + df.format(getPercentC()) + "%");
+        Label perD = new Label("Percent D:  " + df.format(getPercentD()) + "%");
+        Label perF = new Label("Percent F:  " + df.format(getPercentF()) + "%");
+        Label perQ = new Label("Percent Q Drops:  " + df.format(getPercentQDrop()) + "%");
+        Label perPass = new Label("Passing Rate:  " + df.format(percentPassing) + "%");
+
+        percentages.getChildren().addAll(perA, perB, perC, perD, perF, perQ, perPass);
+
+        return percentages;
     }
 
     /* This code was to put the value of the data over the bars of the bar graph
