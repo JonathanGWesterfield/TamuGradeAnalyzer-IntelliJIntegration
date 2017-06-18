@@ -18,6 +18,12 @@ import java.util.*;
 
 public class GradeChart extends Application
 {
+    double percentA;
+    double percentB;
+    double percentC;
+    double percentD;
+    double percentF;
+    double percentQDrop;
 
     public static void main(String[] args)
     {
@@ -29,8 +35,8 @@ public class GradeChart extends Application
         try
         {
             DatabaseAPI db = new DatabaseAPI();
-            BarChart grades = GradeChart.gradeBarChart("CSCE", 121, "MOORE", db);
-            Scene scene = new Scene(grades, 350, 305);
+            BarChart grades = gradeBarChart("CSCE", 121, "MOORE", db);
+            Scene scene = new Scene(grades, 305, 305);
             primaryStage.setScene(scene);
             primaryStage.show();
         }
@@ -40,11 +46,49 @@ public class GradeChart extends Application
         }
     }
 
-    public GradeChart()
+    public GradeChart(String courseSubject, int courseNum, String professor) throws SQLException, ClassNotFoundException
     {
-        //Default empty constructor
+        DatabaseAPI db = new DatabaseAPI();
+        this.percentA = db.getPercentA(courseSubject, courseNum, professor);
+        this.percentB = db.getPercentB(courseSubject, courseNum, professor);
+        this.percentC = db.getPercentC(courseSubject, courseNum, professor);
+        this.percentD = db.getPercentD(courseSubject, courseNum, professor);
+        this.percentF = db.getPercentF(courseSubject, courseNum, professor);
+        this.percentQDrop = db.getPercentQDrops(courseSubject, courseNum, professor);
     }
 
+    public double getPercentA()
+    {
+        return percentA;
+    }
+
+    public double getPercentB()
+    {
+        return percentB;
+    }
+
+    public double getPercentC()
+    {
+        return percentC;
+    }
+
+    public double getPercentD()
+    {
+        return percentD;
+    }
+
+    public double getPercentF()
+    {
+        return percentF;
+    }
+
+    public double getPercentQDrop()
+    {
+        return percentQDrop;
+    }
+
+
+    // is static because all of its informaiton is based off of the databaseAPI so it stores nothing
     public static LineChart<String, Number> LineAvgGPA(String courseSubject, int courseNum, String professor,
                                                        DatabaseAPI db) throws SQLException
     {
@@ -80,9 +124,9 @@ public class GradeChart extends Application
     //TODO: store percentage info in this class so database doesn't have to be called again
     // also add the passing percentage of the class
 
-    // Would probably work best if the barchart was 350x350 or 350x305
+    // Would probably work best if the barchart was 350x350
     // creates a bar chart with the percentage of A's, B's, C's etc.
-    public static BarChart<String, Number> gradeBarChart(String courseSubject, int courseNum,
+    public BarChart<String, Number> gradeBarChart(String courseSubject, int courseNum,
                                                          String professor, DatabaseAPI db) throws SQLException
     {
         final String numA = "A";
@@ -91,13 +135,6 @@ public class GradeChart extends Application
         final String numD = "D";
         final String numF = "F";
         final String numQDrop = "Q Drops";
-
-        double percentA = db.getPercentA(courseSubject, courseNum, professor);
-        double percentB = db.getPercentB(courseSubject, courseNum, professor);
-        double percentC = db.getPercentC(courseSubject, courseNum, professor);
-        double percentD = db.getPercentD(courseSubject, courseNum, professor);
-        double percentF = db.getPercentF(courseSubject, courseNum, professor);
-        double percentQDrop = db.getPercentQDrops(courseSubject, courseNum, professor);
 
         // creates the axis of the graph
         CategoryAxis xAxis = new CategoryAxis();
@@ -144,9 +181,6 @@ public class GradeChart extends Application
         grades.getData().add(dataD);
         grades.getData().add(dataF);
         grades.getData().add(dataQ);
-
-
-
 
         bc.getData().add(grades);
 
