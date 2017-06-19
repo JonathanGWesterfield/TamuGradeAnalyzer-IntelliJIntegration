@@ -106,7 +106,7 @@ public class GradeChart extends Application
     public BarChart<String, Number> getBarChart() { return barChart; }
 
 
-    // is static because all of its informaiton is based off of the databaseAPI so it stores nothing
+    // is static because all of its information is based off of the databaseAPI so it stores nothing
     public LineChart<String, Number> LineAvgGPA() throws SQLException
     {
         final CategoryAxis xAxis = new CategoryAxis();
