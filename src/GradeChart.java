@@ -11,11 +11,15 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.control.*;
+import javafx.animation.*;
 import javafx.scene.text.*;
+import javafx.util.Duration;
 import javafx.stage.Stage;
 import java.sql.*;
 import java.text.DecimalFormat;
 import java.util.*;
+import javafx.event.*;
+
 
 
 public class GradeChart extends Application
@@ -54,9 +58,9 @@ public class GradeChart extends Application
 
             //HBox percentages = charts.getPercentagesDisplay();
 
-            // Scene scene = new Scene(grades, 305, 305);
+            Scene scene = new Scene(grades, 305, 305);
 
-            Scene scene = new Scene(charts.getPercentagesDisplay(), 185, 208);
+            // Scene scene = new Scene(charts.getPercentagesDisplay(), 185, 208);
 
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -245,4 +249,42 @@ public class GradeChart extends Application
             }
         });
     }*/
+
+    /* Attempts to animate the bar graph function
+        Timeline timeline = new Timeline(
+                new KeyFrame(
+                        Duration.ZERO,
+                        new EventHandler<ActionEvent>()
+                        {
+                            @Override public void handle(ActionEvent actionEvent)
+                            {
+                                plot();
+                            }
+                        }
+                ),
+                new KeyFrame(
+                        Duration.seconds(1)
+                )
+        );
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+
+        Timeline tl = new Timeline();
+        tl.getKeyFrames().add(new KeyFrame(Duration.millis(500),
+                new EventHandler<ActionEvent>()
+                {
+                    @Override public void handle(ActionEvent actionEvent)
+                    {
+                        for (XYChart.Series<String, Number> series : bc.getData())
+                        {
+                            for (XYChart.Data<String, Number> data : series.getData())
+                            {
+                                data.setYValue(Math.random() * 100);
+                            }
+                        }
+                    }
+                }));
+        tl.setCycleCount(1000);
+        tl.play();*/
 }
