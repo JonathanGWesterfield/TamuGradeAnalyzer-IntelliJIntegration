@@ -20,8 +20,6 @@ import java.text.DecimalFormat;
 import java.util.*;
 import javafx.event.*;
 
-
-
 public class GradeChart extends Application
 {
     private double percentA;
