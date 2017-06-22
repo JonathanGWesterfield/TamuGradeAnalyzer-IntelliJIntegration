@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a35f547-0a74-4c71-9349-327ef0987db3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GradeChart.java" afterPath="$PROJECT_DIR$/src/GradeChart.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DatabaseAPI.java" afterPath="$PROJECT_DIR$/src/DatabaseAPI.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,9 +24,14 @@
       <file leaf-file-name="DatabaseAPI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DatabaseAPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="887">
-              <caret line="98" column="5" lean-forward="true" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
-              <folding />
+            <state relative-caret-position="984">
+              <caret line="371" column="82" lean-forward="false" selection-start-line="371" selection-start-column="82" selection-end-line="371" selection-end-column="82" />
+              <folding>
+                <element signature="e#6060#6068#0" expanded="true" />
+                <element signature="e#7655#7664#0" expanded="true" />
+                <element signature="e#26897#26905#0" expanded="true" />
+                <element signature="e#32236#32244#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,7 +104,12 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="105">
               <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-              <folding />
+              <folding>
+                <element signature="n#!!doc" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#832#833#0" expanded="false" />
+                <element signature="e#855#856#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -174,10 +183,10 @@
         <option value="$PROJECT_DIR$/src/JavaFXGraphs.java" />
         <option value="$PROJECT_DIR$/src/GradeBarChart.java" />
         <option value="$PROJECT_DIR$/src/LineGraph.java" />
-        <option value="$PROJECT_DIR$/src/DatabaseAPI.java" />
         <option value="$PROJECT_DIR$/src/CustomStackedBarChart.java" />
         <option value="$PROJECT_DIR$/src/DisplayData.java" />
         <option value="$PROJECT_DIR$/src/GradeChart.java" />
+        <option value="$PROJECT_DIR$/src/DatabaseAPI.java" />
       </list>
     </option>
   </component>
@@ -757,6 +766,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="-549" width="1080" height="1898" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32963988" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -769,7 +779,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20930232" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16777408" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16777408" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26107898" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -895,7 +905,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="22" column="51" lean-forward="false" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
-          <folding />
+          <folding>
+            <element signature="e#6060#6068#0" expanded="true" />
+            <element signature="e#7655#7664#0" expanded="true" />
+            <element signature="e#26897#26905#0" expanded="true" />
+            <element signature="e#32236#32244#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -940,7 +955,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#6060#6068#0" expanded="true" />
+            <element signature="e#7655#7664#0" expanded="true" />
+            <element signature="e#26897#26905#0" expanded="true" />
+            <element signature="e#32236#32244#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1082,7 +1102,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#832#833#0" expanded="false" />
+            <element signature="e#855#856#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1159,9 +1184,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DatabaseAPI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="887">
-          <caret line="98" column="5" lean-forward="true" selection-start-line="98" selection-start-column="5" selection-end-line="98" selection-end-column="5" />
-          <folding />
+        <state relative-caret-position="984">
+          <caret line="371" column="82" lean-forward="false" selection-start-line="371" selection-start-column="82" selection-end-line="371" selection-end-column="82" />
+          <folding>
+            <element signature="e#6060#6068#0" expanded="true" />
+            <element signature="e#7655#7664#0" expanded="true" />
+            <element signature="e#26897#26905#0" expanded="true" />
+            <element signature="e#32236#32244#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
