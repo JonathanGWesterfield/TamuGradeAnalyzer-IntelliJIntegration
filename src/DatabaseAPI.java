@@ -45,8 +45,6 @@ public class DatabaseAPI
     String courseSubject;
     int courseNum;
     String professor;
-
-    //TODO: CHANGE FUNCTIONS TO USE DATA MEMBERS INSTEAD OF TAKING ARGUMENTS
     
     public static void main(String[] args) {
         String connectionString = "jdbc:mysql://localhost:8889/TamuData";
@@ -130,6 +128,7 @@ public class DatabaseAPI
         this.courseNum = courseNum;
         this.professor = professor;
 
+        getTotalNumStudentsTaught();
         getNumA();
         getNumB();
         getNumC();
@@ -146,7 +145,6 @@ public class DatabaseAPI
         getPercentF();
         getPercentQDrops();
 
-        //TODO: CALL THE AVGGPA FUNCTION AFTER REWORKING THE GPA FUNCTION TO USE PRIVATE DATA
     }
 
     public void createDBConn() throws SQLException, ClassNotFoundException
@@ -405,7 +403,6 @@ public class DatabaseAPI
         this.numberA = totalNumA;
     }
 
-    //TODO: POSSIBLY CHANGE FUNCTIONS TO VOID AND JUST MODIFY PRIVATE DATA MEMBERS
     // counts total number of A's given by a professor in a specific subject and course number
     private int getNumA(String courseSubject, int courseNum, String professor) throws SQLException
     {
@@ -728,7 +725,7 @@ public class DatabaseAPI
     //uses data in class to get percentage of A's
     public void getPercentA() throws SQLException
     {
-        double total = getTotalNumStudentsTaught();
+        double total = totalNumStudents;
         double numA = numberA;
 
         System.out.println("\nThe percentage of A's for this course is " + ((numA / total) * 100));
@@ -750,7 +747,7 @@ public class DatabaseAPI
     // Calculates the percentage of B's given by a teacher
     public void getPercentB() throws SQLException
     {
-        double total = getTotalNumStudentsTaught();
+        double total = totalNumStudents;
         double numB = numberB;
 
         System.out.println("\nThe percentage of B's for this course is " + ((numB / total) * 100));
@@ -772,7 +769,7 @@ public class DatabaseAPI
     // Calculates the percentage of C's given by a teacher
     public void getPercentC() throws SQLException
     {
-        double total = getTotalNumStudentsTaught();
+        double total = totalNumStudents;
         double numC = numberC;
 
         System.out.println("\nThe percentage of C's for this course is " + ((numC / total) * 100));
@@ -794,7 +791,7 @@ public class DatabaseAPI
     // Calculates the percentage of D's given by a teacher
     public void getPercentD() throws SQLException
     {
-        double total = getTotalNumStudentsTaught();
+        double total = totalNumStudents;
         double numD = numberD;
 
         System.out.println("\nThe percentage of D's for this course is " + ((numD / total) * 100));
@@ -816,7 +813,7 @@ public class DatabaseAPI
     // Calculates the percentage of F's given by a teacher
     public void getPercentF() throws SQLException
     {
-        double total = getTotalNumStudentsTaught();
+        double total = totalNumStudents;
         double numF = numberF;
 
         System.out.println("\nThe percentage of F's for this course is " + ((numF / total) * 100));
@@ -838,7 +835,7 @@ public class DatabaseAPI
     // Calculates the percentage of Q Drops for a teacher
     public void getPercentQDrops() throws SQLException
     {
-        double total = getTotalNumStudentsTaught();
+        double total = totalNumStudents;
         double numQDrops = numberQ;
 
         System.out.println("\nThe percentage of Q drops for this course is " + ((numQDrops / total) * 100));
@@ -859,7 +856,7 @@ public class DatabaseAPI
 
 
 
-    //TODO: TEST WHAT HAPPENS WHEN SEARCHING FOR A YEAR THAT DOES NOT EXIST OR NO RECORD OF TEACHER
+    // If there is no result for a year, the function just returns zero
     // calculates the average GPA for a class for a specific semester
     public double getAvgGPASem(String courseSubject, int courseNum, String professor,
                                String term, int year) throws SQLException
