@@ -195,12 +195,52 @@ public class DatabaseAPI
 
     public int getNumberF()
     {
-        return  numberF;
+        return numberF;
     }
 
     public int getNumberQ()
     {
         return numberQ;
+    }
+
+    public double getAverageGPA()
+    {
+        return averageGPA;
+    }
+
+    public int getTotalNumStudents()
+    {
+        return  totalNumStudents;
+    }
+
+    public double getPercentageA()
+    {
+        return percentageA;
+    }
+
+    public double getPercentageB()
+    {
+        return percentageB;
+    }
+
+    public double getPercentageC()
+    {
+        return percentageC;
+    }
+
+    public double getPercentageD()
+    {
+        return percentageD;
+    }
+
+    public double getPercentageF()
+    {
+        return percentageF;
+    }
+
+    public double getPercentageQ()
+    {
+        return percentageQ;
     }
 
     /* returns an arraylist of all subjects in database in alphabetical order*/

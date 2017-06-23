@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a35f547-0a74-4c71-9349-327ef0987db3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DatabaseAPI.java" afterPath="$PROJECT_DIR$/src/DatabaseAPI.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -25,25 +24,13 @@
       <file leaf-file-name="DatabaseAPI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DatabaseAPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="883" column="11" lean-forward="false" selection-start-line="883" selection-start-column="11" selection-end-line="883" selection-end-column="11" />
+            <state relative-caret-position="688">
+              <caret line="194" column="0" lean-forward="true" selection-start-line="194" selection-start-column="0" selection-end-line="194" selection-end-column="0" />
               <folding>
-                <element signature="e#5806#5807#0" expanded="true" />
-                <element signature="e#5836#5837#0" expanded="true" />
-                <element signature="e#5871#5872#0" expanded="true" />
-                <element signature="e#5901#5902#0" expanded="true" />
-                <element signature="e#5936#5937#0" expanded="true" />
-                <element signature="e#5966#5967#0" expanded="true" />
-                <element signature="e#6001#6002#0" expanded="true" />
-                <element signature="e#6031#6032#0" expanded="true" />
-                <element signature="e#6066#6067#0" expanded="true" />
-                <element signature="e#6097#6098#0" expanded="true" />
-                <element signature="e#6132#6133#0" expanded="true" />
-                <element signature="e#6162#6163#0" expanded="true" />
-                <element signature="e#6822#6830#0" expanded="true" />
-                <element signature="e#8417#8426#0" expanded="true" />
-                <element signature="e#37463#37471#0" expanded="true" />
-                <element signature="e#41868#41876#0" expanded="true" />
+                <element signature="e#7435#7443#0" expanded="true" />
+                <element signature="e#9030#9039#0" expanded="true" />
+                <element signature="e#38076#38084#0" expanded="true" />
+                <element signature="e#42481#42489#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -871,7 +858,18 @@
     <option name="LAST_COMMIT_MESSAGE" value="Added a function that counts how many students a professor has taught for a particular subject and course number. Counts the total number of students since they started teaching the class (or as far back as the database has records)" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/DatabaseAPI.java</url>
+          <line>190</line>
+          <properties class="DatabaseAPI" method="getNumberD">
+            <option name="EMULATED" value="true" />
+          </properties>
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="antWorkspaceConfiguration">
@@ -933,22 +931,10 @@
         <state relative-caret-position="340">
           <caret line="22" column="51" lean-forward="false" selection-start-line="22" selection-start-column="51" selection-end-line="22" selection-end-column="51" />
           <folding>
-            <element signature="e#5806#5807#0" expanded="true" />
-            <element signature="e#5836#5837#0" expanded="true" />
-            <element signature="e#5871#5872#0" expanded="true" />
-            <element signature="e#5901#5902#0" expanded="true" />
-            <element signature="e#5936#5937#0" expanded="true" />
-            <element signature="e#5966#5967#0" expanded="true" />
-            <element signature="e#6001#6002#0" expanded="true" />
-            <element signature="e#6031#6032#0" expanded="true" />
-            <element signature="e#6066#6067#0" expanded="true" />
-            <element signature="e#6097#6098#0" expanded="true" />
-            <element signature="e#6132#6133#0" expanded="true" />
-            <element signature="e#6162#6163#0" expanded="true" />
-            <element signature="e#6822#6830#0" expanded="true" />
-            <element signature="e#8417#8426#0" expanded="true" />
-            <element signature="e#37463#37471#0" expanded="true" />
-            <element signature="e#41868#41876#0" expanded="true" />
+            <element signature="e#7435#7443#0" expanded="true" />
+            <element signature="e#9030#9039#0" expanded="true" />
+            <element signature="e#38076#38084#0" expanded="true" />
+            <element signature="e#42481#42489#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -998,22 +984,10 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#5806#5807#0" expanded="true" />
-            <element signature="e#5836#5837#0" expanded="true" />
-            <element signature="e#5871#5872#0" expanded="true" />
-            <element signature="e#5901#5902#0" expanded="true" />
-            <element signature="e#5936#5937#0" expanded="true" />
-            <element signature="e#5966#5967#0" expanded="true" />
-            <element signature="e#6001#6002#0" expanded="true" />
-            <element signature="e#6031#6032#0" expanded="true" />
-            <element signature="e#6066#6067#0" expanded="true" />
-            <element signature="e#6097#6098#0" expanded="true" />
-            <element signature="e#6132#6133#0" expanded="true" />
-            <element signature="e#6162#6163#0" expanded="true" />
-            <element signature="e#6822#6830#0" expanded="true" />
-            <element signature="e#8417#8426#0" expanded="true" />
-            <element signature="e#37463#37471#0" expanded="true" />
-            <element signature="e#41868#41876#0" expanded="true" />
+            <element signature="e#7435#7443#0" expanded="true" />
+            <element signature="e#9030#9039#0" expanded="true" />
+            <element signature="e#38076#38084#0" expanded="true" />
+            <element signature="e#42481#42489#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1263,25 +1237,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DatabaseAPI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="883" column="11" lean-forward="false" selection-start-line="883" selection-start-column="11" selection-end-line="883" selection-end-column="11" />
+        <state relative-caret-position="688">
+          <caret line="194" column="0" lean-forward="true" selection-start-line="194" selection-start-column="0" selection-end-line="194" selection-end-column="0" />
           <folding>
-            <element signature="e#5806#5807#0" expanded="true" />
-            <element signature="e#5836#5837#0" expanded="true" />
-            <element signature="e#5871#5872#0" expanded="true" />
-            <element signature="e#5901#5902#0" expanded="true" />
-            <element signature="e#5936#5937#0" expanded="true" />
-            <element signature="e#5966#5967#0" expanded="true" />
-            <element signature="e#6001#6002#0" expanded="true" />
-            <element signature="e#6031#6032#0" expanded="true" />
-            <element signature="e#6066#6067#0" expanded="true" />
-            <element signature="e#6097#6098#0" expanded="true" />
-            <element signature="e#6132#6133#0" expanded="true" />
-            <element signature="e#6162#6163#0" expanded="true" />
-            <element signature="e#6822#6830#0" expanded="true" />
-            <element signature="e#8417#8426#0" expanded="true" />
-            <element signature="e#37463#37471#0" expanded="true" />
-            <element signature="e#41868#41876#0" expanded="true" />
+            <element signature="e#7435#7443#0" expanded="true" />
+            <element signature="e#9030#9039#0" expanded="true" />
+            <element signature="e#38076#38084#0" expanded="true" />
+            <element signature="e#42481#42489#0" expanded="true" />
           </folding>
         </state>
       </provider>
