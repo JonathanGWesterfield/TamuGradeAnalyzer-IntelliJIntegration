@@ -155,6 +155,54 @@ public class DatabaseAPI
         return;
     }
 
+    /*
+    private int numberA;
+    private int numberB;
+    private int numberC;
+    private int numberD;
+    private int numberF;
+    private int numberQ;
+    private double averageGPA;
+    private int totalNumStudents;
+
+    private double percentageA;
+    private double percentageB;
+    private double percentageC;
+    private double percentageD;
+    private double percentageF;
+    private double percentageQ; */
+
+    //getter functions for all of the data members
+    public int getNumberA()
+    {
+        return numberA;
+    }
+
+    public int getNumberB()
+    {
+        return numberB;
+    }
+
+    public int getNumberC()
+    {
+        return numberC;
+    }
+
+    public int getNumberD()
+    {
+        return numberD;
+    }
+
+    public int getNumberF()
+    {
+        return  numberF;
+    }
+
+    public int getNumberQ()
+    {
+        return numberQ;
+    }
+
     /* returns an arraylist of all subjects in database in alphabetical order*/
     public ArrayList<String> getAllSubjectDistinct() throws SQLException
     {
@@ -404,7 +452,7 @@ public class DatabaseAPI
     }
 
     // counts total number of A's given by a professor in a specific subject and course number
-    private int getNumA(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumA(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumA = 0;
         String query = "SELECT SUM(NumA) AS total FROM TamuGrades WHERE " +
@@ -443,7 +491,7 @@ public class DatabaseAPI
     }
 
     // counts total number of B's given by a professor in a specific subject and course number
-    private int getNumB(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumB(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumB = 0;
         String query = "SELECT SUM(NumB) AS total FROM TamuGrades WHERE " +
@@ -482,7 +530,7 @@ public class DatabaseAPI
     }
 
     // counts total number of C's given by a professor in a specific subject and course number
-    private int getNumC(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumC(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumC = 0;
         String query = "SELECT SUM(NumC) AS total FROM TamuGrades WHERE " +
@@ -521,7 +569,7 @@ public class DatabaseAPI
     }
 
     // counts total number of D's given by a professor in a specific subject and course number
-    private int getNumD(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumD(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumD = 0;
         String query = "SELECT SUM(NumD) AS total FROM TamuGrades WHERE " +
@@ -560,7 +608,7 @@ public class DatabaseAPI
     }
 
     // counts total number of D's given by a professor in a specific subject and course number
-    private int getNumF(String courseSubject, int courseNum, String professor) throws SQLException
+    public int getNumF(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumF = 0;
         String query = "SELECT SUM(NumF) AS total FROM TamuGrades WHERE " +
@@ -579,7 +627,7 @@ public class DatabaseAPI
     }
 
     // counts total number of QDrops given by a professor in a specific subject and course number
-    public void getNumQDrop() throws SQLException
+    private void getNumQDrop() throws SQLException
     {
         int totalQDrop = 0;
         String query = "SELECT SUM(Num_QDrop) AS total FROM TamuGrades WHERE " +
@@ -650,7 +698,7 @@ public class DatabaseAPI
     }
 
     // calculates the average GPA for the professor of this subject and course
-    private double getAvgGPA(String courseSubject, int courseNum, String professor) throws SQLException
+    public double getAvgGPA(String courseSubject, int courseNum, String professor) throws SQLException
     {
         //gets the total number of A's, B's, etc. for this professor
         int numA = numberA;
@@ -683,7 +731,7 @@ public class DatabaseAPI
         return totalPoints;
     }
 
-    public void getTotalNumStudentsTaught() throws SQLException
+    private void getTotalNumStudentsTaught() throws SQLException
     {
         String query = "SELECT SUM(Num_QDrop + NumA + NumB + NumC + NumD + NumF) FROM" +
                 " TamuGrades WHERE CourseSubject=\"" + courseSubject + "\" AND CourseNum=" + courseNum +
@@ -723,7 +771,7 @@ public class DatabaseAPI
     }
 
     //uses data in class to get percentage of A's
-    public void getPercentA() throws SQLException
+    private void getPercentA() throws SQLException
     {
         double total = totalNumStudents;
         double numA = numberA;
@@ -737,7 +785,7 @@ public class DatabaseAPI
     public double getPercentA(String courseSubject, int courseNum, String professor) throws SQLException
     {
         double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
-        double numA = numberA;
+        double numA = getNumA(courseSubject, courseNum, professor);
 
         System.out.println("\nThe percentage of A's for this course is " + ((numA / total) * 100));
 
@@ -745,7 +793,7 @@ public class DatabaseAPI
     }
 
     // Calculates the percentage of B's given by a teacher
-    public void getPercentB() throws SQLException
+    private void getPercentB() throws SQLException
     {
         double total = totalNumStudents;
         double numB = numberB;
@@ -759,7 +807,7 @@ public class DatabaseAPI
     public double getPercentB(String courseSubject, int courseNum, String professor) throws SQLException
     {
         double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
-        double numB = numberB;
+        double numB = getNumB(courseSubject, courseNum, professor);
 
         System.out.println("\nThe percentage of B's for this course is " + ((numB / total) * 100));
 
@@ -767,7 +815,7 @@ public class DatabaseAPI
     }
 
     // Calculates the percentage of C's given by a teacher
-    public void getPercentC() throws SQLException
+    private void getPercentC() throws SQLException
     {
         double total = totalNumStudents;
         double numC = numberC;
@@ -781,7 +829,7 @@ public class DatabaseAPI
     public double getPercentC(String courseSubject, int courseNum, String professor) throws SQLException
     {
         double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
-        double numC = numberC;
+        double numC = getNumC(courseSubject, courseNum, professor);
 
         System.out.println("\nThe percentage of C's for this course is " + ((numC / total) * 100));
 
@@ -789,7 +837,7 @@ public class DatabaseAPI
     }
 
     // Calculates the percentage of D's given by a teacher
-    public void getPercentD() throws SQLException
+    private void getPercentD() throws SQLException
     {
         double total = totalNumStudents;
         double numD = numberD;
@@ -803,7 +851,7 @@ public class DatabaseAPI
     public double getPercentD(String courseSubject, int courseNum, String professor) throws SQLException
     {
         double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
-        double numD = numberD;
+        double numD = getNumD(courseSubject, courseNum, professor);
 
         System.out.println("\nThe percentage of D's for this course is " + ((numD / total) * 100));
 
@@ -811,7 +859,7 @@ public class DatabaseAPI
     }
 
     // Calculates the percentage of F's given by a teacher
-    public void getPercentF() throws SQLException
+    private void getPercentF() throws SQLException
     {
         double total = totalNumStudents;
         double numF = numberF;
@@ -825,7 +873,7 @@ public class DatabaseAPI
     public double getPercentF(String courseSubject, int courseNum, String professor) throws SQLException
     {
         double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
-        double numF = numberF;
+        double numF = getNumF(courseSubject, courseNum ,professor);
 
         System.out.println("\nThe percentage of F's for this course is " + ((numF / total) * 100));
 
@@ -833,7 +881,7 @@ public class DatabaseAPI
     }
 
     // Calculates the percentage of Q Drops for a teacher
-    public void getPercentQDrops() throws SQLException
+    private void getPercentQDrops() throws SQLException
     {
         double total = totalNumStudents;
         double numQDrops = numberQ;
@@ -847,7 +895,7 @@ public class DatabaseAPI
     public double getPercentQDrops(String courseSubject, int courseNum, String professor) throws SQLException
     {
         double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
-        double numQDrops = numberQ;
+        double numQDrops = getNumQDrop(courseSubject, courseNum, professor);
 
         System.out.println("\nThe percentage of Q drops for this course is " + ((numQDrops / total) * 100));
 
@@ -889,7 +937,6 @@ public class DatabaseAPI
             return 0;
         }
 
-
         // adds the weighted points
         double totalPoints = numASem + numBSem + numCSem + numDSem + numFSem;
 
@@ -897,7 +944,6 @@ public class DatabaseAPI
         totalPoints /= total;
 
         System.out.println("The average for " + term + " " + year + " GPA is: " + totalPoints);
-
 
         return totalPoints;
     }
