@@ -1164,7 +1164,7 @@ public class DatabaseAPI
         {
             // System.out.println("\n" + e);
             System.err.println("Could not Insert into Database because something strange happened");
-            // e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
