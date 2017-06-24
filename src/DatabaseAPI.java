@@ -128,6 +128,7 @@ public class DatabaseAPI
         this.courseNum = courseNum;
         this.professor = professor;
 
+        // create all of the data for the class
         getTotalNumStudentsTaught();
         getNumA();
         getNumB();
@@ -144,7 +145,6 @@ public class DatabaseAPI
         getPercentD();
         getPercentF();
         getPercentQDrops();
-
     }
 
     public void createDBConn() throws SQLException, ClassNotFoundException
@@ -241,6 +241,21 @@ public class DatabaseAPI
     public double getPercentageQ()
     {
         return percentageQ;
+    }
+
+    public String getCourseSubject()
+    {
+        return courseSubject;
+    }
+
+    public int getCourseNum()
+    {
+        return courseNum;
+    }
+
+    public String getProfessor()
+    {
+        return professor;
     }
 
     /* returns an arraylist of all subjects in database in alphabetical order*/
@@ -941,8 +956,6 @@ public class DatabaseAPI
 
         return ((numQDrops / total) * 100);
     }
-
-
 
     // If there is no result for a year, the function just returns zero
     // calculates the average GPA for a class for a specific semester
