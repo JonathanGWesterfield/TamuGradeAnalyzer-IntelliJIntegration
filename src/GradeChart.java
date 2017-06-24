@@ -24,7 +24,6 @@ public class GradeChart extends Application
 {
     private DatabaseAPI db;
 
-    private VBox percentagesDisplay;
     private LineChart<String, Number> lineChart;
     private BarChart<String, Number> barChart;
 
@@ -44,8 +43,6 @@ public class GradeChart extends Application
             LineChart line = charts.getLineChart();
 
             BarChart grades = charts.getBarChart();
-
-            VBox percentages = charts.getPercentagesDisplay();
 
             // Scene scene = new Scene(grades, 305, 305);
 
@@ -75,15 +72,10 @@ public class GradeChart extends Application
 
         this.lineChart = LineAvgGPA();
         this.barChart = gradeBarChart();
-        this.percentagesDisplay = displayPercentages();
+
     }
 
     // class getters
-    public VBox getPercentagesDisplay()
-    {
-        return percentagesDisplay;
-    }
-
     public LineChart<String, Number> getLineChart()
     {
         return lineChart;
@@ -184,27 +176,6 @@ public class GradeChart extends Application
         return bc;
     }
 
-    // displays all of the percentages for the course. Needs to be 185x208
-    private VBox displayPercentages()
-    {
-        VBox percentages = new VBox(10);
-        percentages.setPadding(new Insets(15, 12,15,12));
-        DecimalFormat df = new DecimalFormat("##.0");
-
-        double percentPassing = db.getPercentageA() + db.getPercentageB() + db.getPercentageC();
-
-        Label perA = new Label("Percent A:  " + df.format(db.getPercentageA()) + "%");
-        Label perB = new Label("Percent B:  " + df.format(db.getPercentageB()) + "%");
-        Label perC = new Label("Percent C:  " + df.format(db.getPercentageC()) + "%");
-        Label perD = new Label("Percent D:  " + df.format(db.getPercentageD()) + "%");
-        Label perF = new Label("Percent F:  " + df.format(db.getPercentageF()) + "%");
-        Label perQ = new Label("Percent Q Drops:  " + df.format(db.getPercentageQ()) + "%");
-        Label perPass = new Label("Passing Rate:  " + df.format(percentPassing) + "%");
-
-        percentages.getChildren().addAll(perA, perB, perC, perD, perF, perQ, perPass);
-
-        return percentages;
-    }
 
 
 
