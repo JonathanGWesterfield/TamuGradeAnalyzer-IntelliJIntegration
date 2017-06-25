@@ -122,6 +122,8 @@ public class DatabaseAPI
         getAllSubjectDistinct();
     }
 
+
+
     // constructor that will get all of the info
     DatabaseAPI(String courseSubject, int courseNum, String professor) throws SQLException, ClassNotFoundException
     {

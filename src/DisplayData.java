@@ -16,7 +16,7 @@ import javax.xml.crypto.Data;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 
-
+//TODO: Possibly add a raw data function using a read only function
 public class DisplayData extends Application
 {
 
