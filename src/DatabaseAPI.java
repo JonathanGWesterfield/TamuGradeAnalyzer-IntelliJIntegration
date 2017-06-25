@@ -42,6 +42,8 @@ public class DatabaseAPI
     private double percentageF;
     private double percentageQ;
 
+    private ArrayList<String> subjects;
+
     String courseSubject;
     int courseNum;
     String professor;
@@ -115,6 +117,9 @@ public class DatabaseAPI
         Class.forName("com.mysql.jdbc.Driver");
         this.conn = DriverManager.getConnection(connectionString, username, password);
         System.out.println("Database connection established");
+
+        // sets the subject
+        getAllSubjectDistinct();
     }
 
     // constructor that will get all of the info
@@ -129,6 +134,8 @@ public class DatabaseAPI
         this.professor = professor;
 
         // create all of the data for the class
+
+        getAllSubjectDistinct();
         getTotalNumStudentsTaught();
         getNumA();
         getNumB();
@@ -258,8 +265,13 @@ public class DatabaseAPI
         return professor;
     }
 
+    public ArrayList<String> getSubjects()
+    {
+        return subjects;
+    }
+
     /* returns an arraylist of all subjects in database in alphabetical order*/
-    public ArrayList<String> getAllSubjectDistinct() throws SQLException
+    private void getAllSubjectDistinct() throws SQLException
     {
         //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
         String query1 = "SELECT DISTINCT CourseSubject FROM TamuGrades ORDER BY CourseSubject ASC";
@@ -293,7 +305,7 @@ public class DatabaseAPI
             int numSubjects = result2.getInt(1);
             System.out.println("Number of Subjects in database = " + numSubjects);
         }
-        return allSubjects;
+        this.subjects = allSubjects;
     }
 
     //returns an arraylist of all course numbers under a specific subject

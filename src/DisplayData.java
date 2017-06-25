@@ -23,7 +23,7 @@ public class DisplayData extends Application
     private DatabaseAPI db;
     private VBox totalGrades;
     private VBox percentagesDisplay;
-    private HBox courseInfo;
+    private VBox courseInfo;
 
     public static void main(String [] args)
     {
@@ -39,7 +39,7 @@ public class DisplayData extends Application
             DisplayData display = new DisplayData(db);
 
 
-            Scene scene = new Scene(display.getPercentagesDisplay(), 200, 220);
+            Scene scene = new Scene(display.getCourseInfo(), 300, 85);
 
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -74,12 +74,12 @@ public class DisplayData extends Application
         return totalGrades;
     }
 
-    public HBox getCourseInfo()
+    public VBox getCourseInfo()
     {
         return courseInfo;
     }
 
-    // Displays the total number of each grade and the average GPA. Needs to be 185x208
+    // Displays the total number of each grade and the average GPA. Needs to be 200x195
     private void gradeData()
     {
         VBox data = new VBox(10);
@@ -94,22 +94,22 @@ public class DisplayData extends Application
         int numQ = db.getNumberQ();
         double avgGPA = db.getAverageGPA();
 
-        Label labelA = new Label("Numbers of A's: " + numA);
+        Label labelA = new Label("Numbers of A's:       " + numA);
         labelA.setFont(new Font("Futura", 15));
 
-        Label labelB = new Label("Numbers of B's: " + numB);
+        Label labelB = new Label("Numbers of B's:       " + numB);
         labelB.setFont(new Font("Futura", 15));
 
-        Label labelC = new Label("Numbers of C's: " + numC);
+        Label labelC = new Label("Numbers of C's:       " + numC);
         labelC.setFont(new Font("Futura", 15));
 
-        Label labelD = new Label("Numbers of D's: " + numD);
+        Label labelD = new Label("Numbers of D's:       " + numD);
         labelD.setFont(new Font("Futura", 15));
 
-        Label labelF = new Label("Numbers of F's: " + numF);
+        Label labelF = new Label("Numbers of F's:       " + numF);
         labelF.setFont(new Font("Futura", 15));
 
-        Label labelQ = new Label("Numbers of Q's: " + numQ);
+        Label labelQ = new Label("Numbers of Q's:       " + numQ);
         labelQ.setFont(new Font("Futura", 15));
 
         data.getChildren().addAll(labelA, labelB, labelC, labelD, labelF, labelQ);
@@ -117,7 +117,7 @@ public class DisplayData extends Application
         this.totalGrades = data;
     }
 
-    // displays all of the percentages for the course. Needs to be 185x208
+    // displays all of the percentages for the course. Needs to be 210x225
     private void setPercentagesDisplay()
     {
         VBox percentages = new VBox(10);
@@ -126,25 +126,25 @@ public class DisplayData extends Application
 
         double percentPassing = db.getPercentageA() + db.getPercentageB() + db.getPercentageC();
 
-        Label perA = new Label("Percent A:  " + df.format(db.getPercentageA()) + "%");
+        Label perA = new Label("Percent A:              " + df.format(db.getPercentageA()) + "%");
         perA.setFont(new Font("Futura", 15));
 
-        Label perB = new Label("Percent B:  " + df.format(db.getPercentageB()) + "%");
+        Label perB = new Label("Percent B:              " + df.format(db.getPercentageB()) + "%");
         perB.setFont(new Font("Futura", 15));
 
-        Label perC = new Label("Percent C:  " + df.format(db.getPercentageC()) + "%");
+        Label perC = new Label("Percent C:              " + df.format(db.getPercentageC()) + "%");
         perC.setFont(new Font("Futura", 15));
 
-        Label perD = new Label("Percent D:  " + df.format(db.getPercentageD()) + "%");
+        Label perD = new Label("Percent D:              " + df.format(db.getPercentageD()) + "%");
         perD.setFont(new Font("Futura", 15));
 
-        Label perF = new Label("Percent F:  " + df.format(db.getPercentageF()) + "%");
+        Label perF = new Label("Percent F:              " + df.format(db.getPercentageF()) + "%");
         perF.setFont(new Font("Futura", 15));
 
         Label perQ = new Label("Percent Q Drops:  " + df.format(db.getPercentageQ()) + "%");
         perQ.setFont(new Font("Futura", 15));
 
-        Label perPass = new Label("Passing Rate:  " + df.format(percentPassing) + "%");
+        Label perPass = new Label("Passing Rate:        " + df.format(percentPassing) + "%");
         perPass.setFont(new Font("Futura", 15));
 
         percentages.getChildren().addAll(perA, perB, perC, perD, perF, perQ, perPass);
@@ -153,23 +153,21 @@ public class DisplayData extends Application
     }
 
     // Displays what course we are analyzing
-    //needs to be 500x55
-    private HBox setCourseInfo()
+    //needs to be 300x85
+    private void setCourseInfo()
     {
-        HBox info = new HBox(10);
+        VBox info = new VBox(10);
         info.setPadding(new Insets(15, 15, 15, 15));
 
-        Label course = new Label("Course: " + db.getCourseSubject() + " " +
+        Label course = new Label("Course:  " + db.getCourseSubject() + " " +
                 db.getCourseNum());
         course.setFont(new Font("Futura", 18));
 
-        Label professor = new Label("Professor: " + db.getProfessor());
+        Label professor = new Label("Professor:  " + db.getProfessor());
         professor.setFont(new Font("Futura", 18));
 
         info.getChildren().addAll(course, professor);
 
         this.courseInfo = info;
-
-        return info;
     }
 }
