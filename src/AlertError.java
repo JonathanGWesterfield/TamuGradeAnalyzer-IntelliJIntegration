@@ -5,6 +5,7 @@
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.*;
 import java.io.*;
+import java.sql.SQLException;
 import java.util.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
@@ -22,7 +23,7 @@ public class AlertError
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error!");
         alert.setHeaderText("Choice Not Found");
-        alert.setContentText("The choice that you tried to enter was either mispelled or \n" +
+        alert.setContentText("The choice that you tried to enter was either mispelled or " +
                 "does not exist. Please try again.");
 
         alert.showAndWait();
@@ -49,14 +50,14 @@ public class AlertError
 
     // to be used in any try/catch blocks if a uncovered exception shows up
     // TODO: need to figure out how this code works and how to use it
-    public void showException()
+    public static void showSQLException()
     {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Exception Dialog");
-        alert.setHeaderText("Look, an Exception Dialog");
-        alert.setContentText("Could not find file blabla.txt!");
+        alert.setHeaderText("An Exception Was Generated");
+        alert.setContentText("Something went wrong");
 
-        Exception ex = new FileNotFoundException("Could not find file blabla.txt");
+        Exception ex = new SQLException("There was a problem connecting to the database");
 
         // Create expandable Exception.
         StringWriter sw = new StringWriter();
