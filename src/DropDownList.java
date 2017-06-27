@@ -27,6 +27,7 @@ public class DropDownList extends Application
 {
     private DatabaseAPI db;
     private DatabaseAPI returnDB;
+    HBox allLists;
 
     private ComboBox<String> chooseSubject;
     // private ObservableList<String> subjectData;
@@ -49,10 +50,9 @@ public class DropDownList extends Application
         {
             DatabaseAPI db = new DatabaseAPI("CSCE", 121, "MOORE");
 
-            DropDownList list = new DropDownList(db);
+            DropDownList list = new DropDownList();
 
-
-            Scene scene = new Scene(list.getChooseSubject(), 300, 85);
+            Scene scene = new Scene(list.getAllLists(), 300, 85);
 
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -71,6 +71,16 @@ public class DropDownList extends Application
     public DropDownList(DatabaseAPI db)
     {
         this.db = db;
+        this.chooseSubject = null;
+        this.chooseCourse = null;
+        this.chooseProfessor = null;
+
+        this.chosenSubject = null;
+        this.chosenCourseNum = 000;
+        this.chosenProfessor = null;
+
+        setNullLists();
+
         setChooseSubject();
     }
 
@@ -89,9 +99,62 @@ public class DropDownList extends Application
         return chooseProfessor;
     }
 
+    public HBox getAllLists()
+    {
+        return allLists;
+    }
+
+    //TODO: fix functions so that if a function is null, they can still all be displayed
+    private void setAllLists()
+    {
+        HBox dropLists = new HBox();
+        dropLists.getChildren().addAll(getChooseSubject(), getChooseCourse(), getChooseProfessor());
+
+        this.allLists = dropLists;
+    }
+
+    // sets the lists for the initial state when nothing is entered
+    private void setNullLists()
+    {
+        if(chosenSubject == null)
+        {
+            ObservableList<Integer> courseNumData = FXCollections.observableArrayList();
+            courseNumData.add(000);
+            ComboBox<Integer> courseNums = new ComboBox<>(courseNumData);
+            courseNums.setPromptText("Select Subject");
+            this.chooseCourse = courseNums;
+
+            ObservableList<String> profData = FXCollections.observableArrayList();
+            profData.add("        "); // adds an empty option to the list
+            ComboBox<String> emptyProf = new ComboBox<>(profData);
+            emptyProf.setPromptText("Choose Subject");
+            this.chooseProfessor = emptyProf;
+        }
+
+        return;
+    }
+
+    private void resetLists()
+    {
+        ObservableList<Integer> courseNumData = FXCollections.observableArrayList();
+        courseNumData.add(000);
+        ComboBox<Integer> courseNums = new ComboBox<>(courseNumData);
+        courseNums.setPromptText("Select Subject");
+        this.chooseCourse = courseNums;
+
+        ObservableList<String> profData = FXCollections.observableArrayList();
+        profData.add("        "); // adds an empty option to the list
+        ComboBox<String> emptyProf = new ComboBox<>(profData);
+        emptyProf.setPromptText("Choose Subject");
+        this.chooseProfessor = emptyProf;
+    }
+
     // change to combo box
     private void setChooseSubject()
     {
+        // sets the other lists
+        setNullLists();
+
         ObservableList<String> data = FXCollections.observableArrayList();
         ArrayList<String> course = db.getSubjects();
 
@@ -122,12 +185,14 @@ public class DropDownList extends Application
     {
         if(!chooseSubject.getItems().contains(chooseSubject.getValue()))
         {
-            AlertError.choiceNotFound();
+            AlertError.choiceNotFound(1);
             return;
         }
 
         // gets the value from the list and makes sure it is upper case
-        this.chosenSubject = chooseSubject.getValue().toUpperCase();
+        this.chosenSubject = chooseSubject.getValue();
+
+        resetLists();
 
         setChooseCourse();
     }
@@ -138,15 +203,18 @@ public class DropDownList extends Application
     {
         try
         {
-            ComboBox<Integer> courseNums = new ComboBox<>();
+            ObservableList<Integer> data = FXCollections.observableArrayList();
 
+            // put in a static subject to test
+            chosenSubject = "CSCE";
             ArrayList<Integer> nums = db.getAllCourseNumDistinct(chosenSubject);
 
             for(int i = 0; i < nums.size(); i++)
             {
-                courseNums.getItems().add(nums.get(i));
+                data.add(nums.get(i));
             }
 
+            ComboBox<Integer> courseNums = new ComboBox<>(data);
             courseNums.setPromptText("Select");
             courseNums.setValue(101);
             courseNums.setEditable(true);
@@ -168,7 +236,7 @@ public class DropDownList extends Application
     {
         if(!chooseCourse.getItems().contains(chooseCourse.getValue()))
         {
-            AlertError.choiceNotFound();
+            AlertError.choiceNotFound(2);
             return;
         }
 
@@ -181,23 +249,27 @@ public class DropDownList extends Application
     {
         try
         {
-            ComboBox prof = new ComboBox();
-            ArrayList profList = db.getCourseProfessors(chosenSubject, chosenCourseNum);
+            ObservableList<String> data = FXCollections.observableArrayList();
+
+            //setting static subject and course for testing
+            // ArrayList<String> profList = db.getCourseProfessors("CSCE", 121);
+
+            ArrayList<String> profList = db.getCourseProfessors(chosenSubject, chosenCourseNum);
 
             for(int i = 0; i < profList.size(); i++)
             {
-                prof.getItems().add(profList.get(i));
+                data.add(profList.get(i));
             }
 
+            ComboBox prof = new ComboBox(data);
             prof.setPromptText("Select Prof");
-            prof.setValue(profList.get(0));
+            // prof.setValue(profList.get(0));
             prof.setEditable(true);
             prof.setVisibleRowCount(12);
 
             this.chooseProfessor = prof;
 
             this.chooseProfessor.setOnAction(e -> setChosenProfessor());
-
 
         }
         catch (SQLException e)
@@ -209,9 +281,10 @@ public class DropDownList extends Application
 
     private void setChosenProfessor()
     {
-        if(!chooseCourse.getItems().contains(chooseCourse.getValue()))
+        if(!chooseProfessor.getItems().contains(chooseProfessor.getValue()))
         {
-            AlertError.choiceNotFound();
+            System.err.println("Incorrect Choice was: " + chooseProfessor.getValue());
+            AlertError.choiceNotFound(3);
             return;
         }
 

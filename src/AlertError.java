@@ -18,13 +18,29 @@ public class AlertError
         // default constructor
     }
 
-    public static void choiceNotFound()
+    public static void choiceNotFound(int choice)
     {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error!");
         alert.setHeaderText("Choice Not Found");
-        alert.setContentText("The choice that you tried to enter was either mispelled or " +
-                "does not exist. Please try again.");
+
+        // choice structure for which field has the incorrect input
+        if(choice == 1)
+        {
+            alert.setContentText("The Subject that you tried to enter was either mispelled or " +
+                    "does not exist. Please try again.");
+        }
+        else if(choice == 2)
+        {
+            alert.setContentText("The Course # that you tried to enter was either mispelled or " +
+                    "does not exist. Please try again.");
+        }
+        else if(choice == 3)
+        {
+            alert.setContentText("The Professor that you tried to enter was either mispelled or " +
+                    "does not exist. Please try again.");
+        }
+
 
         alert.showAndWait();
     }
