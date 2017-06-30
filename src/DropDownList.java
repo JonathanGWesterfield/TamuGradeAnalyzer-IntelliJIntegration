@@ -25,8 +25,8 @@ import java.util.Observable;
 
 public class DropDownList extends Application
 {
-    private DatabaseAPI db;
-    private DatabaseAPI returnDB;
+    private DatabaseAPI dbAPI;
+    private DatabaseAPI returndbAPI;
     HBox allLists;
 
     private ComboBox<String> chooseSubject;
@@ -50,9 +50,42 @@ public class DropDownList extends Application
         {
             DatabaseAPI db = new DatabaseAPI("CSCE", 121, "MOORE");
 
-            DropDownList list = new DropDownList();
+            DropDownList list = new DropDownList(db);
 
-            Scene scene = new Scene(list.getAllLists(), 300, 85);
+            Label lbl = new Label("At least something works");
+
+            HBox box = new HBox(10, lbl);
+
+            /*
+            // sets the other lists
+            // setNullLists();
+
+            ObservableList<String> data = FXCollections.observableArrayList();
+            ArrayList<String> course = dbAPI.getSubjects();
+
+            // goes through and stores the arraylist from the dbAPIAPI class full of subjects
+            for (int i = 0; i < course.size(); i++)
+            {
+                data.add(course.get(i));
+            }
+            ComboBox combo = new ComboBox(data);
+            combo.setPromptText("Select");
+            combo.setEditable(true);
+            combo.setVisibleRowCount(10);
+            chooseSubject = combo;
+
+        /*
+        this.chooseSubject.setItems(data);
+        this.chooseSubject.setPromptText("Select");
+        this.chooseSubject.setValue("Select");
+        this.chooseSubject.setEditable(true);
+        this.chooseSubject.setVisibleRowCount(10);
+
+
+            this.chooseSubject.setOnAction(e -> setChosenSubject());
+            */
+
+            Scene scene = new Scene(list.getChooseSubject(), 300, 85);
 
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -66,11 +99,13 @@ public class DropDownList extends Application
     public DropDownList()
     {
         // empty default constructor
+        System.err.println("\nEmpty Default Constructor Called.\nNothing Happening\n\n");
     }
 
     public DropDownList(DatabaseAPI db)
     {
-        this.db = db;
+        this.dbAPI = db;
+
         this.chooseSubject = null;
         this.chooseCourse = null;
         this.chooseProfessor = null;
@@ -156,13 +191,14 @@ public class DropDownList extends Application
         setNullLists();
 
         ObservableList<String> data = FXCollections.observableArrayList();
-        ArrayList<String> course = db.getSubjects();
+        ArrayList<String> course = dbAPI.getSubjects();
 
-        // goes through and stores the arraylist from the DBAPI class full of subjects
+        // goes through and stores the arraylist from the dbAPIAPI class full of subjects
         for (int i = 0; i < course.size(); i++)
         {
             data.add(course.get(i));
         }
+
         ComboBox combo = new ComboBox(data);
         combo.setPromptText("Select");
         combo.setEditable(true);
@@ -192,13 +228,13 @@ public class DropDownList extends Application
         // gets the value from the list and makes sure it is upper case
         this.chosenSubject = chooseSubject.getValue();
 
-        resetLists();
+        // resetLists();
 
         setChooseCourse();
     }
 
     //TODO: set the other 'set' functions to look like the setChooseSubject function
-    // store the course numbers from the DBAPI into the combo box list
+    // store the course numbers from the dbAPIAPI into the combo box list
     private void setChooseCourse()
     {
         try
@@ -206,8 +242,8 @@ public class DropDownList extends Application
             ObservableList<Integer> data = FXCollections.observableArrayList();
 
             // put in a static subject to test
-            chosenSubject = "CSCE";
-            ArrayList<Integer> nums = db.getAllCourseNumDistinct(chosenSubject);
+            // chosenSubject = "CSCE";
+            ArrayList<Integer> nums = dbAPI.getAllCourseNumDistinct(chosenSubject);
 
             for(int i = 0; i < nums.size(); i++)
             {
@@ -252,9 +288,9 @@ public class DropDownList extends Application
             ObservableList<String> data = FXCollections.observableArrayList();
 
             //setting static subject and course for testing
-            // ArrayList<String> profList = db.getCourseProfessors("CSCE", 121);
+            // ArrayList<String> profList = dbAPI.getCourseProfessors("CSCE", 121);
 
-            ArrayList<String> profList = db.getCourseProfessors(chosenSubject, chosenCourseNum);
+            ArrayList<String> profList = dbAPI.getCourseProfessors(chosenSubject, chosenCourseNum);
 
             for(int i = 0; i < profList.size(); i++)
             {
@@ -290,14 +326,14 @@ public class DropDownList extends Application
 
         this.chosenProfessor = chooseProfessor.getValue();
 
-        createDBObject();
+        createdbAPIObject();
     }
 
-    private void createDBObject()
+    private void createdbAPIObject()
     {
         try
         {
-            returnDB = new DatabaseAPI(chosenSubject, chosenCourseNum, chosenProfessor);
+            returndbAPI = new DatabaseAPI(chosenSubject, chosenCourseNum, chosenProfessor);
         }
         catch (SQLException | ClassNotFoundException e)
         {
