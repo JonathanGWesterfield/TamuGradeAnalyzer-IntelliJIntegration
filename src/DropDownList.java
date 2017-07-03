@@ -29,7 +29,7 @@ public class DropDownList extends Application
 {
     private DatabaseAPI dbAPI;
     private DatabaseAPI returndbAPI;
-    HBox allLists;
+    GridPane allLists;
     // Scene scene;
 
     private ComboBox<String> chooseSubject;
@@ -46,6 +46,7 @@ public class DropDownList extends Application
     {
         launch(args);
     }
+
 
     @Override public void start(Stage primaryStage)
     {
@@ -85,6 +86,8 @@ public class DropDownList extends Application
         }
     }
 
+    //TODO: comment the hell out of this class
+
     public DropDownList()
     {
         // empty default constructor
@@ -107,7 +110,7 @@ public class DropDownList extends Application
 
         setChooseSubject();
 
-        setAllLists();
+        // setAllLists();
     }
 
     public ComboBox<String> getChooseSubject()
@@ -125,12 +128,17 @@ public class DropDownList extends Application
         return chooseProfessor;
     }
 
-    //TODO: fix functions so that if a function is null, they can still all be displayed
-    private void setAllLists()
+    public DatabaseAPI getReturndbAPI()
     {
-        this.allLists = new HBox(15, this.chooseSubject, this.chooseCourse,
-                this.chooseProfessor);
+        return returndbAPI;
     }
+
+    //TODO: make this class return the grid pane or figure out how to use it in another class
+    /*private void setAllLists()
+    {
+        this.allLists = new (15, this.chooseSubject, this.chooseCourse,
+                this.chooseProfessor);
+    }*/
 
     // sets the lists for the initial state when nothing is entered
     private void setNullLists()
