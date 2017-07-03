@@ -295,7 +295,6 @@ public class DropDownList extends Application
         }
     }
 
-    //TODO: fix so that
     private void setChosenCourseNum()
     {
         if(!chooseCourse.getItems().contains(chooseCourse.getValue()))

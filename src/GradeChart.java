@@ -63,6 +63,7 @@ public class GradeChart extends Application
         }
     }
 
+    //TODO: Possibly add a raw data function using a read only function
     public GradeChart()
     {
         // default empty constructor

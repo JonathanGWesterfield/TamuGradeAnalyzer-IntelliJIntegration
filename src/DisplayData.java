@@ -16,7 +16,7 @@ import javax.xml.crypto.Data;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 
-//TODO: Possibly add a raw data function using a read only function
+
 public class DisplayData extends Application
 {
 
@@ -50,7 +50,7 @@ public class DisplayData extends Application
         }
 
     }
-    // TODO: set option for when the charts are null and have not had any courses chosen yet
+
     public DisplayData()
     {
         // default constructor
