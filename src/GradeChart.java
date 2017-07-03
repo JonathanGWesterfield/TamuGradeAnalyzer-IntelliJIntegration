@@ -20,6 +20,9 @@ import java.text.DecimalFormat;
 import java.util.*;
 import javafx.event.*;
 
+
+// TODO: set option for when the charts are null and have not had any courses chosen yet
+
 public class GradeChart extends Application
 {
     private DatabaseAPI db;

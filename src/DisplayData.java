@@ -50,7 +50,7 @@ public class DisplayData extends Application
         }
 
     }
-
+    // TODO: set option for when the charts are null and have not had any courses chosen yet
     public DisplayData()
     {
         // default constructor
