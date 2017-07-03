@@ -55,6 +55,8 @@ public class DatabaseAPI
 
         try
         {
+            // DatabaseAPI db = new DatabaseAPI("CSCE", 121, "MOORE");
+
             DatabaseAPI db = new DatabaseAPI();
             /*ArrayList<String> subjects = db.getAllSubjectDistinct();
             for(int i = 0; i < subjects.size(); i++)
@@ -98,8 +100,8 @@ public class DatabaseAPI
             }
 
             double avgGPA = db.getAvgGPA("CSCE", 121, "MOORE");*/
-            db.getNumASem("CSCE", 121, "MOORE", "fall", 2012);
-            db.getPastSemesterGPAs("CSCE", 121, "MOORE");
+            // db.getNumASem("CSCE", 121, "MOORE", "fall", 2012);
+            // db.getPastSemesterGPAs("CSCE", 121, "MOORE");
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -137,7 +139,7 @@ public class DatabaseAPI
 
         // create all of the data for the class
 
-        getAllSubjectDistinct();
+        // getAllSubjectDistinct();
         getTotalNumStudentsTaught();
         getNumA();
         getNumB();
@@ -308,6 +310,44 @@ public class DatabaseAPI
             System.out.println("Number of Subjects in database = " + numSubjects);
         }
         this.subjects = allSubjects;
+    }
+
+    public ArrayList<String> getAllSubjectDistinctList() throws SQLException
+    {
+        //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
+        String query1 = "SELECT DISTINCT CourseSubject FROM TamuGrades ORDER BY CourseSubject ASC";
+        System.out.println("\nSelecting Distinct From Subject");
+        Statement selectDistinctSubject = conn.createStatement();
+        ResultSet result1 = selectDistinctSubject.executeQuery(query1);
+
+        //printing out the result of the SQL query
+        int count = 1;
+        ArrayList<String> allSubjects = new ArrayList<String>();
+        while(result1.next())
+        {
+            String subject = result1.getString("CourseSubject");
+            allSubjects.add(subject);
+            System.out.printf("%d\t%s\n", count, subject);
+            count++;
+        }
+
+        System.out.println();
+
+        String query2 = "SELECT COUNT(DISTINCT CourseSubject) FROM TamuGrades";
+        System.out.println("Counting number of subjects in Database");
+        Statement countCourses = conn.createStatement();
+        ResultSet result2 = countCourses.executeQuery(query2);
+
+        System.out.println("Getting number of subjects");
+
+        //printing out the result of the SQL query
+        while(result2.next())
+        {
+            int numSubjects = result2.getInt(1);
+            System.out.println("Number of Subjects in database = " + numSubjects);
+        }
+
+        return allSubjects;
     }
 
     //returns an arraylist of all course numbers under a specific subject
@@ -670,7 +710,7 @@ public class DatabaseAPI
         while(result.next())
         {
             totalNumF = result.getInt(1);
-            System.out.println("The total number of D's is " + totalNumF);
+            System.out.println("The total number of F's is " + totalNumF);
         }
 
         this.numberF = totalNumF;
@@ -690,7 +730,7 @@ public class DatabaseAPI
         while(result.next())
         {
             totalNumF = result.getInt(1);
-            System.out.println("The total number of D's is " + totalNumF);
+            System.out.println("The total number of F's is " + totalNumF);
         }
         return totalNumF;
     }
