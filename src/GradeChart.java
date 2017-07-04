@@ -27,9 +27,6 @@ public class GradeChart extends Application
     private LineChart<String, Number> lineChart;
     private BarChart<String, Number> barChart;
 
-    private LineChart<String, Number> emptyLineChart;
-    private BarChart<String, Number> emptyBarChart;
-
     public static void main(String[] args)
     {
         launch(args);
@@ -46,7 +43,7 @@ public class GradeChart extends Application
             LineChart line = charts.getLineChart();
 
             GridPane grid = new GridPane();
-            grid.add(charts.getEmptyLineChart(), 3, 0);
+            grid.add(charts.getLineChart(), 3, 0);
 
 
             BarChart grades = charts.getBarChart();
@@ -80,7 +77,8 @@ public class GradeChart extends Application
         if(isempty)
         {
             setEmptyLineAvgGPA();
-            setEmptyBarChart();
+            setbarChart();
+            return;
         }
         this.db = db;
 
@@ -100,26 +98,16 @@ public class GradeChart extends Application
         return barChart;
     }
 
-    public LineChart<String, Number> getEmptyLineChart()
-    {
-        return emptyLineChart;
-    }
-
-    public BarChart<String, Number> getEmptyBarChart()
-    {
-        return emptyBarChart;
-    }
-
     private void setEmptyLineAvgGPA()
     {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis("GPA", 0f, 4f, .25);
 
-        emptyLineChart = new LineChart<String, Number>(xAxis, yAxis);
+        lineChart = new LineChart<String, Number>(xAxis, yAxis);
 
-        emptyLineChart.setAnimated(true);
+        lineChart.setAnimated(true);
 
-        emptyLineChart.setTitle("Professor GPA in Recent Years");
+        lineChart.setTitle("Professor GPA in Recent Years");
 
         XYChart.Series GPAArray = new XYChart.Series();
         GPAArray.setName("Average GPA");
@@ -127,20 +115,20 @@ public class GradeChart extends Application
         GPAArray.getData().add(new XYChart.Data("No Professor Chosen", 0));
 
         // changes the color of the line on the graph to maroon
-        emptyLineChart.setStyle("CHART_COLOR_1: #800000"); //#228B22;");
+        lineChart.setStyle("CHART_COLOR_1: #800000"); //#228B22;");
 
-        emptyLineChart.getData().add(GPAArray);
+        lineChart.getData().add(GPAArray);
 
         // attempts to sets the dimensions of the barchart
-        emptyLineChart.setMaxHeight(500);
-        emptyLineChart.setMaxWidth(550);
+        lineChart.setMaxHeight(500);
+        lineChart.setMaxWidth(550);
 
-        emptyLineChart.setMinHeight(305);
-        emptyLineChart.setMinWidth(350);
+        lineChart.setMinHeight(305);
+        lineChart.setMinWidth(350);
 
 
-        emptyLineChart.setPrefHeight(305);
-        emptyLineChart.setPrefWidth(350);
+        lineChart.setPrefHeight(305);
+        lineChart.setPrefWidth(350);
 
         return;
     }
@@ -189,7 +177,7 @@ public class GradeChart extends Application
         return;
     }
 
-    private void setEmptyBarChart()
+    private void setbarChart()
     {
         final String numA = "A";
         final String numB = "B";
@@ -203,9 +191,9 @@ public class GradeChart extends Application
         NumberAxis yAxis = new NumberAxis();
 
         // creates the graph array
-        emptyBarChart = new BarChart<String,Number>(xAxis,yAxis);
+        barChart = new BarChart<String,Number>(xAxis,yAxis);
 
-        emptyBarChart.setTitle("Grade Percentages"); // sets the title of the graph
+        barChart.setTitle("Grade Percentages"); // sets the title of the graph
 
         // sets the graph labels
         xAxis.setLabel("Grades");
@@ -231,19 +219,19 @@ public class GradeChart extends Application
         grades.getData().add(dataF);
         grades.getData().add(dataQ);
 
-        emptyBarChart.setStyle("CHART_COLOR_1: #800000;");
+        barChart.setStyle("CHART_COLOR_1: #800000;");
 
-        emptyBarChart.getData().add(grades);
+        barChart.getData().add(grades);
 
         //sets the size of the chart
-        emptyBarChart.setMaxHeight(500);
-        emptyBarChart.setMaxWidth(500);
+        barChart.setMaxHeight(500);
+        barChart.setMaxWidth(500);
 
-        emptyBarChart.setMinHeight(250);
-        emptyBarChart.setMinWidth(250);
+        barChart.setMinHeight(250);
+        barChart.setMinWidth(250);
 
-        emptyBarChart.setPrefHeight(350);
-        emptyBarChart.setPrefWidth(350);
+        barChart.setPrefHeight(350);
+        barChart.setPrefWidth(350);
 
         return;
     }
