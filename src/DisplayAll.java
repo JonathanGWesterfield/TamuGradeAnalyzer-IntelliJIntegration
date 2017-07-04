@@ -27,10 +27,16 @@ import java.util.Observable;
 import java.util.Scanner;
 
 
-// displays all of the other components in the other classes
+/** This class ties in all of the components from the GradeChart, DisplayData, and
+ * DropDownLists class and puts them all onto one grid pane to be displayed in the scene
+ */
+
+//TODO: need to put an action event that extends to all of the other classes to refresh them
+    // once a professor is chosen/ MAY HAVE TO MOVE THE ACTIONEVENT FROM THE DROPDOWN CLASS TO THIS ONE
 public class DisplayAll extends Application
 {
 
+    //TODO: use a grid pane to display everything somewhat easily
     public static void main(String[] args)
     {
         launch(args);
@@ -46,7 +52,7 @@ public class DisplayAll extends Application
 
             DisplayData displayData = new DisplayData(dropList.getReturndbAPI(), true);
 
-            GradeChart gradeChart = new GradeChart(dropList.getReturndbAPI());
+            GradeChart gradeChart = new GradeChart(dropList.getReturndbAPI(), true);
 
             GridPane grid = new GridPane();
 
