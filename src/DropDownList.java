@@ -64,6 +64,7 @@ public class DropDownList extends Application
 
             // list.setChooseCourse();
 
+            // TODO: use this code to finish up the DisplayAll Class
             GridPane grid = new GridPane();
             grid.setVgap(4);
             grid.setHgap(10);
@@ -134,11 +135,6 @@ public class DropDownList extends Application
     }
 
     //TODO: make this class return the grid pane or figure out how to use it in another class
-    /*private void setAllLists()
-    {
-        this.allLists = new (15, this.chooseSubject, this.chooseCourse,
-                this.chooseProfessor);
-    }*/
 
     // sets the lists for the initial state when nothing is entered
     private void setNullLists()
