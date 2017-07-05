@@ -38,6 +38,8 @@ public class DropDownList extends Application
     private ComboBox<Integer> chooseCourse;
     private ComboBox<String> chooseProfessor;
 
+    // this is to let the other classes know to update and get rid of their empty null functions
+    private boolean signalChange = false;
     private String chosenSubject;
     private int chosenCourseNum;
     private String chosenProfessor;
@@ -132,6 +134,11 @@ public class DropDownList extends Application
     public DatabaseAPI getReturndbAPI()
     {
         return returndbAPI;
+    }
+
+    public boolean getSignalChange()
+    {
+        return signalChange;
     }
 
     //TODO: make this class return the grid pane or figure out how to use it in another class
@@ -375,22 +382,32 @@ public class DropDownList extends Application
 
         this.chosenProfessor = chooseProfessor.getValue();
 
-        createdbAPIObject();
-
-        return;
-    }
-
-    private void createdbAPIObject()
-    {
         try
         {
-            returndbAPI = new DatabaseAPI(chosenSubject, chosenCourseNum, chosenProfessor);
+            createdbAPIObject();
+            return;
         }
-        catch (SQLException | ClassNotFoundException e)
+        catch(SQLException e)
         {
             e.printStackTrace();
             AlertError.showSQLException();
         }
+        catch(ClassNotFoundException e)
+        {
+            e.printStackTrace();
+            AlertError.showClassNotFoundException();
+        }
+
+        return;
+    }
+
+    public RefreshedDisplay createdbAPIObject() throws SQLException, ClassNotFoundException
+    {
+
+        returndbAPI = new DatabaseAPI(chosenSubject, chosenCourseNum, chosenProfessor);
+        RefreshedDisplay refreshedDisplay = new RefreshedDisplay(returndbAPI);
+        signalChange = true;
+        return refreshedDisplay;
     }
 }
 

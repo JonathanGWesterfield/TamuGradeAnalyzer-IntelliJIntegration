@@ -42,6 +42,8 @@ public class DisplayAll extends Application
     GradeChart gradeChart;
     BackgroundImage backgroundImage;
 
+    RefreshedDisplay refresh;
+
 
     GridPane listPane;
     BorderPane pane;
@@ -55,32 +57,72 @@ public class DisplayAll extends Application
     {
         try
         {
-            DatabaseAPI db = new DatabaseAPI();
-
-            dropList = new DropDownList(db);
-
-            displayData = new DisplayData(dropList.getReturndbAPI(), true);
-
-            gradeChart = new GradeChart(dropList.getReturndbAPI(), true);
-
-            setDropListPane();
-
-
-
-            Image seal = new Image(new FileInputStream("resources/No BackGround TAMU Seal.png"));
-
             GridPane grid = new GridPane();
             grid.setVgap(4);
             grid.setHgap(10);
             grid.setPadding(new Insets(5,3,5,3));
-            // grid.add(dropList.getChooseSubject(), 0,0);
-            // grid.add(dropList.getChooseCourse(), 1, 0);
-            // grid.add(dropList.getChooseProfessor(), 2, 0);
-            // grid.add(displayData.getCourseInfo(), 3,1);
-            grid.add(gradeChart.getBarChart(),0,3);
-            grid.add(gradeChart.getLineChart(), 0, 6);
-            grid.add(displayData.getPercentagesDisplay(),1, 3);
-            grid.add(displayData.getTotalGrades(), 1, 6);
+
+            DatabaseAPI db = new DatabaseAPI();
+
+            dropList = new DropDownList(db);
+
+            if(dropList.getSignalChange() == false)
+            {
+                displayData = new DisplayData(dropList.getReturndbAPI(), true);
+                gradeChart = new GradeChart(dropList.getReturndbAPI(), true);
+                setEmptyDropListPane();
+
+                // grid.add(dropList.getChooseSubject(), 0,0);
+                // grid.add(dropList.getChooseCourse(), 1, 0);
+                // grid.add(dropList.getChooseProfessor(), 2, 0);
+                // grid.add(displayData.getCourseInfo(), 3,1);
+                grid.add(gradeChart.getBarChart(),0,3);
+                grid.add(gradeChart.getLineChart(), 0, 6);
+                grid.add(displayData.getPercentagesDisplay(),1, 3);
+                grid.add(displayData.getTotalGrades(), 1, 6);
+
+                pane.setCenter(grid);
+                pane.setBackground(new Background(backgroundImage));
+
+                Scene scene = new Scene(pane, 800, 800);
+
+                // Supposedly changes the scene Icon
+                primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
+
+                primaryStage.setScene(scene);
+                primaryStage.show();
+            }
+//TODO: none of this works at refreshing. Action event needs to be in this class
+
+            //TODO: install proper exit procedure
+            if (dropList.getSignalChange() == true)
+            {
+                // all of these are created in the DropDownList class in the last listener
+                refresh = dropList.createdbAPIObject();
+                displayData = refresh.getDisplayData();
+                gradeChart = refresh.getGradeChart();
+
+                pane.setCenter(grid);
+                pane.setBackground(new Background(backgroundImage));
+
+                grid.add(refresh.getGradeChart().getBarChart(),0,3);
+                grid.add(refresh.getGradeChart().getLineChart(), 0, 6);
+                grid.add(refresh.getDisplayData().getPercentagesDisplay(),1, 3);
+                grid.add(refresh.getDisplayData().getTotalGrades(), 1, 6);
+
+                setDropListPane();
+
+                Scene scene = new Scene(pane, 800, 800);
+
+                // Supposedly changes the scene Icon
+                primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
+
+                primaryStage.setScene(scene);
+                primaryStage.show();
+            }
+
+
+            /*Image seal = new Image(new FileInputStream("resources/No BackGround TAMU Seal.png"));
 
             pane.setCenter(grid);
             pane.setBackground(new Background(backgroundImage));
@@ -91,7 +133,7 @@ public class DisplayAll extends Application
             primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
 
             primaryStage.setScene(scene);
-            primaryStage.show();
+            primaryStage.show();*/
 
         }
         catch(SQLException | ClassNotFoundException e)
@@ -106,7 +148,7 @@ public class DisplayAll extends Application
         }
     }
 
-    private void setDropListPane()
+    private void setEmptyDropListPane()
     {
         listPane = new GridPane();
 
@@ -122,16 +164,39 @@ public class DisplayAll extends Application
         pane = new BorderPane();
         pane.setTop(listPane);
         pane.setPadding(new Insets(5, 5, 5, 5));
+    }
+
+    private void setDropListPane()
+    {
+        listPane = new GridPane();
+
+        listPane.setVgap(4);
+        listPane.setHgap(10);
+        listPane.setPadding(new Insets(5,3,5,5));
+        listPane.add(dropList.getChooseSubject(), 0, 0);
+        listPane.add(dropList.getChooseCourse(), 1, 0);
+        listPane.add(dropList.getChooseProfessor(), 2,0);
+        listPane.add(refresh.getDisplayData().getCourseInfo(), 3,0);
+
+        pane = new BorderPane();
+        pane.setTop(listPane);
+        pane.setPadding(new Insets(5, 5, 5, 5));
 
     }
 
     //Hopefully sets the background image for the application but doesn't
+    // This doesn't work
     private void setBackground() throws FileNotFoundException
     {
         backgroundImage = new BackgroundImage(new Image("resources/No BackGround TAMU Seal.png",
                 32,32,false, true)
                 ,BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT);
+    }
+
+    private void refreshAll()
+    {
+
     }
 
 //TODO: change the application ICON
