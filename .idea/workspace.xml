@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a35f547-0a74-4c71-9349-327ef0987db3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/RefreshedDisplay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/GradeData.dat" afterPath="$PROJECT_DIR$/resources/GradeData.dat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/PDFMatchVerification.dat" afterPath="$PROJECT_DIR$/resources/PDFMatchVerification.dat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AlertError.java" afterPath="$PROJECT_DIR$/src/AlertError.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DisplayAll.java" afterPath="$PROJECT_DIR$/src/DisplayAll.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DropDownList.java" afterPath="$PROJECT_DIR$/src/DropDownList.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -66,8 +60,8 @@
       <file leaf-file-name="DisplayAll.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/DisplayAll.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1220">
-              <caret line="139" column="9" lean-forward="true" selection-start-line="139" selection-start-column="9" selection-end-line="139" selection-end-column="9" />
+            <state relative-caret-position="840">
+              <caret line="140" column="66" lean-forward="false" selection-start-line="140" selection-start-column="66" selection-end-line="140" selection-end-column="66" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="imports" expanded="true" />
@@ -1241,8 +1235,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DisplayAll.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1220">
-          <caret line="139" column="9" lean-forward="true" selection-start-line="139" selection-start-column="9" selection-end-line="139" selection-end-column="9" />
+        <state relative-caret-position="840">
+          <caret line="140" column="66" lean-forward="false" selection-start-line="140" selection-start-column="66" selection-end-line="140" selection-end-column="66" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
             <element signature="imports" expanded="true" />

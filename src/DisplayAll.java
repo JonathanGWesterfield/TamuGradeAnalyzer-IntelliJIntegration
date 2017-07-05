@@ -95,6 +95,7 @@ public class DisplayAll extends Application
 //TODO: none of this works at refreshing. Action event needs to be in this class
 
             //TODO: install proper exit procedure
+
             if (dropList.getSignalChange() == true)
             {
                 // all of these are created in the DropDownList class in the last listener
@@ -136,6 +137,8 @@ public class DisplayAll extends Application
             primaryStage.show();*/
 
         }
+        //TODO: possibly use the dropdownlists chosenSubject data members to refresh charts
+        // TODO: possibly use a button as the action event anyways
         catch(SQLException | ClassNotFoundException e)
         {
             e.printStackTrace();
