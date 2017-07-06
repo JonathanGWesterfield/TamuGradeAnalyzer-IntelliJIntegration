@@ -181,6 +181,30 @@ public class AlertError
         alert.showAndWait();
     }
 
+    public static void showNeedChooseSubject()
+    {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error!");
+        alert.setHeaderText("Subject Not Chosen");
+        alert.setContentText("You Need to choose a Subject, Course Number and Professor." +
+                " Try again.");
+    }
 
+    public static void showNeedChooseCourseNum()
+    {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error!");
+        alert.setHeaderText("Course Number Not Chosen");
+        alert.setContentText("You Need to choose a Course Number and Professor." +
+                " Try again.");
+    }
+
+    public static void showNeedChooseProfessor()
+    {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error!");
+        alert.setHeaderText("Professor Not Chosen");
+        alert.setContentText("You Need to choose a Professor. Try again.");
+    }
 
 }

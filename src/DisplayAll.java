@@ -41,6 +41,7 @@ public class DisplayAll extends Application
     DisplayData displayData;
     GradeChart gradeChart;
     BackgroundImage backgroundImage;
+    Button generate;
 
     RefreshedDisplay refresh;
 
@@ -66,36 +67,42 @@ public class DisplayAll extends Application
 
             dropList = new DropDownList(db);
 
-            if(dropList.getSignalChange() == false)
+            setGenerate();
+
+            /*if(dropList.getSignalChange() == false)
             {
-                displayData = new DisplayData(dropList.getReturndbAPI(), true);
-                gradeChart = new GradeChart(dropList.getReturndbAPI(), true);
-                setEmptyDropListPane();
 
-                // grid.add(dropList.getChooseSubject(), 0,0);
-                // grid.add(dropList.getChooseCourse(), 1, 0);
-                // grid.add(dropList.getChooseProfessor(), 2, 0);
-                // grid.add(displayData.getCourseInfo(), 3,1);
-                grid.add(gradeChart.getBarChart(),0,3);
-                grid.add(gradeChart.getLineChart(), 0, 6);
-                grid.add(displayData.getPercentagesDisplay(),1, 3);
-                grid.add(displayData.getTotalGrades(), 1, 6);
+            }*/
 
-                pane.setCenter(grid);
-                pane.setBackground(new Background(backgroundImage));
+            displayData = new DisplayData(dropList.getReturndbAPI(), true);
+            gradeChart = new GradeChart(dropList.getReturndbAPI(), true);
+            setEmptyDropListPane();
 
-                Scene scene = new Scene(pane, 800, 800);
+            // grid.add(dropList.getChooseSubject(), 0,0);
+            // grid.add(dropList.getChooseCourse(), 1, 0);
+            // grid.add(dropList.getChooseProfessor(), 2, 0);
+            // grid.add(displayData.getCourseInfo(), 3,1);
+            grid.add(gradeChart.getBarChart(),0,3);
+            grid.add(gradeChart.getLineChart(), 0, 6);
+            grid.add(displayData.getPercentagesDisplay(),1, 3);
+            grid.add(displayData.getTotalGrades(), 1, 6);
+            grid.add(generate, 3,6);
 
-                // Supposedly changes the scene Icon
-                primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
+            pane.setCenter(grid);
+            pane.setBackground(new Background(backgroundImage));
 
-                primaryStage.setScene(scene);
-                primaryStage.show();
-            }
+            Scene scene = new Scene(pane, 800, 800);
+
+            // Supposedly changes the scene Icon
+            primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
+
+            primaryStage.setScene(scene);
+            primaryStage.show();
 //TODO: none of this works at refreshing. Action event needs to be in this class
 
             //TODO: install proper exit procedure
 
+            /*
             if (dropList.getSignalChange() == true)
             {
                 // all of these are created in the DropDownList class in the last listener
@@ -120,7 +127,7 @@ public class DisplayAll extends Application
 
                 primaryStage.setScene(scene);
                 primaryStage.show();
-            }
+            }*/
 
 
             /*Image seal = new Image(new FileInputStream("resources/No BackGround TAMU Seal.png"));
@@ -138,7 +145,8 @@ public class DisplayAll extends Application
 
         }
         //TODO: possibly use the dropdownlists chosenSubject data members to refresh charts
-        // TODO: possibly use a button as the action event anyways
+        // TODO: The button still doesn't refresh the screen. Need to figure that out
+        //TODO: re add all of the components to the grid and border pane in the action listener
         catch(SQLException | ClassNotFoundException e)
         {
             e.printStackTrace();
@@ -150,6 +158,58 @@ public class DisplayAll extends Application
             AlertError.showImageNotFound();
         }
     }
+
+    public Button getGenerateButton()
+    {
+        return generate;
+    }
+
+    public void setGenerate()
+    {
+        generate = new Button("Generate Report");
+        generate.setOnAction(e -> refreshScreen());
+
+    }
+
+    public void refreshScreen()
+    {
+        try
+        {
+            if(dropList.getChosenSubject() == null)
+            {
+                AlertError.showNeedChooseSubject();
+                return;
+            }
+            else if(dropList.getChosenCourseNum() == 0)
+            {
+                AlertError.showNeedChooseCourseNum();
+                return;
+            }
+            else if(dropList.getChosenProfessor() == null)
+            {
+                AlertError.showNeedChooseProfessor();
+                return;
+            }
+
+
+            DatabaseAPI newDB = dropList.getReturndbAPI();
+            displayData = new DisplayData(newDB, false);
+            gradeChart = new GradeChart(newDB, false);
+
+            return;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            AlertError.showSQLException();
+        }
+        catch (ClassNotFoundException e)
+        {
+            e.printStackTrace();
+            AlertError.showClassNotFoundException();
+        }
+    }
+
 
     private void setEmptyDropListPane()
     {
@@ -179,7 +239,7 @@ public class DisplayAll extends Application
         listPane.add(dropList.getChooseSubject(), 0, 0);
         listPane.add(dropList.getChooseCourse(), 1, 0);
         listPane.add(dropList.getChooseProfessor(), 2,0);
-        listPane.add(refresh.getDisplayData().getCourseInfo(), 3,0);
+        listPane.add(displayData.getCourseInfo(), 3,0);
 
         pane = new BorderPane();
         pane.setTop(listPane);
@@ -197,10 +257,6 @@ public class DisplayAll extends Application
                 BackgroundSize.DEFAULT);
     }
 
-    private void refreshAll()
-    {
-
-    }
 
 //TODO: change the application ICON
     //TODO: put the TAMU seal somewhere

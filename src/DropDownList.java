@@ -131,6 +131,21 @@ public class DropDownList extends Application
         return chooseProfessor;
     }
 
+    public String getChosenSubject()
+    {
+        return chosenSubject;
+    }
+
+    public int getChosenCourseNum()
+    {
+        return chosenCourseNum;
+    }
+
+    public String getChosenProfessor()
+    {
+        return chosenProfessor;
+    }
+
     public DatabaseAPI getReturndbAPI()
     {
         return returndbAPI;
@@ -140,6 +155,7 @@ public class DropDownList extends Application
     {
         return signalChange;
     }
+
 
     //TODO: make this class return the grid pane or figure out how to use it in another class
 
