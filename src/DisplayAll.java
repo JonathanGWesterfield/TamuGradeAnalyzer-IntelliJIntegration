@@ -47,6 +47,8 @@ public class DisplayAll extends Application
 
 
     GridPane listPane;
+    GridPane grid;
+    Scene scene;
     BorderPane pane;
     //TODO: use a layout pane on top of a grid pane to display everything somewhat easily
     public static void main(String[] args)
@@ -58,7 +60,7 @@ public class DisplayAll extends Application
     {
         try
         {
-            GridPane grid = new GridPane();
+            grid = new GridPane();
             grid.setVgap(4);
             grid.setHgap(10);
             grid.setPadding(new Insets(5,3,5,3));
@@ -86,12 +88,12 @@ public class DisplayAll extends Application
             grid.add(gradeChart.getLineChart(), 0, 6);
             grid.add(displayData.getPercentagesDisplay(),1, 3);
             grid.add(displayData.getTotalGrades(), 1, 6);
-            grid.add(generate, 3,6);
+            grid.add(generate, 3,7);
 
             pane.setCenter(grid);
-            pane.setBackground(new Background(backgroundImage));
+            // pane.setBackground(new Background(backgroundImage));
 
-            Scene scene = new Scene(pane, 800, 800);
+            scene = new Scene(pane, 800, 800);
 
             // Supposedly changes the scene Icon
             primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
@@ -144,9 +146,8 @@ public class DisplayAll extends Application
             primaryStage.show();*/
 
         }
-        //TODO: possibly use the dropdownlists chosenSubject data members to refresh charts
-        // TODO: The button still doesn't refresh the screen. Need to figure that out
-        //TODO: re add all of the components to the grid and border pane in the action listener
+        //TODO: fix runtime exception in the display all after generating report
+        //TODO: display the average GPA for the class
         catch(SQLException | ClassNotFoundException e)
         {
             e.printStackTrace();
@@ -191,10 +192,28 @@ public class DisplayAll extends Application
                 return;
             }
 
+            grid = new GridPane();
 
             DatabaseAPI newDB = dropList.getReturndbAPI();
             displayData = new DisplayData(newDB, false);
             gradeChart = new GradeChart(newDB, false);
+
+            setDropListPane();
+
+            grid.getChildren().clear();
+            // grid.add(dropList.getChooseSubject(), 0,0);
+            // grid.add(dropList.getChooseCourse(), 1, 0);
+            // grid.add(dropList.getChooseProfessor(), 2, 0);
+            // grid.add(displayData.getCourseInfo(), 3,1);
+            grid.add(gradeChart.getBarChart(),0,3);
+            grid.add(gradeChart.getLineChart(), 0, 6);
+            grid.add(displayData.getPercentagesDisplay(),1, 3);
+            grid.add(displayData.getTotalGrades(), 1, 6);
+            grid.add(generate, 3,7);
+
+            pane.setCenter(grid);
+
+            scene = new Scene(pane, 800, 800);
 
             return;
         }
@@ -231,7 +250,7 @@ public class DisplayAll extends Application
 
     private void setDropListPane()
     {
-        listPane = new GridPane();
+        listPane.getChildren().clear();
 
         listPane.setVgap(4);
         listPane.setHgap(10);
@@ -241,7 +260,7 @@ public class DisplayAll extends Application
         listPane.add(dropList.getChooseProfessor(), 2,0);
         listPane.add(displayData.getCourseInfo(), 3,0);
 
-        pane = new BorderPane();
+        pane.getChildren().clear();
         pane.setTop(listPane);
         pane.setPadding(new Insets(5, 5, 5, 5));
 
