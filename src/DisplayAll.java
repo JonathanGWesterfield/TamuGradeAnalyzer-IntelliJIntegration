@@ -100,7 +100,6 @@ public class DisplayAll extends Application
 
             primaryStage.setScene(scene);
             primaryStage.show();
-//TODO: none of this works at refreshing. Action event needs to be in this class
 
             //TODO: install proper exit procedure
 
