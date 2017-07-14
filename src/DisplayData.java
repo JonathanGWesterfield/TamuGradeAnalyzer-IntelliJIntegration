@@ -24,6 +24,7 @@ public class DisplayData extends Application
     private VBox totalGrades;
     private VBox percentagesDisplay;
     private VBox courseInfo;
+    private Label avgGPA;
 
     public static void main(String [] args)
     {
@@ -63,6 +64,7 @@ public class DisplayData extends Application
             emptyCourseInfo();
             emptyGradeData();
             emptyPercentages();
+            setEmptyAvgGPA();
             return;
         }
 
@@ -70,6 +72,7 @@ public class DisplayData extends Application
         gradeData();
         setPercentagesDisplay();
         setCourseInfo();
+        setAvgGPA();
     }
 
     public VBox getPercentagesDisplay()
@@ -85,6 +88,11 @@ public class DisplayData extends Application
     public VBox getCourseInfo()
     {
         return courseInfo;
+    }
+
+    public Label getAvgGPA()
+    {
+        return avgGPA;
     }
 
     // Displays the total number of each grade and the average GPA. Needs to be 200x195
@@ -257,5 +265,15 @@ public class DisplayData extends Application
         info.getChildren().addAll(course, professor);
 
         this.courseInfo = info;
+    }
+
+    private void setEmptyAvgGPA()
+    {
+        avgGPA = new Label("Average GPA: ");
+    }
+
+    private void setAvgGPA()
+    {
+        avgGPA.setText("Average GPA: " + db.getAverageGPA());
     }
 }
