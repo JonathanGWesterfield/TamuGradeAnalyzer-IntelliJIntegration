@@ -88,7 +88,8 @@ public class DisplayAll extends Application
             grid.add(gradeChart.getLineChart(), 0, 6);
             grid.add(displayData.getPercentagesDisplay(),1, 3);
             grid.add(displayData.getTotalGrades(), 1, 6);
-            grid.add(generate, 3,7);
+            grid.add(displayData.getAvgGPA(), 2, 3);
+            grid.add(generate, 3, 7);
 
             pane.setCenter(grid);
             // pane.setBackground(new Background(backgroundImage));
@@ -208,6 +209,7 @@ public class DisplayAll extends Application
             grid.add(gradeChart.getLineChart(), 0, 6);
             grid.add(displayData.getPercentagesDisplay(),1, 3);
             grid.add(displayData.getTotalGrades(), 1, 6);
+            grid.add(displayData.getAvgGPA(), 2, 3);
             grid.add(generate, 3,7);
 
             pane.setCenter(grid);
