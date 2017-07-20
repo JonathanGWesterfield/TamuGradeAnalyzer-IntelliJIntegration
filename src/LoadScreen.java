@@ -95,10 +95,6 @@ public class LoadScreen extends Application
         return tamuSeal;
     }
 
-    public GridPane getGrid()
-    {
-        return grid;
-    }
 
     private void setCalligraphyJ()
     {
