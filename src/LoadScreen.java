@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.io.*;
 import java.util.*;
@@ -31,38 +32,6 @@ public class LoadScreen extends Application
     {
         LoadScreen screen = new LoadScreen();
 
-        VBox box = new VBox(screen.getCalligraphyJ(), screen.getTamuSeal());
-        box.setAlignment(Pos.CENTER);
-        box.setPadding(new Insets(8, 8, 8, 8));
-
-
-        // TODO: Fix the labels by using Text area?
-        // TODO: Put the borderPane in a function to be used by other classes
-        String text = "Written by Jonathan Westerfield";
-        String openSource = "This software is open source. Anyone can take this software and modify ";
-        openSource += "and distribute as they see fit. ";
-        openSource += "But if you do, please credit me.";
-
-        Label writtenBy = new Label(text);
-        Label source = new Label(openSource);
-        Label classYear = new Label("Class of 2019");
-        Label ag = new Label("Redass Ag\n");
-
-        VBox labelBox = new VBox(writtenBy, classYear, ag, source);
-        labelBox.setAlignment(Pos.CENTER);
-        labelBox.setPadding(new Insets(8, 8, 8, 8));
-
-        BorderPane pane = new BorderPane();
-        BorderPane.setAlignment(box, Pos.CENTER);
-        BorderPane.setMargin(box, new Insets(8, 8, 8, 8));
-        pane.setCenter(box);
-        BorderPane.setAlignment(writtenBy, Pos.CENTER);
-        BorderPane.setMargin(writtenBy, new Insets(8, 8, 8, 8));
-        pane.setBottom(labelBox);
-
-
-
-
         /*StackPane pane = new StackPane();
         pane.getChildren().add(box);
         StackPane.setAlignment(box, Pos.CENTER);*/
@@ -73,7 +42,7 @@ public class LoadScreen extends Application
         pane.setRight(screen.getTamuSeal());
         BorderPane.setAlignment(screen.getTamuSeal(), Pos.CENTER);*/
 
-        Scene scene = new Scene(pane, 800, 800);
+        Scene scene = new Scene(screen.getPane(), 800, 825);
         stage.setScene(scene);
         stage.show();
     }
@@ -83,6 +52,7 @@ public class LoadScreen extends Application
         System.out.println("LoadScreen default constructor called");
         setCalligraphyJ();
         setTamuSeal();
+        setPane();
     }
 
     public ImageView getCalligraphyJ()
@@ -95,6 +65,62 @@ public class LoadScreen extends Application
         return tamuSeal;
     }
 
+    public BorderPane getPane()
+    {
+        return pane;
+    }
+
+    private void setPane()
+    {
+        Label name = new Label("Texas A&M Professor Grade Analysis Tool");
+        name.setFont(new Font("Futura", 30));
+
+        HBox title = new HBox(name);
+        title.setAlignment(Pos.CENTER);
+        title.setSpacing(8);
+        title.setPadding(new Insets(8, 8, 8, 8));
+
+
+
+        VBox box = new VBox(calligraphyJ, tamuSeal);
+        box.setAlignment(Pos.CENTER);
+        box.setPadding(new Insets(8, 8, 8, 8));
+
+
+        // TODO: Fix the labels by using Text area?
+        // TODO: Put the borderPane in a function to be used by other classes
+        String text = "Written by Jonathan Westerfield";
+        String openSource = "This software is open source. Anyone can take this software and modify ";
+        openSource += "and distribute as they see fit. ";
+        openSource += "But if you do, please credit me.";
+
+        Label writtenBy = new Label(text);
+        writtenBy.setFont(new Font("Futura", 20));
+
+        Label source = new Label(openSource);
+        source.setFont(new Font("Futura", 12));
+
+        Label classYear = new Label("Class of 2019");
+        classYear.setFont(new Font("Futura", 20));
+
+        Label ag = new Label("Redass Ag\n");
+        ag.setFont(new Font("Futura", 20));
+
+        VBox labelBox = new VBox(writtenBy, classYear, ag, source);
+        labelBox.setAlignment(Pos.CENTER);
+        labelBox.setPadding(new Insets(8, 8, 8, 8));
+
+        pane = new BorderPane();
+        BorderPane.setAlignment(title, Pos.CENTER);
+        BorderPane.setMargin(title, new Insets(8, 8, 0, 8));
+        pane.setTop(title);
+        BorderPane.setAlignment(box, Pos.CENTER);
+        BorderPane.setMargin(box, new Insets(8, 8, 8, 8));
+        pane.setCenter(box);
+        BorderPane.setAlignment(writtenBy, Pos.CENTER);
+        BorderPane.setMargin(writtenBy, new Insets(8, 8, 8, 8));
+        pane.setBottom(labelBox);
+    }
 
     private void setCalligraphyJ()
     {
