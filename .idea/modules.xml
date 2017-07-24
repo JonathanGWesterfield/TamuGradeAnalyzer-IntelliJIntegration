@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Tamu Grade Analyzer.iml" filepath="$PROJECT_DIR$/Tamu Grade Analyzer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TamuGradeAnalyzer-IntelliJIntegration.iml" filepath="$PROJECT_DIR$/.idea/modules/TamuGradeAnalyzer-IntelliJIntegration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TamuGradeAnalyzer-IntelliJIntegration_main.iml" filepath="$PROJECT_DIR$/.idea/modules/TamuGradeAnalyzer-IntelliJIntegration_main.iml" group="TamuGradeAnalyzer-IntelliJIntegration" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TamuGradeAnalyzer-IntelliJIntegration_test.iml" filepath="$PROJECT_DIR$/.idea/modules/TamuGradeAnalyzer-IntelliJIntegration_test.iml" group="TamuGradeAnalyzer-IntelliJIntegration" />
     </modules>
   </component>
 </project>

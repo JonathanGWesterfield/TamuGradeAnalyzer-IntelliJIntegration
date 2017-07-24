@@ -85,10 +85,9 @@ public class LoadScreen extends Application
         VBox box = new VBox(calligraphyJ, tamuSeal);
         box.setAlignment(Pos.CENTER);
         box.setPadding(new Insets(8, 8, 8, 8));
+        box.setMinHeight(300);
+        box.setMinWidth(300);
 
-
-        // TODO: Fix the labels by using Text area?
-        // TODO: Put the borderPane in a function to be used by other classes
         String text = "Written by Jonathan Westerfield";
         String openSource = "This software is open source. Anyone can take this software and modify ";
         openSource += "and distribute as they see fit. ";
@@ -120,6 +119,9 @@ public class LoadScreen extends Application
         BorderPane.setAlignment(writtenBy, Pos.CENTER);
         BorderPane.setMargin(writtenBy, new Insets(8, 8, 8, 8));
         pane.setBottom(labelBox);
+
+        pane.setMinHeight(300);
+        pane.setMinWidth(300);
     }
 
     private void setCalligraphyJ()
