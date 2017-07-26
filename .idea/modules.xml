@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Tamu Grade Analyzer.iml" filepath="$PROJECT_DIR$/Tamu Grade Analyzer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/TamuGradeAnalyzer-IntelliJIntegration.iml" filepath="$PROJECT_DIR$/.idea/modules/TamuGradeAnalyzer-IntelliJIntegration.iml" />
     </modules>
   </component>
 </project>

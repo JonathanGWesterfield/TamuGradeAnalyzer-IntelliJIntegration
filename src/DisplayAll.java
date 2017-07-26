@@ -214,7 +214,7 @@ public class DisplayAll extends Application
 
             pane.setCenter(grid);
 
-            scene = new Scene(pane, 800, 800);
+            scene = new Scene(pane, 850, 850);
 
             return;
         }

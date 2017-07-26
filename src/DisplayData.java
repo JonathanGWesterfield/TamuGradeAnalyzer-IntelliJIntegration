@@ -11,6 +11,7 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.event.*;
 import javafx.scene.text.*;
+import java.util.*;
 
 import javax.xml.crypto.Data;
 import java.sql.SQLException;
@@ -274,6 +275,7 @@ public class DisplayData extends Application
 
     private void setAvgGPA()
     {
-        avgGPA.setText("Average GPA: " + db.getAverageGPA());
+        DecimalFormat df = new DecimalFormat("##.000");
+        avgGPA = new Label("Average GPA: " + db.getAverageGPA());// df.format(db.getAverageGPA()));
     }
 }
