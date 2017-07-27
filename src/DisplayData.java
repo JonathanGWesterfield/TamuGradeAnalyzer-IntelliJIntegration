@@ -276,6 +276,9 @@ public class DisplayData extends Application
     private void setAvgGPA()
     {
         DecimalFormat df = new DecimalFormat("##.000");
-        avgGPA = new Label("Average GPA: " + db.getAverageGPA());// df.format(db.getAverageGPA()));
+        String localAverage = df.format(db.getAverageGPA());
+        avgGPA = new Label("Average GPA: " + localAverage);
+        avgGPA.setFont(new Font("Futura", 15));
     }
+    // TODO: Figure out how to format this to 3 decimal places
 }
