@@ -270,6 +270,7 @@ public class DisplayData extends Application
     private void setEmptyAvgGPA()
     {
         avgGPA = new Label("Average GPA: ");
+        avgGPA.setFont(new Font("Futura", 15));
     }
 
     private void setAvgGPA()

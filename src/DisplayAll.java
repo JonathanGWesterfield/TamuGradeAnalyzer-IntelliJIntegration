@@ -91,14 +91,13 @@ public class DisplayAll extends Application
             grid.add(displayData.getPercentagesDisplay(),1, 3);
             grid.add(displayData.getTotalGrades(), 1, 6);
             grid.add(displayData.getAvgGPA(), 1, 4);
-            // grid.add(generate, 3, 0);
             grid.add(screen.getCalligraphyJ(), 3,3);
             grid.add(screen.getTamuSeal(), 3,6);
 
             pane.setCenter(grid);
             // pane.setBackground(new Background(backgroundImage));
 
-            scene = new Scene(pane, 1050, 850);
+            scene = new Scene(pane, 925, 850);
 
             // Supposedly changes the scene Icon
             primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
@@ -109,50 +108,8 @@ public class DisplayAll extends Application
             //TODO: install proper exit procedure
             //TODO: fix the average GPA label
 
-            /*
-            if (dropList.getSignalChange() == true)
-            {
-                // all of these are created in the DropDownList class in the last listener
-                refresh = dropList.createdbAPIObject();
-                displayData = refresh.getDisplayData();
-                gradeChart = refresh.getGradeChart();
-
-                pane.setCenter(grid);
-                pane.setBackground(new Background(backgroundImage));
-
-                grid.add(refresh.getGradeChart().getBarChart(),0,3);
-                grid.add(refresh.getGradeChart().getLineChart(), 0, 6);
-                grid.add(refresh.getDisplayData().getPercentagesDisplay(),1, 3);
-                grid.add(refresh.getDisplayData().getTotalGrades(), 1, 6);
-
-                setDropListPane();
-
-                Scene scene = new Scene(pane, 800, 800);
-
-                // Supposedly changes the scene Icon
-                primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
-
-                primaryStage.setScene(scene);
-                primaryStage.show();
-            }*/
-
-
-            /*Image seal = new Image(new FileInputStream("resources/No BackGround TAMU Seal.png"));
-
-            pane.setCenter(grid);
-            pane.setBackground(new Background(backgroundImage));
-
-            Scene scene = new Scene(pane, 800, 800);
-
-            // Supposedly changes the scene Icon
-            primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
-
-            primaryStage.setScene(scene);
-            primaryStage.show();*/
-
         }
         //TODO: fix runtime exception in the display all after generating report
-        //TODO: display the average GPA for the class
         catch(SQLException | ClassNotFoundException e)
         {
             e.printStackTrace();
@@ -214,7 +171,7 @@ public class DisplayAll extends Application
             grid.add(gradeChart.getLineChart(), 0, 6);
             grid.add(displayData.getPercentagesDisplay(),1, 3);
             grid.add(displayData.getTotalGrades(), 1, 6);
-            grid.add(displayData.getAvgGPA(), 2, 4);
+            grid.add(displayData.getAvgGPA(), 1, 4);
             // grid.add(generate, 3,0);
             grid.add(screen.getCalligraphyJ(), 3,3);
             grid.add(screen.getTamuSeal(), 3,6);
