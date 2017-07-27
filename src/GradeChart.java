@@ -20,24 +20,10 @@ import java.text.DecimalFormat;
 import java.util.*;
 import javafx.event.*;
 
-
-
 public class GradeChart extends Application
 {
-    private double percentA;
-    private double percentB;
-    private double percentC;
-    private double percentD;
-    private double percentF;
-    private double percentQDrop;
-
-    private String courseSubject;
-    private String professor;
-    private int courseNum;
-
     private DatabaseAPI db;
 
-    private VBox percentagesDisplay;
     private LineChart<String, Number> lineChart;
     private BarChart<String, Number> barChart;
 
@@ -50,17 +36,23 @@ public class GradeChart extends Application
     {
         try
         {
-            DatabaseAPI db = new DatabaseAPI();
+            DatabaseAPI db = new DatabaseAPI("CSCE", 121, "MOORE");
+
+            GradeChart charts = new GradeChart(db, true);
+
+            LineChart line = charts.getLineChart();
+
+            GridPane grid = new GridPane();
+            grid.add(charts.getLineChart(), 3, 0);
 
 
-            GradeChart charts = new GradeChart("CSCE", 121, "MOORE", db);
             BarChart grades = charts.getBarChart();
 
-            //HBox percentages = charts.getPercentagesDisplay();
-
-            Scene scene = new Scene(grades, 305, 305);
+            // Scene scene = new Scene(grades, 305, 305);
 
             // Scene scene = new Scene(charts.getPercentagesDisplay(), 185, 208);
+
+            Scene scene = new Scene(grid, 600, 600);
 
             primaryStage.setScene(scene);
             primaryStage.show();
@@ -72,46 +64,76 @@ public class GradeChart extends Application
         }
     }
 
+    //TODO: Possibly add a raw data function using a read only function
     public GradeChart()
     {
         // default empty constructor
     }
 
+    //WARNING: using the wrong boolean value may result in a nullpointer exception
     // constructor for this class the takes in all the data
-    public GradeChart(String courseSubject, int courseNum, String professor, DatabaseAPI db) throws SQLException, ClassNotFoundException
+    public GradeChart(DatabaseAPI db, boolean isempty) throws SQLException, ClassNotFoundException
     {
+        if(isempty)
+        {
+            setEmptyLineAvgGPA();
+            setbarChart();
+            return;
+        }
         this.db = db;
-        this.courseSubject = courseSubject;
-        this.courseNum = courseNum;
-        this.professor = professor;
-        this.percentA = db.getPercentA(courseSubject, courseNum, professor);
-        this.percentB = db.getPercentB(courseSubject, courseNum, professor);
-        this.percentC = db.getPercentC(courseSubject, courseNum, professor);
-        this.percentD = db.getPercentD(courseSubject, courseNum, professor);
-        this.percentF = db.getPercentF(courseSubject, courseNum, professor);
-        this.percentQDrop = db.getPercentQDrops(courseSubject, courseNum, professor);
 
-        this.lineChart = LineAvgGPA();
-        this.barChart = gradeBarChart();
-        this.percentagesDisplay = displayPercentages();
-
+        setLineAvgGPA();
+        setGradeBarChart();
 
     }
 
     // class getters
-    public double getPercentA() { return percentA; }
-    public double getPercentB() { return percentB; }
-    public double getPercentC() { return percentC; }
-    public double getPercentD() { return percentD; }
-    public double getPercentF() { return percentF; }
-    public double getPercentQDrop() { return percentQDrop; }
-    public VBox getPercentagesDisplay() { return percentagesDisplay; }
-    public LineChart<String, Number> getLineChart() { return lineChart; }
-    public BarChart<String, Number> getBarChart() { return barChart; }
+    public LineChart<String, Number> getLineChart()
+    {
+        return lineChart;
+    }
+
+    public BarChart<String, Number> getBarChart()
+    {
+        return barChart;
+    }
+
+    private void setEmptyLineAvgGPA()
+    {
+        final CategoryAxis xAxis = new CategoryAxis();
+        final NumberAxis yAxis = new NumberAxis("GPA", 0f, 4f, .25);
+
+        lineChart = new LineChart<String, Number>(xAxis, yAxis);
+
+        lineChart.setAnimated(true);
+
+        lineChart.setTitle("Professor GPA in Recent Years");
+
+        XYChart.Series GPAArray = new XYChart.Series();
+        GPAArray.setName("Average GPA");
+
+        GPAArray.getData().add(new XYChart.Data("No Professor Chosen", 0));
+
+        // changes the color of the line on the graph to maroon
+        lineChart.setStyle("CHART_COLOR_1: #800000"); //#228B22;");
+
+        lineChart.getData().add(GPAArray);
+
+        // attempts to sets the dimensions of the barchart
+        lineChart.setMaxHeight(500);
+        lineChart.setMaxWidth(550);
+
+        lineChart.setMinHeight(305);
+        lineChart.setMinWidth(350);
 
 
-    // is static because all of its information is based off of the databaseAPI so it stores nothing
-    public LineChart<String, Number> LineAvgGPA() throws SQLException
+        lineChart.setPrefHeight(305);
+        lineChart.setPrefWidth(350);
+
+        return;
+    }
+
+    private void setLineAvgGPA() throws SQLException
     {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis("GPA", 0f, 4f, .25);
@@ -119,34 +141,43 @@ public class GradeChart extends Application
         xAxis.setLabel("Semester");
         // yAxis.setLabel("GPA"); redundant line since constructor takes care of this
 
-        final LineChart<String, Number> avgGPA =
-                new LineChart<String, Number>(xAxis, yAxis);
+        lineChart = new LineChart<String, Number>(xAxis, yAxis);
 
-        avgGPA.setAnimated(true);
+        lineChart.setAnimated(true);
 
-        avgGPA.setTitle("Professor GPA in Recent Years");
+        lineChart.setTitle("Professor GPA in Recent Years");
 
         XYChart.Series GPAArray = new XYChart.Series();
         GPAArray.setName("Average GPA");
 
-        ArrayList<Double> GPAList = db.getPastSemesterGPAs(courseSubject,courseNum, professor);
-        ArrayList<String> pastSemesters = db.getPastSemesters(courseSubject,courseNum, professor);
+        ArrayList<Double> GPAList = db.getPastSemesterGPAs(db.getCourseSubject(), db.getCourseNum(), db.getProfessor());
+        ArrayList<String> pastSemesters = db.getPastSemesters(db.getCourseSubject(), db.getCourseNum(), db.getProfessor());
 
         for(int i = 0; i < GPAList.size(); i++)
         {
             GPAArray.getData().add(new XYChart.Data(pastSemesters.get(i), GPAList.get(i)));
         }
 
-        avgGPA.getData().add(GPAArray);
+        // changes the color of the line on the graph to maroon
+        lineChart.setStyle("CHART_COLOR_1: #800000"); //#228B22;");
 
-        return avgGPA;
+        lineChart.getData().add(GPAArray);
+
+        // attempts to sets the dimensions of the barchart
+        lineChart.setMaxHeight(500);
+        lineChart.setMaxWidth(550);
+
+        lineChart.setMinHeight(305);
+        lineChart.setMinWidth(350);
+
+
+        lineChart.setPrefHeight(305);
+        lineChart.setPrefWidth(350);
+
+        return;
     }
 
-    // also add the passing percentage of the class
-
-    // Would probably work best if the barchart was 350x350
-    // creates a bar chart with the percentage of A's, B's, C's etc.
-    public BarChart<String, Number> gradeBarChart() throws SQLException
+    private void setbarChart()
     {
         final String numA = "A";
         final String numB = "B";
@@ -160,10 +191,9 @@ public class GradeChart extends Application
         NumberAxis yAxis = new NumberAxis();
 
         // creates the graph array
-        BarChart<String,Number> bc =
-                new BarChart<String,Number>(xAxis,yAxis);
+        barChart = new BarChart<String,Number>(xAxis,yAxis);
 
-        bc.setTitle("Grade Percentages"); // sets the title of the graph
+        barChart.setTitle("Grade Percentages"); // sets the title of the graph
 
         // sets the graph labels
         xAxis.setLabel("Grades");
@@ -174,12 +204,12 @@ public class GradeChart extends Application
         grades.setName("Grade Percentages"); // was commented out because it is redundant
 
         // adds the data to the chart
-        XYChart.Data dataA = new XYChart.Data(numA, percentA);
-        XYChart.Data dataB = new XYChart.Data(numB, percentB);
-        XYChart.Data dataC = new XYChart.Data(numC, percentC);
-        XYChart.Data dataD = new XYChart.Data(numD, percentD);
-        XYChart.Data dataF = new XYChart.Data(numF, percentF);
-        XYChart.Data dataQ = new XYChart.Data(numQDrop, percentQDrop);
+        XYChart.Data dataA = new XYChart.Data(numA, 0);
+        XYChart.Data dataB = new XYChart.Data(numB, 0);
+        XYChart.Data dataC = new XYChart.Data(numC, 0);
+        XYChart.Data dataD = new XYChart.Data(numD, 0);
+        XYChart.Data dataF = new XYChart.Data(numF, 0);
+        XYChart.Data dataQ = new XYChart.Data(numQDrop, 0);
 
         // adds the inputs to the bar graph to be displayed
         grades.getData().add(dataA);
@@ -189,32 +219,97 @@ public class GradeChart extends Application
         grades.getData().add(dataF);
         grades.getData().add(dataQ);
 
-        bc.getData().add(grades);
+        barChart.setStyle("CHART_COLOR_1: #800000;");
 
-        return bc;
+        barChart.getData().add(grades);
+
+        //sets the size of the chart
+        barChart.setMaxHeight(500);
+        barChart.setMaxWidth(500);
+
+        barChart.setMinHeight(250);
+        barChart.setMinWidth(250);
+
+        barChart.setPrefHeight(350);
+        barChart.setPrefWidth(350);
+
+        return;
     }
 
-    // displays all of the percentages for the course. Needs to be 185x208
-    public VBox displayPercentages()
+    // also add the passing percentage of the class
+
+    // Would probably work best if the barchart was 350x350
+    // creates a bar chart with the percentage of A's, B's, C's etc.
+    private void setGradeBarChart() throws SQLException
     {
-        VBox percentages = new VBox(10);
-        percentages.setPadding(new Insets(15, 12,15,12));
-        DecimalFormat df = new DecimalFormat("##.0");
+        final String numA = "A";
+        final String numB = "B";
+        final String numC = "C";
+        final String numD = "D";
+        final String numF = "F";
+        final String numQDrop = "Q Drops";
 
-        double percentPassing = percentA + percentB + percentC;
+        // creates the axis of the graph
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
 
-        Label perA = new Label("Percent A:  " + df.format(getPercentA()) + "%");
-        Label perB = new Label("Percent B:  " + df.format(getPercentB()) + "%");
-        Label perC = new Label("Percent C:  " + df.format(getPercentC()) + "%");
-        Label perD = new Label("Percent D:  " + df.format(getPercentD()) + "%");
-        Label perF = new Label("Percent F:  " + df.format(getPercentF()) + "%");
-        Label perQ = new Label("Percent Q Drops:  " + df.format(getPercentQDrop()) + "%");
-        Label perPass = new Label("Passing Rate:  " + df.format(percentPassing) + "%");
+        // creates the graph array
+        barChart = new BarChart<String,Number>(xAxis,yAxis);
 
-        percentages.getChildren().addAll(perA, perB, perC, perD, perF, perQ, perPass);
+        barChart.setTitle("Grade Percentages"); // sets the title of the graph
 
-        return percentages;
+        // sets the graph labels
+        xAxis.setLabel("Grades");
+        yAxis.setLabel(" Percentage of Total Grades ");
+
+        XYChart.Series grades = new XYChart.Series();
+
+        grades.setName("Grade Percentages"); // was commented out because it is redundant
+
+        // adds the data to the chart
+        XYChart.Data dataA = new XYChart.Data(numA, db.getPercentageA());
+        XYChart.Data dataB = new XYChart.Data(numB, db.getPercentageB());
+        XYChart.Data dataC = new XYChart.Data(numC, db.getPercentageC());
+        XYChart.Data dataD = new XYChart.Data(numD, db.getPercentageD());
+        XYChart.Data dataF = new XYChart.Data(numF, db.getPercentageF());
+        XYChart.Data dataQ = new XYChart.Data(numQDrop, db.getPercentageQ());
+
+        // adds the inputs to the bar graph to be displayed
+        grades.getData().add(dataA);
+        grades.getData().add(dataB);
+        grades.getData().add(dataC);
+        grades.getData().add(dataD);
+        grades.getData().add(dataF);
+        grades.getData().add(dataQ);
+
+        barChart.setStyle("CHART_COLOR_1: #800000;");
+
+        barChart.getData().add(grades);
+
+        //sets the size of the chart
+        barChart.setMaxHeight(500);
+        barChart.setMaxWidth(500);
+
+        barChart.setMinHeight(250);
+        barChart.setMinWidth(250);
+
+        barChart.setPrefHeight(350);
+        barChart.setPrefWidth(350);
+
+        return;
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     /* This code was to put the value of the data over the bars of the bar graph
         but it generates a nullpointerexception
@@ -276,7 +371,7 @@ public class GradeChart extends Application
                 {
                     @Override public void handle(ActionEvent actionEvent)
                     {
-                        for (XYChart.Series<String, Number> series : bc.getData())
+                        for (XYChart.Series<String, Number> series : barChart.getData())
                         {
                             for (XYChart.Data<String, Number> data : series.getData())
                             {
