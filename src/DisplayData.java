@@ -274,6 +274,9 @@ public class DisplayData extends Application
 
     private void setAvgGPA()
     {
-        avgGPA.setText("Average GPA: " + db.getAverageGPA());
+        DecimalFormat df = new DecimalFormat("##.000");
+        String localAverage = df.format(db.getAverageGPA());
+        avgGPA = new Label("Average GPA: " + localAverage);
+        avgGPA.setFont(new Font("Futura", 15));
     }
 }

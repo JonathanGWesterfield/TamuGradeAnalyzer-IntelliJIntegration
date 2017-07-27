@@ -42,6 +42,7 @@ public class DisplayAll extends Application
     GradeChart gradeChart;
     BackgroundImage backgroundImage;
     Button generate;
+    LoadScreen screen;
 
     RefreshedDisplay refresh;
 
@@ -78,6 +79,7 @@ public class DisplayAll extends Application
 
             displayData = new DisplayData(dropList.getReturndbAPI(), true);
             gradeChart = new GradeChart(dropList.getReturndbAPI(), true);
+            screen = new LoadScreen();
             setEmptyDropListPane();
 
             // grid.add(dropList.getChooseSubject(), 0,0);
@@ -88,13 +90,15 @@ public class DisplayAll extends Application
             grid.add(gradeChart.getLineChart(), 0, 6);
             grid.add(displayData.getPercentagesDisplay(),1, 3);
             grid.add(displayData.getTotalGrades(), 1, 6);
-            grid.add(displayData.getAvgGPA(), 2, 3);
-            grid.add(generate, 3, 7);
+            grid.add(displayData.getAvgGPA(), 1, 4);
+            // grid.add(generate, 3, 0);
+            grid.add(screen.getCalligraphyJ(), 3,3);
+            grid.add(screen.getTamuSeal(), 3,6);
 
             pane.setCenter(grid);
             // pane.setBackground(new Background(backgroundImage));
 
-            scene = new Scene(pane, 800, 800);
+            scene = new Scene(pane, 1050, 850);
 
             // Supposedly changes the scene Icon
             primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
@@ -103,6 +107,7 @@ public class DisplayAll extends Application
             primaryStage.show();
 
             //TODO: install proper exit procedure
+            //TODO: fix the average GPA label
 
             /*
             if (dropList.getSignalChange() == true)
@@ -209,12 +214,15 @@ public class DisplayAll extends Application
             grid.add(gradeChart.getLineChart(), 0, 6);
             grid.add(displayData.getPercentagesDisplay(),1, 3);
             grid.add(displayData.getTotalGrades(), 1, 6);
-            grid.add(displayData.getAvgGPA(), 2, 3);
-            grid.add(generate, 3,7);
-
+            grid.add(displayData.getAvgGPA(), 2, 4);
+            // grid.add(generate, 3,0);
+            grid.add(screen.getCalligraphyJ(), 3,3);
+            grid.add(screen.getTamuSeal(), 3,6);
             pane.setCenter(grid);
 
-            scene = new Scene(pane, 800, 800);
+            scene = null;
+
+            scene = new Scene(pane, 850, 800);
 
             return;
         }
@@ -241,7 +249,8 @@ public class DisplayAll extends Application
         listPane.add(dropList.getChooseSubject(), 0, 0);
         listPane.add(dropList.getChooseCourse(), 1, 0);
         listPane.add(dropList.getChooseProfessor(), 2,0);
-        listPane.add(displayData.getCourseInfo(), 3, 0);
+        listPane.add(generate, 3, 0);
+        listPane.add(displayData.getCourseInfo(), 4, 0);
 
 
         pane = new BorderPane();
@@ -259,7 +268,8 @@ public class DisplayAll extends Application
         listPane.add(dropList.getChooseSubject(), 0, 0);
         listPane.add(dropList.getChooseCourse(), 1, 0);
         listPane.add(dropList.getChooseProfessor(), 2,0);
-        listPane.add(displayData.getCourseInfo(), 3,0);
+        listPane.add(generate, 3, 0);
+        listPane.add(displayData.getCourseInfo(), 4,0);
 
         pane.getChildren().clear();
         pane.setTop(listPane);
