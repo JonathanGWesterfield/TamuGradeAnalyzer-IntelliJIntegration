@@ -58,15 +58,6 @@ public class DropDownList extends Application
 
             DropDownList list = new DropDownList(db);
 
-            // Label lbl = new Label("At least something works");
-
-            //HBox box = new HBox(10, list.getChooseSubject(), list.getChooseCourse(), list.getChooseProfessor());
-
-            //list.setAllLists();
-
-            // list.setChooseCourse();
-
-            // TODO: use this code to finish up the DisplayAll Class
             GridPane grid = new GridPane();
             grid.setVgap(4);
             grid.setHgap(10);
@@ -226,14 +217,6 @@ public class DropDownList extends Application
             combo.setVisibleRowCount(10);
             chooseSubject = combo;
 
-            /*
-            this.chooseSubject.setItems(data);
-            this.chooseSubject.setPromptText("Select");
-            this.chooseSubject.setValue("Select");
-            this.chooseSubject.setEditable(true);
-            this.chooseSubject.setVisibleRowCount(10);
-            */
-
             this.chooseSubject.setOnAction(e -> setChosenSubject());
         }
 
@@ -258,10 +241,6 @@ public class DropDownList extends Application
 
         resetLists();
 
-        // resetLists();
-
-        // refreshHbox();
-
         setChooseCourse();
     }
 
@@ -283,22 +262,10 @@ public class DropDownList extends Application
                 data.add(nums.get(i));
             }
 
-            // ComboBox<Integer> courseNums = new ComboBox<>(data);
-            // courseNums.setPromptText("Select");
-            // courseNums.setValue(101);
-            // courseNums.setEditable(true);
-            // courseNums.setVisibleRowCount(10);
-
             chooseCourse.getItems().addAll(data);
             chooseCourse.setPromptText("Select");
             chooseCourse.setEditable(false);
             chooseCourse.setVisibleRowCount(10);
-
-            // this.chooseCourse = courseNums;
-
-            // uses function to refresh the combobox
-            // this.setAllLists();
-            // this.getAllLists();
 
             chooseCourse.setOnAction(e -> setChosenCourseNum());
             chooseCourse.setDisable(false);
@@ -331,10 +298,6 @@ public class DropDownList extends Application
 
         this.chosenCourseNum = chooseCourse.getValue();
 
-        // uses function to refresh the combobox
-        // this.setAllLists();
-        // this.getAllLists();
-
         setChooseProfessor();
 
         return;
@@ -357,12 +320,6 @@ public class DropDownList extends Application
             {
                 data.add(profList.get(i));
             }
-
-            // ComboBox prof = new ComboBox(data);
-            // prof.setPromptText("Select Prof");
-            // prof.setValue(profList.get(0));
-            // prof.setEditable(true);
-            // prof.setVisibleRowCount(12);
 
             chooseProfessor.getItems().addAll(data);
             chooseProfessor.setPromptText("Select Prof");

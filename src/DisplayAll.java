@@ -33,7 +33,6 @@ import java.util.Scanner;
  * DropDownLists class and puts them all onto one grid pane to be displayed in the scene
  */
 
-//TODO: need to put an action event that extends to all of the other classes to refresh them
     // once a professor is chosen/ MAY HAVE TO MOVE THE ACTIONEVENT FROM THE DROPDOWN CLASS TO THIS ONE
 public class DisplayAll extends Application
 {
@@ -51,7 +50,7 @@ public class DisplayAll extends Application
     GridPane grid;
     Scene scene;
     BorderPane pane;
-    //TODO: use a layout pane on top of a grid pane to display everything somewhat easily
+
     public static void main(String[] args)
     {
         launch(args);
@@ -72,20 +71,11 @@ public class DisplayAll extends Application
 
             setGenerate();
 
-            /*if(dropList.getSignalChange() == false)
-            {
-
-            }*/
-
             displayData = new DisplayData(dropList.getReturndbAPI(), true);
             gradeChart = new GradeChart(dropList.getReturndbAPI(), true);
             screen = new LoadScreen();
             setEmptyDropListPane();
 
-            // grid.add(dropList.getChooseSubject(), 0,0);
-            // grid.add(dropList.getChooseCourse(), 1, 0);
-            // grid.add(dropList.getChooseProfessor(), 2, 0);
-            // grid.add(displayData.getCourseInfo(), 3,1);
             grid.add(gradeChart.getBarChart(),0,3);
             grid.add(gradeChart.getLineChart(), 0, 6);
             grid.add(displayData.getPercentagesDisplay(),1, 3);
@@ -163,10 +153,6 @@ public class DisplayAll extends Application
             setDropListPane();
 
             grid.getChildren().clear();
-            // grid.add(dropList.getChooseSubject(), 0,0);
-            // grid.add(dropList.getChooseCourse(), 1, 0);
-            // grid.add(dropList.getChooseProfessor(), 2, 0);
-            // grid.add(displayData.getCourseInfo(), 3,1);
             grid.add(gradeChart.getBarChart(),0,3);
             grid.add(gradeChart.getLineChart(), 0, 6);
             grid.add(displayData.getPercentagesDisplay(),1, 3);
