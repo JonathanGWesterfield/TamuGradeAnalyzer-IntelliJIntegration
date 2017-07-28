@@ -15,8 +15,6 @@ import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.io.IOException;
 import java.sql.*;
 import java.util.*;
-import java.lang.*;
-import java.lang.String;
 import java.io.*;
 
 public class DatabaseAPI
@@ -156,6 +154,8 @@ public class DatabaseAPI
         getPercentD();
         getPercentF();
         getPercentQDrops();
+
+        closeDBConn(); // closes because it won't be used anymore after this
     }
 
     public void createDBConn() throws SQLException, ClassNotFoundException
