@@ -436,6 +436,7 @@ public class DatabaseAPI
         }
         return totalNumA;
     }
+    //TODO: MAKE SURE HONORS SCORES ARE NOT INCLUDED!
 
     // gets the number of B's for a class for a certain semester and year
     public int getNumBSem(String courseSubject, int courseNum, String professor,
