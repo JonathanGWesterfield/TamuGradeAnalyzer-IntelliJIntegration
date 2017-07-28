@@ -36,20 +36,21 @@ import java.util.Scanner;
     // once a professor is chosen/ MAY HAVE TO MOVE THE ACTIONEVENT FROM THE DROPDOWN CLASS TO THIS ONE
 public class DisplayAll extends Application
 {
-    DropDownList dropList;
-    DisplayData displayData;
-    GradeChart gradeChart;
-    BackgroundImage backgroundImage;
-    Button generate;
-    LoadScreen screen;
+    private DropDownList dropList;
+    private DisplayData displayData;
+    private GradeChart gradeChart;
+    private BackgroundImage backgroundImage;
+    private Button generate;
+    private LoadScreen screen;
+    private DatabaseAPI db;
 
-    RefreshedDisplay refresh;
+    private RefreshedDisplay refresh;
 
 
-    GridPane listPane;
-    GridPane grid;
-    Scene scene;
-    BorderPane pane;
+    private GridPane listPane;
+    private GridPane grid;
+    private Scene scene;
+    private BorderPane pane;
 
     public static void main(String[] args)
     {
@@ -60,12 +61,69 @@ public class DisplayAll extends Application
     {
         try
         {
+            DatabaseAPI db = new DatabaseAPI();
+            DisplayAll display = new DisplayAll(db);
+
+            // Supposedly changes the scene Icon
+            primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
+
+            primaryStage.setScene(display.getScene());
+            primaryStage.show();
+
+            //TODO: install proper exit procedure
+            //TODO: fix the average GPA label
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+            AlertError.showImageNotFound();
+        }
+        catch(SQLException | ClassNotFoundException e)
+        {
+            e.printStackTrace();
+            AlertError.showSQLException();
+        }
+    }
+
+    // default constructor
+    public DisplayAll()
+    {
+        System.out.println("Default constructor has been called");
+    }
+
+    // constructor
+    public DisplayAll(DatabaseAPI db)
+    {
+        this.db = db;
+        setGrid(db);
+    }
+
+    // public getter functions
+    public Scene getScene()
+    {
+        return scene;
+    }
+
+    public Button getGenerateButton()
+    {
+        return generate;
+    }
+
+    public void setGenerate()
+    {
+        generate = new Button("Generate Report");
+        generate.setOnAction(e -> refreshScreen());
+
+    }
+
+    public void setGrid(DatabaseAPI db)
+    {
+        try
+        {
             grid = new GridPane();
             grid.setVgap(4);
             grid.setHgap(10);
             grid.setPadding(new Insets(5,3,5,3));
-
-            DatabaseAPI db = new DatabaseAPI();
 
             dropList = new DropDownList(db);
 
@@ -88,16 +146,6 @@ public class DisplayAll extends Application
             // pane.setBackground(new Background(backgroundImage));
 
             scene = new Scene(pane, 925, 850);
-
-            // Supposedly changes the scene Icon
-            primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
-
-            primaryStage.setScene(scene);
-            primaryStage.show();
-
-            //TODO: install proper exit procedure
-            //TODO: fix the average GPA label
-
         }
         //TODO: fix runtime exception in the display all after generating report
         catch(SQLException | ClassNotFoundException e)
@@ -105,23 +153,6 @@ public class DisplayAll extends Application
             e.printStackTrace();
             AlertError.showSQLException();
         }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-            AlertError.showImageNotFound();
-        }
-    }
-
-    public Button getGenerateButton()
-    {
-        return generate;
-    }
-
-    public void setGenerate()
-    {
-        generate = new Button("Generate Report");
-        generate.setOnAction(e -> refreshScreen());
-
     }
 
     public void refreshScreen()

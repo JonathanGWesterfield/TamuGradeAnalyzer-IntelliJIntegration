@@ -166,22 +166,6 @@ public class DatabaseAPI
         return;
     }
 
-    /*
-    private int numberA;
-    private int numberB;
-    private int numberC;
-    private int numberD;
-    private int numberF;
-    private int numberQ;
-    private double averageGPA;
-    private int totalNumStudents;
-
-    private double percentageA;
-    private double percentageB;
-    private double percentageC;
-    private double percentageD;
-    private double percentageF;
-    private double percentageQ; */
 
     //getter functions for all of the data members
     public int getNumberA()
