@@ -155,7 +155,7 @@ public class DatabaseAPI
         getPercentF();
         getPercentQDrops();
 
-        closeDBConn(); // closes because it won't be used anymore after this
+         // closes because it won't be used anymore after this
     }
 
     public void createDBConn() throws SQLException, ClassNotFoundException
@@ -261,7 +261,6 @@ public class DatabaseAPI
     /* returns an arraylist of all subjects in database in alphabetical order*/
     private void getAllSubjectDistinct() throws SQLException
     {
-        //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
         String query1 = "SELECT DISTINCT CourseSubject FROM TamuGrades ORDER BY CourseSubject ASC";
         System.out.println("\nSelecting Distinct From Subject");
         Statement selectDistinctSubject = conn.createStatement();
@@ -298,7 +297,6 @@ public class DatabaseAPI
 
     public ArrayList<String> getAllSubjectDistinctList() throws SQLException
     {
-        //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
         String query1 = "SELECT DISTINCT CourseSubject FROM TamuGrades ORDER BY CourseSubject ASC";
         System.out.println("\nSelecting Distinct From Subject");
         Statement selectDistinctSubject = conn.createStatement();
@@ -337,7 +335,6 @@ public class DatabaseAPI
     //returns an arraylist of all course numbers under a specific subject
     public ArrayList<Integer> getAllCourseNumDistinct(String courseSubject) throws SQLException
     {
-        //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
         String query1 = "SELECT DISTINCT CourseNum FROM TamuGrades " +
                 "WHERE CourseSubject=\"" + courseSubject + "\"";
         System.out.println("\nSelecting Distinct From CourseNum");
@@ -379,7 +376,6 @@ public class DatabaseAPI
     // Returns an arraylist of the professors in alphabetical order
     public ArrayList<String> getCourseProfessors(String courseSubject, int courseNum) throws SQLException
     {
-        //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
         String query1 = "SELECT DISTINCT Professor FROM TamuGrades WHERE CourseSubject=\""
                  + courseSubject + "\" AND CourseNum=" + courseNum + " ORDER BY Professor ASC";
         System.out.println("\nLooking for professors of this subject and course");
@@ -423,7 +419,7 @@ public class DatabaseAPI
         String query = "SELECT SUM(NumA) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
                 courseNum + " AND Professor=\"" + professor + "\" AND Semester_Term=\"" +
-                term + "\" AND Semester_Year=" + year;
+                term + "\" AND Semester_Year=" + year + " AND Honors=FALSE";
         System.out.println("\nCounting number of A's given by this professor in this course");
         Statement countNumA = conn.createStatement();
         ResultSet result = countNumA.executeQuery(query);
@@ -446,7 +442,7 @@ public class DatabaseAPI
         String query = "SELECT SUM(NumB) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
                 courseNum + " AND Professor=\"" + professor + "\" AND Semester_Term=\"" +
-                term + "\" AND Semester_Year=" + year;
+                term + "\" AND Semester_Year=" + year +" AND Honors=FALSE";
         System.out.println("\nCounting number of B's given by this professor in this course");
         Statement countNumA = conn.createStatement();
         ResultSet result = countNumA.executeQuery(query);
@@ -468,7 +464,7 @@ public class DatabaseAPI
         String query = "SELECT SUM(NumC) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
                 courseNum + " AND Professor=\"" + professor + "\" AND Semester_Term=\"" +
-                term + "\" AND Semester_Year=" + year;
+                term + "\" AND Semester_Year=" + year +" AND Honors=FALSE";
         System.out.println("\nCounting number of C's given by this professor in this course");
         Statement countNumA = conn.createStatement();
         ResultSet result = countNumA.executeQuery(query);
@@ -490,7 +486,7 @@ public class DatabaseAPI
         String query = "SELECT SUM(NumD) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
                 courseNum + " AND Professor=\"" + professor + "\" AND Semester_Term=\"" +
-                term + "\" AND Semester_Year=" + year;
+                term + "\" AND Semester_Year=" + year +" AND Honors=FALSE";
         System.out.println("\nCounting number of D's given by this professor in this course");
         Statement countNumA = conn.createStatement();
         ResultSet result = countNumA.executeQuery(query);
@@ -503,6 +499,7 @@ public class DatabaseAPI
         }
         return totalNumD;
     }
+    //TODO: Fix the bug that interrupts after trying to get the number of F's for a Sem
 
     // gets the number of F's for a class for a certain semester and year
     public int getNumFSem(String courseSubject, int courseNum, String professor,
@@ -512,7 +509,7 @@ public class DatabaseAPI
         String query = "SELECT SUM(NumF) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
                 courseNum + " AND Professor=\"" + professor + "\" AND Semester_Term=\"" +
-                term + "\" AND Semester_Year=" + year;
+                term + "\" AND Semester_Year=" + year + " AND Honors=FALSE";
         System.out.println("\nCounting number of F's given by this professor in this course");
         Statement countNumA = conn.createStatement();
         ResultSet result = countNumA.executeQuery(query);
@@ -531,7 +528,7 @@ public class DatabaseAPI
         int totalNumA = 0;
         String query = "SELECT SUM(NumA) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
-                courseNum + " AND Professor=\"" + professor + "\"";
+                courseNum + " AND Professor=\"" + professor + "\" AND Honors=FALSE";
         System.out.println("\nCounting number of A's given by this professor in this course");
         Statement countNumA = conn.createStatement();
         ResultSet result = countNumA.executeQuery(query);
@@ -551,7 +548,7 @@ public class DatabaseAPI
         int totalNumA = 0;
         String query = "SELECT SUM(NumA) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
-                courseNum + " AND Professor=\"" + professor + "\"";
+                courseNum + " AND Professor=\"" + professor + "\" AND Honors=FALSE";
         System.out.println("\nCounting number of A's given by this professor in this course");
         Statement countNumA = conn.createStatement();
         ResultSet result = countNumA.executeQuery(query);
@@ -570,7 +567,7 @@ public class DatabaseAPI
         int totalNumB = 0;
         String query = "SELECT SUM(NumB) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
-                courseNum + " AND Professor=\"" + professor + "\"";
+                courseNum + " AND Professor=\"" + professor + "\" AND Honors=FALSE";
         System.out.println("\nCounting number of B's given by this professor in this course");
         Statement countNumA = conn.createStatement();
         ResultSet result = countNumA.executeQuery(query);
@@ -590,7 +587,7 @@ public class DatabaseAPI
         int totalNumB = 0;
         String query = "SELECT SUM(NumB) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
-                courseNum + " AND Professor=\"" + professor + "\"";
+                courseNum + " AND Professor=\"" + professor + "\" AND Honors=FALSE";
         System.out.println("\nCounting number of B's given by this professor in this course");
         Statement countNumA = conn.createStatement();
         ResultSet result = countNumA.executeQuery(query);
@@ -609,7 +606,7 @@ public class DatabaseAPI
         int totalNumC = 0;
         String query = "SELECT SUM(NumC) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
-                courseNum + " AND Professor=\"" + professor + "\"";
+                courseNum + " AND Professor=\"" + professor + "\" AND Honors=FALSE";
         System.out.println("\nCounting number of C's given by this professor in this course");
         Statement countNumC = conn.createStatement();
         ResultSet result = countNumC.executeQuery(query);
@@ -629,7 +626,7 @@ public class DatabaseAPI
         int totalNumC = 0;
         String query = "SELECT SUM(NumC) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
-                courseNum + " AND Professor=\"" + professor + "\"";
+                courseNum + " AND Professor=\"" + professor + "\" AND Honors=FALSE";
         System.out.println("\nCounting number of C's given by this professor in this course");
         Statement countNumC = conn.createStatement();
         ResultSet result = countNumC.executeQuery(query);
@@ -648,7 +645,7 @@ public class DatabaseAPI
         int totalNumD = 0;
         String query = "SELECT SUM(NumD) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
-                courseNum + " AND Professor=\"" + professor + "\"";
+                courseNum + " AND Professor=\"" + professor + "\" AND Honors=FALSE";
         System.out.println("\nCounting number of D's given by this professor in this course");
         Statement countNumD = conn.createStatement();
         ResultSet result = countNumD.executeQuery(query);
@@ -668,7 +665,7 @@ public class DatabaseAPI
         int totalNumD = 0;
         String query = "SELECT SUM(NumD) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
-                courseNum + " AND Professor=\"" + professor + "\"";
+                courseNum + " AND Professor=\"" + professor + "\" AND Honors=FALSE";
         System.out.println("\nCounting number of D's given by this professor in this course");
         Statement countNumD = conn.createStatement();
         ResultSet result = countNumD.executeQuery(query);
@@ -687,7 +684,7 @@ public class DatabaseAPI
         int totalNumF = 0;
         String query = "SELECT SUM(NumF) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
-                courseNum + " AND Professor=\"" + professor + "\"";
+                courseNum + " AND Professor=\"" + professor + "\" AND Honors=FALSE";
         System.out.println("\nCounting number of F's given by this professor in this course");
         Statement countNumF = conn.createStatement();
         ResultSet result = countNumF.executeQuery(query);
@@ -707,7 +704,7 @@ public class DatabaseAPI
         int totalNumF = 0;
         String query = "SELECT SUM(NumF) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
-                courseNum + " AND Professor=\"" + professor + "\"";
+                courseNum + " AND Professor=\"" + professor + "\" AND Honors=FALSE";
         System.out.println("\nCounting number of F's given by this professor in this course");
         Statement countNumF = conn.createStatement();
         ResultSet result = countNumF.executeQuery(query);
@@ -726,7 +723,7 @@ public class DatabaseAPI
         int totalQDrop = 0;
         String query = "SELECT SUM(Num_QDrop) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
-                courseNum + " AND Professor=\"" + professor + "\"";
+                courseNum + " AND Professor=\"" + professor + "\" AND Honors=FALSE";
         System.out.println("\nCounting number of Q Drops given by this professor in this course");
         Statement countQDrop = conn.createStatement();
         ResultSet result = countQDrop.executeQuery(query);
@@ -746,7 +743,7 @@ public class DatabaseAPI
         int totalQDrop = 0;
         String query = "SELECT SUM(Num_QDrop) AS total FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + courseSubject + "\" AND CourseNum=" +
-                courseNum + " AND Professor=\"" + professor + "\"";
+                courseNum + " AND Professor=\"" + professor + "\" AND Honors=FALSE";
         System.out.println("\nCounting number of Q Drops given by this professor in this course");
         Statement countQDrop = conn.createStatement();
         ResultSet result = countQDrop.executeQuery(query);
@@ -829,7 +826,7 @@ public class DatabaseAPI
     {
         String query = "SELECT SUM(Num_QDrop + NumA + NumB + NumC + NumD + NumF) FROM" +
                 " TamuGrades WHERE CourseSubject=\"" + courseSubject + "\" AND CourseNum=" + courseNum +
-                " AND Professor=\"" + professor + "\"";
+                " AND Professor=\"" + professor + "\" AND Honors=FALSE";
         System.out.println("\nCounting number of students this professor has taught");
         Statement getTotalStudents = conn.createStatement();
         ResultSet result = getTotalStudents.executeQuery(query);
@@ -849,7 +846,7 @@ public class DatabaseAPI
     {
         String query = "SELECT SUM(Num_QDrop + NumA + NumB + NumC + NumD + NumF) FROM" +
                 " TamuGrades WHERE CourseSubject=\"" + courseSubject + "\" AND CourseNum=" + courseNum +
-                " AND Professor=\"" + professor + "\"";
+                " AND Professor=\"" + professor + "\"AND Honors=FALSE";
         System.out.println("\nCounting number of students this professor has taught");
         Statement getTotalStudents = conn.createStatement();
         ResultSet result = getTotalStudents.executeQuery(query);
@@ -1140,7 +1137,7 @@ public class DatabaseAPI
         String query = "SELECT professor, NumA, NumB, NumC, NumD, NumF, Num_QDrop, " +
                 "Avg_GPA, Semester_Term, Semester_Year FROM TamuGrades WHERE " +
                 "CourseSubject=\"" + subject + "\" AND CourseNum=" + courseNum + " AND " +
-                "professor=\"" + professor + "\" ORDER BY Semester_Year, Semester_Term DESC";
+                "professor=\"" + professor + "\" AND Honors=false ORDER BY Semester_Year, Semester_Term DESC";
         Statement getRawData = conn.createStatement();
         ResultSet result = getRawData.executeQuery(query);
 
@@ -1182,8 +1179,8 @@ public class DatabaseAPI
     {
         try
         {
-            //FIXME: CHANGE THIS BACK TO TAMURAWDATA FOR USE ON LAPTOP
-            String query = "INSERT INTO TamuGrades " /*TamuRawData*/ + "VALUES (\"" + Subject + "\", " +
+
+            String query = "INSERT INTO TamuGrades VALUES (\"" + Subject + "\", " +
                     courseNum + ", " + sectionNum + ", " + avgGPA + ", \"" + professor + "\", "
                     + numA + ", " + numB + ", " + numC + ", " + numD + ", " + numF
                     + ", " + numQdrop + ", \"" + termSemester + "\", " + termYear + ", " + honors + ") ";
