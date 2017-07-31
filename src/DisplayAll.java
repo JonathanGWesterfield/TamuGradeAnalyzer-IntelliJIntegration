@@ -68,6 +68,7 @@ public class DisplayAll extends Application
             primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
 
             primaryStage.setScene(display.getScene());
+            primaryStage.setTitle("Texas A&M Professor Grade Analyzer");
             primaryStage.show();
 
             //TODO: install proper exit procedure
