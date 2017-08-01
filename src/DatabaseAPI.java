@@ -377,7 +377,8 @@ public class DatabaseAPI
     public ArrayList<String> getCourseProfessors(String courseSubject, int courseNum) throws SQLException
     {
         String query1 = "SELECT DISTINCT Professor FROM TamuGrades WHERE CourseSubject=\""
-                 + courseSubject + "\" AND CourseNum=" + courseNum + " AND Honors=FALSE ORDER BY Professor ASC";
+                 + courseSubject + "\" AND CourseNum=" + courseNum + " AND Honors=FALSE " +
+                "ORDER BY Professor ASC";
         System.out.println("\nLooking for professors of this subject and course");
         Statement getProfessors = conn.createStatement();
         ResultSet result1 = getProfessors.executeQuery(query1);
@@ -432,7 +433,6 @@ public class DatabaseAPI
         }
         return totalNumA;
     }
-    //TODO: MAKE SURE HONORS SCORES ARE NOT INCLUDED!
 
     // gets the number of B's for a class for a certain semester and year
     public int getNumBSem(String courseSubject, int courseNum, String professor,

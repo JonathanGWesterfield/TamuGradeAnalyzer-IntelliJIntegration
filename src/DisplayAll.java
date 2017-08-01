@@ -39,15 +39,10 @@ public class DisplayAll extends Application
     private DropDownList dropList;
     private DisplayData displayData;
     private GradeChart gradeChart;
-    private BackgroundImage backgroundImage;
     private Button generate;
     private LoadScreen screen;
     private DatabaseAPI db;
     private Stage primaryStage;
-
-    private RefreshedDisplay refresh;
-
-
     private GridPane listPane;
     private GridPane grid;
     private Scene scene;
@@ -80,7 +75,6 @@ public class DisplayAll extends Application
 
             this.primaryStage.show();
 
-            //TODO: install proper exit procedure
             //TODO: fix the average GPA label
         }
         catch (FileNotFoundException e)
@@ -100,6 +94,9 @@ public class DisplayAll extends Application
     {
         System.out.println("Default constructor has been called");
     }
+
+
+    //TODO: fix how the DBAPI is called twice in the beginning
 
     // constructor
     public DisplayAll(DatabaseAPI db)
@@ -239,7 +236,6 @@ public class DisplayAll extends Application
         }
     }
 
-
     private void setEmptyDropListPane()
     {
         listPane = new GridPane();
@@ -277,18 +273,4 @@ public class DisplayAll extends Application
         pane.setPadding(new Insets(5, 5, 5, 5));
 
     }
-
-    //Hopefully sets the background image for the application but doesn't
-    // This doesn't work
-    private void setBackground() throws FileNotFoundException
-    {
-        backgroundImage = new BackgroundImage(new Image("resources/No BackGround TAMU Seal.png",
-                32,32,false, true)
-                ,BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
-                BackgroundSize.DEFAULT);
-    }
-
-
-//TODO: change the application ICON
-    //TODO: put the TAMU seal somewhere
 }
