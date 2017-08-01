@@ -43,6 +43,7 @@ public class DisplayAll extends Application
     private Button generate;
     private LoadScreen screen;
     private DatabaseAPI db;
+    private Stage primaryStage;
 
     private RefreshedDisplay refresh;
 
@@ -61,15 +62,23 @@ public class DisplayAll extends Application
     {
         try
         {
+            this.primaryStage = primaryStage;
             DatabaseAPI db = new DatabaseAPI();
             DisplayAll display = new DisplayAll(db);
 
             // Supposedly changes the scene Icon
-            primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
+            this.primaryStage.getIcons().add(new Image(new FileInputStream("resources/Calligraphy J.png")));
 
-            primaryStage.setScene(display.getScene());
-            primaryStage.setTitle("Texas A&M Professor Grade Analyzer");
-            primaryStage.show();
+            this.primaryStage.setScene(display.getScene());
+            this.primaryStage.setTitle("Texas A&M Professor Grade Analyzer");
+
+            this.primaryStage.setOnCloseRequest(e ->
+            {
+                e.consume();
+                exit();
+            });
+
+            this.primaryStage.show();
 
             //TODO: install proper exit procedure
             //TODO: fix the average GPA label
@@ -96,7 +105,7 @@ public class DisplayAll extends Application
     public DisplayAll(DatabaseAPI db)
     {
         this.db = db;
-        setGrid(db);
+        setGrid();
     }
 
     // public getter functions
@@ -117,7 +126,7 @@ public class DisplayAll extends Application
 
     }
 
-    public void setGrid(DatabaseAPI db)
+    public void setGrid()
     {
         try
         {
@@ -126,7 +135,7 @@ public class DisplayAll extends Application
             grid.setHgap(10);
             grid.setPadding(new Insets(5,3,5,3));
 
-            dropList = new DropDownList(db);
+            dropList = new DropDownList(this.db);
 
             setGenerate();
 
@@ -154,6 +163,23 @@ public class DisplayAll extends Application
             e.printStackTrace();
             AlertError.showSQLException();
         }
+    }
+
+    public void exit()
+    {
+        if (!AlertError.confirmExit()) // makes sure user actually wants to quit
+        {
+            System.out.println("Exit aborted");
+            return;
+        }
+
+        this.db = null; // closes connection by destroying the class
+        System.out.println("\n\nDatabase connection in DisplayAll class closed");
+
+        // System.out.println("Database connection not closed");
+
+        System.out.println("Closing application");
+        this.primaryStage.close(); // closes application window
     }
 
     public void refreshScreen()

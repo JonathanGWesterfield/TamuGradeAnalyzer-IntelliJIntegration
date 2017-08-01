@@ -68,6 +68,24 @@ public class AlertError
         }
     }
 
+    public static boolean confirmExit()
+    {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Exit");
+        alert.setHeaderText("Are you sure you want to exit?");
+        alert.setContentText("You don't have any other professors to look at?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     // to be used in any try/catch blocks if a uncovered exception shows up
     // TODO: need to figure out how this code works and how to use it
     public static void showSQLException()
