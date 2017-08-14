@@ -201,7 +201,8 @@ public class DisplayAll extends Application
 
             grid = new GridPane();
 
-            DatabaseAPI newDB = dropList.getReturndbAPI();
+            DatabaseAPI newDB = new DatabaseAPI(dropList.getChosenSubject(), dropList.getChosenCourseNum(),
+                    dropList.getChosenProfessor());
             displayData = new DisplayData(newDB, false);
             gradeChart = new GradeChart(newDB, false);
 

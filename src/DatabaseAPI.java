@@ -19,9 +19,10 @@ import java.io.*;
 
 public class DatabaseAPI
 {
-    private String connectionString = "jdbc:mysql://localhost:8889/TamuData";
-    private String password = "root"; //Chrome11"; // on laptop password is "root"
-    private String username = "root";
+    private String connectionString = "jdbc:mysql://tamudata.cgmm1m5yk0wt.us-east-2." +
+            "rds.amazonaws.com:3306/TamuData";
+    private String password = "TamuDefaultUserHullabaloo2019WHO0P!"; // password for a default user account
+    private String username = "DefaultUser"; // default username
     private Connection conn;
 
     private int numberA;
@@ -48,8 +49,8 @@ public class DatabaseAPI
     
     public static void main(String[] args) {
         String connectionString = "jdbc:mysql://localhost:8889/TamuData";
-        String password = "root";
-        String username = "root";
+        String password = "TamuDefaultUserHullabaloo2019WHO0P!"; // password for a default user account
+        String username = "DefaultUser"; // default username
 
         try
         {
@@ -1234,6 +1235,14 @@ NumA, Numb, NumC, NumD, NumF, Num_QDrop, Semester_Term, Semester_Year, Honors);>
 
 then use the command <COMMIT>
  */
+
+/* This is for putting the constraint on the Amazon RDS database
+BEGIN;
+
+ALTER IGNORE TABLE `TamuData`.`TamuGrades` ADD CONSTRAINT TamuGrades_unique
+UNIQUE (CourseSubject, CourseNum, SectionNum, Avg_GPA, Professor,
+NumA, Numb, NumC, NumD, NumF, Num_QDrop, Semester_Term, Semester_Year, Honors);
+*/
 
 
 // is the code for listing all of the raw data in case I want to use it in a different file

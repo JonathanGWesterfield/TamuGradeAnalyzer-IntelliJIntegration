@@ -355,6 +355,8 @@ public class DropDownList extends Application
 
         this.chosenProfessor = chooseProfessor.getValue();
 
+        /* This and the called function caused 2 database connections to be created
+        which significantly slowed down the information gathering and it was inefficient
         try
         {
             createdbAPIObject();
@@ -369,19 +371,19 @@ public class DropDownList extends Application
         {
             e.printStackTrace();
             AlertError.showClassNotFoundException();
-        }
+        }*/
 
         return;
     }
 
-    public RefreshedDisplay createdbAPIObject() throws SQLException, ClassNotFoundException
+    /*public RefreshedDisplay createdbAPIObject() throws SQLException, ClassNotFoundException
     {
 
         returndbAPI = new DatabaseAPI(chosenSubject, chosenCourseNum, chosenProfessor);
         RefreshedDisplay refreshedDisplay = new RefreshedDisplay(returndbAPI);
         signalChange = true;
         return refreshedDisplay;
-    }
+    }*/
 }
 
 
