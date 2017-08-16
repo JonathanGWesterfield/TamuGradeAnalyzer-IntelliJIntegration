@@ -241,10 +241,10 @@ public class DisplayData extends Application
 
         Label course = new Label("Course:  " + db.getCourseSubject() + " " +
                 db.getCourseNum());
-        course.setFont(new Font("Futura", 18));
+        course.setFont(new Font("Futura", 22));
 
         Label professor = new Label("Professor:  " + db.getProfessor());
-        professor.setFont(new Font("Futura", 18));
+        professor.setFont(new Font("Futura", 22));
 
         info.getChildren().addAll(course, professor);
 
@@ -257,10 +257,10 @@ public class DisplayData extends Application
         info.setPadding(new Insets(15, 15, 15, 15));
 
         Label course = new Label("Course: None Chosen ");
-        course.setFont(new Font("Futura", 18));
+        course.setFont(new Font("Futura", 20));
 
         Label professor = new Label("Professor: None Chosen ");
-        professor.setFont(new Font("Futura", 18));
+        professor.setFont(new Font("Futura", 20));
 
         info.getChildren().addAll(course, professor);
 
@@ -270,7 +270,7 @@ public class DisplayData extends Application
     private void setEmptyAvgGPA()
     {
         avgGPA = new Label("Average GPA: ");
-        avgGPA.setFont(new Font("Futura", 15));
+        avgGPA.setFont(new Font("Futura", 25));
     }
 
     private void setAvgGPA()
@@ -278,6 +278,6 @@ public class DisplayData extends Application
         DecimalFormat df = new DecimalFormat("##.000");
         String localAverage = df.format(db.getAverageGPA());
         avgGPA = new Label("Average GPA: " + localAverage);
-        avgGPA.setFont(new Font("Futura", 15));
+        avgGPA.setFont(new Font("Futura", 25));
     }
 }

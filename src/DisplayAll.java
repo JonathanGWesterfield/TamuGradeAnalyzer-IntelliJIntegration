@@ -106,6 +106,7 @@ public class DisplayAll extends Application
     {
         this.db = db;
         setGrid();
+        setPrimaryStage();
     }
 
     // public getter functions
@@ -124,6 +125,44 @@ public class DisplayAll extends Application
     {
         generate = new Button("Generate Report");
         generate.setOnAction(e -> createNewDBConn());
+    }
+
+    public void showPrimaryStage()
+    {
+        primaryStage.show();
+    }
+
+    private void setPrimaryStage()
+    {
+        try
+        {
+            primaryStage = new Stage(StageStyle.DECORATED);
+            this.primaryStage = primaryStage;
+
+            // Supposedly changes the scene Icon
+            this.primaryStage.getIcons().add(new Image(new FileInputStream(
+                    "resources/Calligraphy J.png")));
+
+            this.primaryStage.setScene(scene);
+            this.primaryStage.setTitle("Texas A&M Professor Grade Analyzer");
+
+            // declares the procedure for the exit button
+            this.primaryStage.setOnCloseRequest(e ->
+            {
+                e.consume();
+                exit();
+            });
+
+            this.primaryStage.show();
+
+            //TODO: fix the average GPA label
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+            AlertError.showImageNotFound();
+        }
+        return;
     }
 
     // sets up the empty scene when it is first opened
@@ -145,18 +184,41 @@ public class DisplayAll extends Application
             screen = new LoadScreen();
             setEmptyDropListPane();
 
+            // sets the vertical and horizontal alignment for the Bar chart
+            GridPane.setHalignment(gradeChart.getBarChart(), HPos.CENTER);
+            GridPane.setValignment(gradeChart.getBarChart(), VPos.CENTER);
             grid.add(gradeChart.getBarChart(),0,3);
+
+            // sets the vertical and horizontal alignment for the Line Chart
+            GridPane.setHalignment(gradeChart.getLineChart(), HPos.CENTER);
+            GridPane.setValignment(gradeChart.getLineChart(), VPos.CENTER);
             grid.add(gradeChart.getLineChart(), 0, 6);
+
             grid.add(displayData.getPercentagesDisplay(),1, 3);
+
+            // tries to set the alignment for the number of A's, B's etc.
+            GridPane.setValignment(displayData.getTotalGrades(), VPos.BOTTOM);
             grid.add(displayData.getTotalGrades(), 1, 6);
-            grid.add(displayData.getAvgGPA(), 1, 4);
+
+            // sets the vertical and horizontal alignment for the GPA average
+            GridPane.setHalignment(displayData.getAvgGPA(), HPos.CENTER);
+            GridPane.setValignment(displayData.getAvgGPA(), VPos.BOTTOM);
+            grid.add(displayData.getAvgGPA(), 1, 3);
+
+            // sets the vertical and horizontal alignment for J image
+            GridPane.setHalignment(screen.getCalligraphyJ(), HPos.CENTER);
+            GridPane.setValignment(screen.getCalligraphyJ(), VPos.CENTER);
             grid.add(screen.getCalligraphyJ(), 3,3);
+
+            // sets the vertical and horizontal alignment for Tamu Seal
+            GridPane.setHalignment(screen.getTamuSeal(), HPos.CENTER);
+            GridPane.setValignment(screen.getTamuSeal(), VPos.CENTER);
             grid.add(screen.getTamuSeal(), 3,6);
 
             pane.setCenter(grid);
             // pane.setBackground(new Background(backgroundImage));
 
-            scene = new Scene(pane, 925, 850);
+            scene = new Scene(pane, 980, 825);
         }
         //TODO: fix runtime exception in the display all after generating report
         catch(SQLException | ClassNotFoundException e)
@@ -181,72 +243,6 @@ public class DisplayAll extends Application
 
         System.out.println("Closing application");
         this.primaryStage.close(); // closes application window
-    }
-
-    public void refreshScreen1()
-    {
-        if(dropList.getChosenSubject() == null)
-        {
-            AlertError.showNeedChooseSubject();
-            return;
-        }
-        else if(dropList.getChosenCourseNum() == 0)
-        {
-            AlertError.showNeedChooseCourseNum();
-            return;
-        }
-        else if(dropList.getChosenProfessor() == null)
-        {
-            AlertError.showNeedChooseProfessor();
-            return;
-        }
-
-        // grid = new GridPane();
-
-        try
-        {
-            DatabaseAPI newDB = new DatabaseAPI(dropList.getChosenSubject(),
-                    dropList.getChosenCourseNum(), dropList.getChosenProfessor());
-
-            // an attempt to clear these fields
-            displayData = null;
-            gradeChart = null;
-
-            displayData = new DisplayData(newDB, false);
-            gradeChart = new GradeChart(newDB, false);
-
-            System.out.println("New Database Connection created");
-            System.out.println("Data for the charts has been updated");
-
-            setDropListPane();
-
-
-            grid.getChildren().clear();
-            grid.add(gradeChart.getBarChart(),0,3);
-            grid.add(gradeChart.getLineChart(), 0, 6);
-            grid.add(displayData.getPercentagesDisplay(),1, 3);
-            grid.add(displayData.getTotalGrades(), 1, 6);
-            grid.add(displayData.getAvgGPA(), 1, 4);
-            // grid.add(generate, 3,0);
-            grid.add(screen.getCalligraphyJ(), 3,3);
-            grid.add(screen.getTamuSeal(), 3,6);
-            pane.setCenter(grid);
-
-            scene = null;
-
-            scene = new Scene(pane, 850, 800);
-
-            return;
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-            AlertError.showSQLException();
-        }
-        catch (ClassNotFoundException e)
-        {
-            e.printStackTrace();
-        }
     }
 
     public void refreshScreen()
@@ -276,7 +272,7 @@ public class DisplayAll extends Application
 
         scene = null;
 
-        scene = new Scene(pane, 850, 800);
+        scene = new Scene(pane, 980, 825);
 
         return;
     }
@@ -288,15 +284,40 @@ public class DisplayAll extends Application
         // TODO: This is the part that actaully takes the longest so put the progress
         // indicator
         grid.getChildren().clear();
+
+        // sets the vertical and horizontal alignment for the Bar chart
+        GridPane.setHalignment(gradeChart.getBarChart(), HPos.CENTER);
+        GridPane.setValignment(gradeChart.getBarChart(), VPos.CENTER);
         grid.add(gradeChart.getBarChart(),0,3);
+
+        // sets the vertical and horizontal alignment for the Line Chart
+        GridPane.setHalignment(gradeChart.getLineChart(), HPos.CENTER);
+        GridPane.setValignment(gradeChart.getLineChart(), VPos.CENTER);
         grid.add(gradeChart.getLineChart(), 0, 6);
+
         grid.add(displayData.getPercentagesDisplay(),1, 3);
+
+        // tries to set the alignment for the number of A's, B's etc.
+        GridPane.setValignment(displayData.getTotalGrades(), VPos.BOTTOM);
         grid.add(displayData.getTotalGrades(), 1, 6);
-        grid.add(displayData.getAvgGPA(), 1, 4);
-        // grid.add(generate, 3,0);
+
+        // sets the vertical and horizontal alignment for the GPA average
+        GridPane.setHalignment(displayData.getAvgGPA(), HPos.CENTER);
+        GridPane.setValignment(displayData.getAvgGPA(), VPos.BOTTOM);
+        grid.add(displayData.getAvgGPA(), 1, 3);
+
+        // sets the vertical and horizontal alignment for J image
+        GridPane.setHalignment(screen.getCalligraphyJ(), HPos.CENTER);
+        GridPane.setValignment(screen.getCalligraphyJ(), VPos.CENTER);
         grid.add(screen.getCalligraphyJ(), 3,3);
+
+        // sets the vertical and horizontal alignment for Tamu Seal
+        GridPane.setHalignment(screen.getTamuSeal(), HPos.CENTER);
+        GridPane.setValignment(screen.getTamuSeal(), VPos.CENTER);
         grid.add(screen.getTamuSeal(), 3,6);
+
         pane.setCenter(grid);
+        // pane.setBackground(new Background(backgroundImage));
 
         return;
     }
@@ -318,7 +339,7 @@ public class DisplayAll extends Application
         updatePane.getChildren().addAll(progress, progresslbl1, progresslbl2);
         updatePane.setAlignment(Pos.CENTER); // centers everything
 
-        Stage taskUpdateStage = new Stage(StageStyle.UNDECORATED);
+        Stage taskUpdateStage = new Stage(StageStyle.TRANSPARENT);
         taskUpdateStage.setScene(new Scene(updatePane));
         taskUpdateStage.show();
 
