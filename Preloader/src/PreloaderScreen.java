@@ -15,6 +15,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.*;
 import java.util.*;
 
@@ -23,6 +25,8 @@ public class PreloaderScreen extends Preloader
     ImageView calligraphyJ;
     ImageView tamuSeal;
     BorderPane pane;
+    StackPane stackPane;
+    Stage stage;
 
 
     public static void main(String[] args)
@@ -32,10 +36,12 @@ public class PreloaderScreen extends Preloader
     @Override public void start(Stage stage)
     {
         PreloaderScreen screen = new PreloaderScreen();
+        screen.showStage();
 
-        Scene scene = new Scene(screen.getPane(), 800, 825);
-        stage.setScene(scene);
-        stage.show();
+        // Scene scene = new Scene(screen.getPane(), 800, 825);
+        // stage.setScene(scene);
+        // stage.initStyle(StageStyle.UNDECORATED);
+        // stage.show();
     }
 
     public PreloaderScreen()
@@ -44,6 +50,8 @@ public class PreloaderScreen extends Preloader
         setCalligraphyJ();
         setTamuSeal();
         setPane();
+        setStackPane();
+        setStage();
     }
 
     public ImageView getCalligraphyJ()
@@ -59,6 +67,11 @@ public class PreloaderScreen extends Preloader
     public BorderPane getPane()
     {
         return pane;
+    }
+
+    public void showStage()
+    {
+        stage.show();
     }
 
     private void setPane()
@@ -113,6 +126,30 @@ public class PreloaderScreen extends Preloader
 
         pane.setMinHeight(300);
         pane.setMinWidth(300);
+    }
+
+    private void setStackPane()
+    {
+        ProgressIndicator progress = new ProgressIndicator();
+        progress.setMaxWidth(200);
+        progress.setMaxHeight(200);
+        progress.setMinHeight(200);
+        progress.setMinWidth(200);
+
+        stackPane = new StackPane();
+        stackPane.setAlignment(Pos.CENTER);
+        stackPane.getChildren().addAll(pane, progress);
+
+        return;
+    }
+
+    private void setStage()
+    {
+        Scene scene = new Scene(stackPane);
+        stage = new Stage(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+
+        return;
     }
 
     private void setCalligraphyJ()

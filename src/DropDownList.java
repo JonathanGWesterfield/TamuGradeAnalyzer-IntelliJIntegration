@@ -244,7 +244,7 @@ public class DropDownList extends Application
         setChooseCourse();
     }
 
-    // store the course numbers from the dbAPIAPI into the combo box list
+    // store the course numbers from the dbAPI into the combo box list
     private void setChooseCourse()
     {
         try

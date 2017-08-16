@@ -19,7 +19,8 @@ import javafx.event.*;
 import javafx.geometry.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
+import javafx.concurrent.*;
+import javax.xml.crypto.Data;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -41,12 +42,13 @@ public class DisplayAll extends Application
     private GradeChart gradeChart;
     private Button generate;
     private LoadScreen screen;
-    private DatabaseAPI db;
+    private static DatabaseAPI db;
     private Stage primaryStage;
     private GridPane listPane;
     private GridPane grid;
     private Scene scene;
     private BorderPane pane;
+    private Stage stage;
 
     public static void main(String[] args)
     {
@@ -57,6 +59,7 @@ public class DisplayAll extends Application
     {
         try
         {
+            stage = primaryStage;
             this.primaryStage = primaryStage;
             DatabaseAPI db = new DatabaseAPI();
             DisplayAll display = new DisplayAll(db);
@@ -116,13 +119,14 @@ public class DisplayAll extends Application
         return generate;
     }
 
+    // sets the action for the generate button
     public void setGenerate()
     {
         generate = new Button("Generate Report");
-        generate.setOnAction(e -> refreshScreen());
-
+        generate.setOnAction(e -> createNewDBConn());
     }
 
+    // sets up the empty scene when it is first opened
     public void setGrid()
     {
         try
@@ -179,34 +183,43 @@ public class DisplayAll extends Application
         this.primaryStage.close(); // closes application window
     }
 
-    public void refreshScreen()
+    public void refreshScreen1()
     {
+        if(dropList.getChosenSubject() == null)
+        {
+            AlertError.showNeedChooseSubject();
+            return;
+        }
+        else if(dropList.getChosenCourseNum() == 0)
+        {
+            AlertError.showNeedChooseCourseNum();
+            return;
+        }
+        else if(dropList.getChosenProfessor() == null)
+        {
+            AlertError.showNeedChooseProfessor();
+            return;
+        }
+
+        // grid = new GridPane();
+
         try
         {
-            if(dropList.getChosenSubject() == null)
-            {
-                AlertError.showNeedChooseSubject();
-                return;
-            }
-            else if(dropList.getChosenCourseNum() == 0)
-            {
-                AlertError.showNeedChooseCourseNum();
-                return;
-            }
-            else if(dropList.getChosenProfessor() == null)
-            {
-                AlertError.showNeedChooseProfessor();
-                return;
-            }
+            DatabaseAPI newDB = new DatabaseAPI(dropList.getChosenSubject(),
+                    dropList.getChosenCourseNum(), dropList.getChosenProfessor());
 
-            grid = new GridPane();
+            // an attempt to clear these fields
+            displayData = null;
+            gradeChart = null;
 
-            DatabaseAPI newDB = new DatabaseAPI(dropList.getChosenSubject(), dropList.getChosenCourseNum(),
-                    dropList.getChosenProfessor());
             displayData = new DisplayData(newDB, false);
             gradeChart = new GradeChart(newDB, false);
 
+            System.out.println("New Database Connection created");
+            System.out.println("Data for the charts has been updated");
+
             setDropListPane();
+
 
             grid.getChildren().clear();
             grid.add(gradeChart.getBarChart(),0,3);
@@ -233,8 +246,140 @@ public class DisplayAll extends Application
         catch (ClassNotFoundException e)
         {
             e.printStackTrace();
-            AlertError.showClassNotFoundException();
         }
+    }
+
+    public void refreshScreen()
+    {
+        if(dropList.getChosenSubject() == null)
+        {
+            AlertError.showNeedChooseSubject();
+            return;
+        }
+        else if(dropList.getChosenCourseNum() == 0)
+        {
+            AlertError.showNeedChooseCourseNum();
+            return;
+        }
+        else if(dropList.getChosenProfessor() == null)
+        {
+            AlertError.showNeedChooseProfessor();
+            return;
+        }
+
+        grid = new GridPane();
+
+        System.out.println("New Database Connection created");
+        System.out.println("Data for the charts has been updated");
+
+        refreshData();
+
+        scene = null;
+
+        scene = new Scene(pane, 850, 800);
+
+        return;
+    }
+
+    public void refreshData()
+    {
+        setDropListPane();
+
+        // TODO: This is the part that actaully takes the longest so put the progress
+        // indicator
+        grid.getChildren().clear();
+        grid.add(gradeChart.getBarChart(),0,3);
+        grid.add(gradeChart.getLineChart(), 0, 6);
+        grid.add(displayData.getPercentagesDisplay(),1, 3);
+        grid.add(displayData.getTotalGrades(), 1, 6);
+        grid.add(displayData.getAvgGPA(), 1, 4);
+        // grid.add(generate, 3,0);
+        grid.add(screen.getCalligraphyJ(), 3,3);
+        grid.add(screen.getTamuSeal(), 3,6);
+        pane.setCenter(grid);
+
+        return;
+    }
+
+    // TODO: figure out how to fix the refresh screen bug
+    private void createNewDBConn()
+    {
+        ProgressIndicator progress = new ProgressIndicator();
+        progress.setMinSize(200, 200);
+        progress.setMaxSize(200, 200);
+
+        Label progresslbl1 = new Label("Currently Generating Report");
+        progresslbl1.setFont(new Font("Futura", 20));
+        Label progresslbl2 = new Label("Please wait shortly");
+        progresslbl2.setFont(new Font("Futura", 20));
+
+        VBox updatePane = new VBox(10);
+        updatePane.setPadding(new Insets(15, 15, 15, 15));
+        updatePane.getChildren().addAll(progress, progresslbl1, progresslbl2);
+        updatePane.setAlignment(Pos.CENTER); // centers everything
+
+        Stage taskUpdateStage = new Stage(StageStyle.UNDECORATED);
+        taskUpdateStage.setScene(new Scene(updatePane));
+        taskUpdateStage.show();
+
+        // creates a separate thread to set all of the new data
+        Task<Void> createnewDB = new Task<Void>()
+        {
+            @Override
+            protected Void call() throws SQLException, ClassNotFoundException
+            {
+                DatabaseAPI newDB = new DatabaseAPI(dropList.getChosenSubject(),
+                        dropList.getChosenCourseNum(), dropList.getChosenProfessor());
+
+                // an attempt to clear these fields
+                displayData = null;
+                gradeChart = null;
+
+                displayData = new DisplayData(newDB, false);
+                gradeChart = new GradeChart(newDB, false);
+
+                return null;
+            }
+        };
+
+        // I think this makes the progress indicator indeterminate?
+        progress.progressProperty().bind(createnewDB.progressProperty());
+
+        taskUpdateStage.show();
+
+        // starts the task that was just created
+        Thread createThread = new Thread(createnewDB);
+        createThread.setDaemon(true);
+        createThread.start();
+
+
+        // for if the connection is created
+        // should just get rid of the progress window
+        createnewDB.setOnSucceeded(new EventHandler<WorkerStateEvent>()
+        {
+            @Override
+            public void handle(WorkerStateEvent event)
+            {
+                taskUpdateStage.hide();
+                // had to put the refresh call here because it wouldn't update
+                // the screen otherwise
+                refreshScreen();
+            }
+        });
+
+        // procedure for if creating the new connection fails
+        // it should quit the application
+        createnewDB.setOnFailed(new EventHandler<WorkerStateEvent>()
+        {
+            @Override
+            public void handle(WorkerStateEvent event)
+            {
+                AlertError.showSQLException();
+                exit();
+            }
+        });
+
+        return;
     }
 
     private void setEmptyDropListPane()

@@ -139,7 +139,6 @@ public class GradeChart extends Application
         final NumberAxis yAxis = new NumberAxis("GPA", 0f, 4f, .25);
 
         xAxis.setLabel("Semester");
-        // yAxis.setLabel("GPA"); redundant line since constructor takes care of this
 
         lineChart = new LineChart<String, Number>(xAxis, yAxis);
 
@@ -153,6 +152,7 @@ public class GradeChart extends Application
         ArrayList<Double> GPAList = db.getPastSemesterGPAs(db.getCourseSubject(), db.getCourseNum(), db.getProfessor());
         ArrayList<String> pastSemesters = db.getPastSemesters(db.getCourseSubject(), db.getCourseNum(), db.getProfessor());
 
+        // goes through all past semesters that aren't zero and puts them on the chart
         for(int i = 0; i < GPAList.size(); i++)
         {
             GPAArray.getData().add(new XYChart.Data(pastSemesters.get(i), GPAList.get(i)));
