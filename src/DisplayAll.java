@@ -120,16 +120,17 @@ public class DisplayAll extends Application
         return generate;
     }
 
+    // public getter for the stage of this class
+    public void showPrimaryStage()
+    {
+        primaryStage.show();
+    }
+
     // sets the action for the generate button
     public void setGenerate()
     {
         generate = new Button("Generate Report");
         generate.setOnAction(e -> createNewDBConn());
-    }
-
-    public void showPrimaryStage()
-    {
-        primaryStage.show();
     }
 
     private void setPrimaryStage()
@@ -153,9 +154,7 @@ public class DisplayAll extends Application
                 exit();
             });
 
-            this.primaryStage.show();
-
-            //TODO: fix the average GPA label
+            // this.primaryStage.show();
         }
         catch (FileNotFoundException e)
         {
