@@ -68,6 +68,21 @@ public class AlertError
         }
     }
 
+    public static void failedToStart()
+    {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error!");
+        alert.setHeaderText("Application failed to start");
+        alert.setContentText("Whoops! Looks like I'm having trouble getting it up. Please make sure " +
+                "that you are connected to the internet and have the latest version of the " +
+                "Java runtime environment (JRE).\n\nThis can be downloaded FOR FREE at " +
+                "http://www.oracle.com/technetwork/java/javase/downloads/index.html");
+
+        System.out.println();
+
+        alert.showAndWait();
+    }
+
     public static boolean confirmExit()
     {
         Alert alert = new Alert(AlertType.CONFIRMATION);

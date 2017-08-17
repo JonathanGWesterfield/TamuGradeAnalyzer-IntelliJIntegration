@@ -3,6 +3,7 @@
  */
 
 import javafx.application.Application;
+import javafx.application.Preloader;
 import javafx.geometry.*;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
@@ -14,6 +15,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.*;
 import java.util.*;
 
@@ -22,6 +25,8 @@ public class LoadScreen extends Application
     ImageView calligraphyJ;
     ImageView tamuSeal;
     BorderPane pane;
+    StackPane stackPane;
+    // Stage stage;
 
 
     public static void main(String[] args)
@@ -31,20 +36,12 @@ public class LoadScreen extends Application
     @Override public void start(Stage stage)
     {
         LoadScreen screen = new LoadScreen();
+        // screen.showStage();
 
-        /*StackPane pane = new StackPane();
-        pane.getChildren().add(box);
-        StackPane.setAlignment(box, Pos.CENTER);*/
-
-        /*BorderPane pane = new BorderPane();
-        pane.setLeft(screen.getCalligraphyJ());
-        BorderPane.setAlignment(screen.getCalligraphyJ(), Pos.CENTER);
-        pane.setRight(screen.getTamuSeal());
-        BorderPane.setAlignment(screen.getTamuSeal(), Pos.CENTER);*/
-
-        Scene scene = new Scene(screen.getPane(), 800, 825);
-        stage.setScene(scene);
-        stage.show();
+        // Scene scene = new Scene(screen.getPane(), 800, 825);
+        // stage.setScene(scene);
+        // stage.initStyle(StageStyle.UNDECORATED);
+        // stage.show();
     }
 
     public LoadScreen()
@@ -53,6 +50,8 @@ public class LoadScreen extends Application
         setCalligraphyJ();
         setTamuSeal();
         setPane();
+        setStackPane();
+        // setStage();
     }
 
     public ImageView getCalligraphyJ()
@@ -69,6 +68,21 @@ public class LoadScreen extends Application
     {
         return pane;
     }
+
+    public StackPane getStackPane()
+    {
+        return stackPane;
+    }
+
+    /*public void showStage()
+    {
+        stage.show();
+    }*/
+
+    /*public void hideStage()
+    {
+        stage.hide();
+    }*/
 
     private void setPane()
     {
@@ -123,6 +137,30 @@ public class LoadScreen extends Application
         pane.setMinHeight(300);
         pane.setMinWidth(300);
     }
+
+    private void setStackPane()
+    {
+        ProgressIndicator progress = new ProgressIndicator();
+        progress.setMaxWidth(200);
+        progress.setMaxHeight(200);
+        progress.setMinHeight(200);
+        progress.setMinWidth(200);
+
+        stackPane = new StackPane();
+        stackPane.setAlignment(Pos.CENTER);
+        stackPane.getChildren().addAll(pane, progress);
+
+        return;
+    }
+
+    /*private void setStage()
+    {
+        Scene scene = new Scene(stackPane);
+        stage = new Stage(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+
+        return;
+    }*/
 
     private void setCalligraphyJ()
     {

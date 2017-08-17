@@ -41,7 +41,7 @@ public class DisplayAll extends Application
     private DisplayData displayData;
     private GradeChart gradeChart;
     private Button generate;
-    private LoadScreen screen;
+    // private LoadScreen screen;
     private static DatabaseAPI db;
     private Stage primaryStage;
     private GridPane listPane;
@@ -49,6 +49,8 @@ public class DisplayAll extends Application
     private Scene scene;
     private BorderPane pane;
     private Stage stage;
+    ImageView calligraphyJ;
+    ImageView tamuSeal;
 
     public static void main(String[] args)
     {
@@ -104,6 +106,8 @@ public class DisplayAll extends Application
     // constructor
     public DisplayAll(DatabaseAPI db)
     {
+        setCalligraphyJ();
+        setTamuSeal();
         this.db = db;
         setGrid();
         setPrimaryStage();
@@ -180,7 +184,7 @@ public class DisplayAll extends Application
 
             displayData = new DisplayData(dropList.getReturndbAPI(), true);
             gradeChart = new GradeChart(dropList.getReturndbAPI(), true);
-            screen = new LoadScreen();
+            // screen = new LoadScreen();
             setEmptyDropListPane();
 
             // sets the vertical and horizontal alignment for the Bar chart
@@ -205,14 +209,14 @@ public class DisplayAll extends Application
             grid.add(displayData.getAvgGPA(), 1, 3);
 
             // sets the vertical and horizontal alignment for J image
-            GridPane.setHalignment(screen.getCalligraphyJ(), HPos.CENTER);
-            GridPane.setValignment(screen.getCalligraphyJ(), VPos.CENTER);
-            grid.add(screen.getCalligraphyJ(), 3,3);
+            GridPane.setHalignment(calligraphyJ, HPos.CENTER);
+            GridPane.setValignment(calligraphyJ, VPos.CENTER);
+            grid.add(calligraphyJ, 3,3);
 
             // sets the vertical and horizontal alignment for Tamu Seal
-            GridPane.setHalignment(screen.getTamuSeal(), HPos.CENTER);
-            GridPane.setValignment(screen.getTamuSeal(), VPos.CENTER);
-            grid.add(screen.getTamuSeal(), 3,6);
+            GridPane.setHalignment(tamuSeal, HPos.CENTER);
+            GridPane.setValignment(tamuSeal, VPos.CENTER);
+            grid.add(tamuSeal, 3,6);
 
             pane.setCenter(grid);
             // pane.setBackground(new Background(backgroundImage));
@@ -251,12 +255,12 @@ public class DisplayAll extends Application
             AlertError.showNeedChooseSubject();
             return;
         }
-        else if(dropList.getChosenCourseNum() == 0)
+        if(dropList.getChosenCourseNum() == 0)
         {
             AlertError.showNeedChooseCourseNum();
             return;
         }
-        else if(dropList.getChosenProfessor() == null)
+        if(dropList.getChosenProfessor() == null)
         {
             AlertError.showNeedChooseProfessor();
             return;
@@ -272,6 +276,8 @@ public class DisplayAll extends Application
         scene = null;
 
         scene = new Scene(pane, 980, 825);
+
+        dropList.setNullChosenProfessor();
 
         return;
     }
@@ -306,14 +312,14 @@ public class DisplayAll extends Application
         grid.add(displayData.getAvgGPA(), 1, 3);
 
         // sets the vertical and horizontal alignment for J image
-        GridPane.setHalignment(screen.getCalligraphyJ(), HPos.CENTER);
-        GridPane.setValignment(screen.getCalligraphyJ(), VPos.CENTER);
-        grid.add(screen.getCalligraphyJ(), 3,3);
+        GridPane.setHalignment(calligraphyJ, HPos.CENTER);
+        GridPane.setValignment(calligraphyJ, VPos.CENTER);
+        grid.add(calligraphyJ, 3,3);
 
         // sets the vertical and horizontal alignment for Tamu Seal
-        GridPane.setHalignment(screen.getTamuSeal(), HPos.CENTER);
-        GridPane.setValignment(screen.getTamuSeal(), VPos.CENTER);
-        grid.add(screen.getTamuSeal(), 3,6);
+        GridPane.setHalignment(tamuSeal, HPos.CENTER);
+        GridPane.setValignment(tamuSeal, VPos.CENTER);
+        grid.add(tamuSeal, 3,6);
 
         pane.setCenter(grid);
         // pane.setBackground(new Background(backgroundImage));
@@ -362,7 +368,7 @@ public class DisplayAll extends Application
             }
         };
 
-        // I think this makes the progress indicator indeterminate?
+        // binds the progress indicator to the task thread
         progress.progressProperty().bind(createnewDB.progressProperty());
 
         taskUpdateStage.show();
@@ -438,5 +444,43 @@ public class DisplayAll extends Application
         pane.setTop(listPane);
         pane.setPadding(new Insets(5, 5, 5, 5));
 
+        return;
+    }
+
+    private void setCalligraphyJ()
+    {
+        try
+        {
+            // simple displays ImageView the image as is
+            calligraphyJ = new ImageView(new Image(new FileInputStream("resources/Calligraphy J.png")));
+            calligraphyJ.setFitWidth(325);
+            calligraphyJ.setFitHeight(325);
+            calligraphyJ.setPreserveRatio(true);
+            calligraphyJ.setSmooth(true);
+            calligraphyJ.setCache(true);
+        }
+        catch(IOException e)
+        {
+            System.err.println("\nProblem loading the Calligraphy J image\n");
+            e.printStackTrace();
+        }
+    }
+
+    private void setTamuSeal()
+    {
+        try
+        {
+            tamuSeal = new ImageView(new Image(new FileInputStream("resources/No Background TAMU Seal.png")));
+            tamuSeal.setFitWidth(325);
+            tamuSeal.setFitHeight(325);
+            tamuSeal.setPreserveRatio(true);
+            tamuSeal.setSmooth(true);
+            tamuSeal.setCache(true);
+        }
+        catch(IOException e)
+        {
+            System.err.println("\nProblem loading the Calligraphy J image\n");
+            e.printStackTrace();
+        }
     }
 }

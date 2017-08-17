@@ -147,6 +147,20 @@ public class DropDownList extends Application
         return signalChange;
     }
 
+    public void setNullChosenSubject()
+    {
+        chosenSubject = null;
+    }
+
+    public void setNullChosenCourseNum()
+    {
+        chosenCourseNum = 0;
+    }
+
+    public void setNullChosenProfessor()
+    {
+        chosenProfessor = null;
+    }
 
     //TODO: make this class return the grid pane or figure out how to use it in another class
 
@@ -201,6 +215,9 @@ public class DropDownList extends Application
         {
             // sets the other lists
             setNullLists();
+            setNullChosenSubject();
+            setNullChosenCourseNum();
+            setNullChosenProfessor();
 
             ObservableList<String> data = FXCollections.observableArrayList();
             ArrayList<String> course = dbAPI.getAllSubjectDistinctList();
@@ -249,6 +266,9 @@ public class DropDownList extends Application
     {
         try
         {
+            setNullChosenCourseNum();
+            setNullChosenProfessor();
+
             chooseCourse.getItems().clear();
 
             ObservableList<Integer> data = FXCollections.observableArrayList();
@@ -307,6 +327,8 @@ public class DropDownList extends Application
     {
         try
         {
+            setNullChosenProfessor();
+
             chooseProfessor.getItems().clear();
 
             ObservableList<String> data = FXCollections.observableArrayList();
