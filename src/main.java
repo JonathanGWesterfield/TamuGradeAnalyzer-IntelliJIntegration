@@ -30,181 +30,24 @@ public class main extends Application
 
 
     protected DisplayAll display;
-    private static DatabaseAPI db;
-
-    ImageView calligraphyJ;
-    ImageView tamuSeal;
-    BorderPane pane;
-    StackPane stackPane;
-    Stage loadScreenStage;
-    Scene loadScene;
-
 
     public static void main(String[] args)
     {
         launch(args);
     }
 
-    /*@Override
-    public void init()
-    {
-        loadScreen = new LoadScreen();
-    }*/
-
     @Override
     public void start(Stage primaryStage)
     {
-        setLoadScreen();
-        setDisplay1();
+        setDisplay();
     }
 
-    // Stage stage;
 
-    public void setLoadScreen()
-    {
-        setCalligraphyJ();
-        setTamuSeal();
-        setPane();
-        setStackPane();
-
-        loadScene = new Scene(stackPane);
-        loadScreenStage = new Stage();
-        loadScreenStage.setScene(loadScene);
-        // setStage();
-    }
-
-    public ImageView getCalligraphyJ()
-    {
-        return calligraphyJ;
-    }
-
-    public ImageView getTamuSeal()
-    {
-        return tamuSeal;
-    }
-
-    public BorderPane getPane()
-    {
-        return pane;
-    }
-
-    public StackPane getStackPane()
-    {
-        return stackPane;
-    }
-
-    private void setPane()
-    {
-        Label name = new Label("Texas A&M Professor Grade Analysis Tool");
-        name.setFont(new Font("Futura", 30));
-
-        HBox title = new HBox(name);
-        title.setAlignment(Pos.CENTER);
-        title.setSpacing(8);
-        title.setPadding(new Insets(8, 8, 8, 8));
-
-
-
-        VBox box = new VBox(calligraphyJ, tamuSeal);
-        box.setAlignment(Pos.CENTER);
-        box.setPadding(new Insets(8, 8, 8, 8));
-        box.setMinHeight(300);
-        box.setMinWidth(300);
-
-        String text = "Written by Jonathan Westerfield";
-        String openSource = "This software is open source. Anyone can take this software and modify ";
-        openSource += "and distribute as they see fit. ";
-        openSource += "But if you do, please credit me.";
-
-        Label writtenBy = new Label(text);
-        writtenBy.setFont(new Font("Futura", 20));
-
-        Label source = new Label(openSource);
-        source.setFont(new Font("Futura", 12));
-
-        Label classYear = new Label("Class of 2019");
-        classYear.setFont(new Font("Futura", 20));
-
-        Label ag = new Label("Redass Ag\n");
-        ag.setFont(new Font("Futura", 20));
-
-        VBox labelBox = new VBox(writtenBy, classYear, ag, source);
-        labelBox.setAlignment(Pos.CENTER);
-        labelBox.setPadding(new Insets(8, 8, 8, 8));
-
-        pane = new BorderPane();
-        BorderPane.setAlignment(title, Pos.CENTER);
-        BorderPane.setMargin(title, new Insets(8, 8, 0, 8));
-        pane.setTop(title);
-        BorderPane.setAlignment(box, Pos.CENTER);
-        BorderPane.setMargin(box, new Insets(8, 8, 8, 8));
-        pane.setCenter(box);
-        BorderPane.setAlignment(writtenBy, Pos.CENTER);
-        BorderPane.setMargin(writtenBy, new Insets(8, 8, 8, 8));
-        pane.setBottom(labelBox);
-
-        pane.setMinHeight(300);
-        pane.setMinWidth(300);
-    }
-
-    private void setStackPane()
-    {
-        ProgressIndicator progress = new ProgressIndicator();
-        progress.setMaxWidth(200);
-        progress.setMaxHeight(200);
-        progress.setMinHeight(200);
-        progress.setMinWidth(200);
-
-        stackPane = new StackPane();
-        stackPane.setAlignment(Pos.CENTER);
-        stackPane.getChildren().addAll(pane, progress);
-
-        return;
-    }
-
-    private void setCalligraphyJ()
-    {
-        try
-        {
-            // simple displays ImageView the image as is
-            calligraphyJ = new ImageView(new Image(new FileInputStream("resources/Calligraphy J.png")));
-            calligraphyJ.setFitWidth(325);
-            calligraphyJ.setFitHeight(325);
-            calligraphyJ.setPreserveRatio(true);
-            calligraphyJ.setSmooth(true);
-            calligraphyJ.setCache(true);
-        }
-        catch(IOException e)
-        {
-            System.err.println("\nProblem loading the Calligraphy J image\n");
-            e.printStackTrace();
-        }
-    }
-
-    private void setTamuSeal()
-    {
-        try
-        {
-            tamuSeal = new ImageView(new Image(new FileInputStream("resources/No Background TAMU Seal.png")));
-            tamuSeal.setFitWidth(325);
-            tamuSeal.setFitHeight(325);
-            tamuSeal.setPreserveRatio(true);
-            tamuSeal.setSmooth(true);
-            tamuSeal.setCache(true);
-        }
-        catch(IOException e)
-        {
-            System.err.println("\nProblem loading the Calligraphy J image\n");
-            e.printStackTrace();
-        }
-    }
-
-    private void setDisplay1()
+    private void setDisplay()
     {
         // sets up the splash screen for the application
-        // loadScreen.showStage();
-
-        loadScreenStage.show();
+        LoadScreen loadScreen = new LoadScreen();
+        loadScreen.showStage();
 
         System.out.println("Attempting the TASK");
 
@@ -216,33 +59,11 @@ public class main extends Application
                 System.out.println("Trying to open up the DB connection");
                 DatabaseAPI db = new DatabaseAPI();
 
+                // makes the splash screen stay up a little longer so they can see my stuff
+                Thread.sleep(2000);
+
                 System.out.println("Successfully created the DatabaseAPI object. Returning");
                 return db;
-
-                /*try
-                {
-                    DatabaseAPI db = new DatabaseAPI();
-                    DisplayAll newDisplay = new DisplayAll(db);
-
-                    return newDisplay;
-                }
-                catch (SQLException e)
-                {
-                    AlertError.showSQLException();
-                    AlertError.failedToStart();
-                }
-                catch (ClassNotFoundException e)
-                {
-                    AlertError.showClassNotFoundException();
-                }*/
-
-                    /* long start = System.currentTimeMillis();
-                    long end = start + 3*1000; // 3 seconds * 1000 ms/sec
-
-                    while (System.currentTimeMillis() < end)
-                    {
-                        continue;
-                    }*/
             }
         };
 
@@ -259,7 +80,7 @@ public class main extends Application
             public void handle(WorkerStateEvent event)
             {
                 // hides the splash screen
-                loadScreenStage.hide();
+                loadScreen.hideStage();
 
                 System.out.print("Was able to hide the splashscreen");
 
@@ -267,11 +88,12 @@ public class main extends Application
                 // loadScreen = null;
 
                 System.out.println("Trying to create the Main Stage");
+
                 display = new DisplayAll(splashScreen.getValue());
 
                 display.showPrimaryStage();
 
-
+                return;
             }
         });
 
@@ -288,22 +110,8 @@ public class main extends Application
                 System.exit(0);
             }
         });
+
         return;
-
-        /*try
-        {
-
-        }
-        catch (SQLException e)
-        {
-            AlertError.showSQLException();
-            AlertError.failedToStart();
-        }
-        catch (ClassNotFoundException e)
-        {
-            AlertError.showClassNotFoundException();
-        }*/
-
     }
 
     // this is useless i think. It doesn't print the stack trace where I need it
@@ -318,8 +126,6 @@ public class main extends Application
                     + "(" + s.getFileName() + ":" + s.getLineNumber() + ")");
         }
     }
-
-
 }
 
 

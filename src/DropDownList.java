@@ -357,6 +357,7 @@ public class DropDownList extends Application
         {
             e.printStackTrace();
             AlertError.showSQLException();
+
         }
     }
 

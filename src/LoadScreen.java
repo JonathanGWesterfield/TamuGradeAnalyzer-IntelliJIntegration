@@ -26,7 +26,7 @@ public class LoadScreen extends Application
     ImageView tamuSeal;
     BorderPane pane;
     StackPane stackPane;
-    // Stage stage;
+    Stage stage;
 
 
     public static void main(String[] args)
@@ -36,12 +36,6 @@ public class LoadScreen extends Application
     @Override public void start(Stage stage)
     {
         LoadScreen screen = new LoadScreen();
-        // screen.showStage();
-
-        // Scene scene = new Scene(screen.getPane(), 800, 825);
-        // stage.setScene(scene);
-        // stage.initStyle(StageStyle.UNDECORATED);
-        // stage.show();
     }
 
     public LoadScreen()
@@ -51,7 +45,7 @@ public class LoadScreen extends Application
         setTamuSeal();
         setPane();
         setStackPane();
-        // setStage();
+        setStage();
     }
 
     public ImageView getCalligraphyJ()
@@ -74,15 +68,15 @@ public class LoadScreen extends Application
         return stackPane;
     }
 
-    /*public void showStage()
+    public void showStage()
     {
         stage.show();
-    }*/
+    }
 
-    /*public void hideStage()
+    public void hideStage()
     {
         stage.hide();
-    }*/
+    }
 
     private void setPane()
     {
@@ -93,8 +87,6 @@ public class LoadScreen extends Application
         title.setAlignment(Pos.CENTER);
         title.setSpacing(8);
         title.setPadding(new Insets(8, 8, 8, 8));
-
-
 
         VBox box = new VBox(calligraphyJ, tamuSeal);
         box.setAlignment(Pos.CENTER);
@@ -153,14 +145,14 @@ public class LoadScreen extends Application
         return;
     }
 
-    /*private void setStage()
+    private void setStage()
     {
         Scene scene = new Scene(stackPane);
         stage = new Stage(StageStyle.UNDECORATED);
         stage.setScene(scene);
 
         return;
-    }*/
+    }
 
     private void setCalligraphyJ()
     {
@@ -177,6 +169,7 @@ public class LoadScreen extends Application
         catch(IOException e)
         {
             System.err.println("\nProblem loading the Calligraphy J image\n");
+            AlertError.showImageNotFound();
             e.printStackTrace();
         }
     }
@@ -195,10 +188,9 @@ public class LoadScreen extends Application
         catch(IOException e)
         {
             System.err.println("\nProblem loading the Calligraphy J image\n");
+            AlertError.showImageNotFound();
             e.printStackTrace();
         }
     }
-
-
 }
 

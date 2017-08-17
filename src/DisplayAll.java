@@ -41,16 +41,15 @@ public class DisplayAll extends Application
     private DisplayData displayData;
     private GradeChart gradeChart;
     private Button generate;
-    // private LoadScreen screen;
-    private static DatabaseAPI db;
+    private DatabaseAPI db;
     private Stage primaryStage;
     private GridPane listPane;
     private GridPane grid;
     private Scene scene;
     private BorderPane pane;
     private Stage stage;
-    ImageView calligraphyJ;
-    ImageView tamuSeal;
+    private ImageView calligraphyJ;
+    private ImageView tamuSeal;
 
     public static void main(String[] args)
     {
@@ -79,8 +78,6 @@ public class DisplayAll extends Application
             });
 
             this.primaryStage.show();
-
-            //TODO: fix the average GPA label
         }
         catch (FileNotFoundException e)
         {
@@ -99,7 +96,6 @@ public class DisplayAll extends Application
     {
         System.out.println("Default constructor has been called");
     }
-
 
     //TODO: fix how the DBAPI is called twice in the beginning
 
@@ -157,8 +153,6 @@ public class DisplayAll extends Application
                 e.consume();
                 exit();
             });
-
-            // this.primaryStage.show();
         }
         catch (FileNotFoundException e)
         {
@@ -250,22 +244,6 @@ public class DisplayAll extends Application
 
     public void refreshScreen()
     {
-        if(dropList.getChosenSubject() == null)
-        {
-            AlertError.showNeedChooseSubject();
-            return;
-        }
-        if(dropList.getChosenCourseNum() == 0)
-        {
-            AlertError.showNeedChooseCourseNum();
-            return;
-        }
-        if(dropList.getChosenProfessor() == null)
-        {
-            AlertError.showNeedChooseProfessor();
-            return;
-        }
-
         grid = new GridPane();
 
         System.out.println("New Database Connection created");
@@ -327,9 +305,25 @@ public class DisplayAll extends Application
         return;
     }
 
-    // TODO: figure out how to fix the refresh screen bug
     private void createNewDBConn()
     {
+        // makes sure there are no mistakes to save time
+        if(dropList.getChosenSubject() == null)
+        {
+            AlertError.showNeedChooseSubject();
+            return;
+        }
+        if(dropList.getChosenCourseNum() == 0)
+        {
+            AlertError.showNeedChooseCourseNum();
+            return;
+        }
+        if(dropList.getChosenProfessor() == null)
+        {
+            AlertError.showNeedChooseProfessor();
+            return;
+        }
+
         ProgressIndicator progress = new ProgressIndicator();
         progress.setMinSize(200, 200);
         progress.setMaxSize(200, 200);
@@ -408,6 +402,7 @@ public class DisplayAll extends Application
         return;
     }
 
+    // for when the application is first started
     private void setEmptyDropListPane()
     {
         listPane = new GridPane();
@@ -462,6 +457,7 @@ public class DisplayAll extends Application
         catch(IOException e)
         {
             System.err.println("\nProblem loading the Calligraphy J image\n");
+            AlertError.showImageNotFound();
             e.printStackTrace();
         }
     }
@@ -480,6 +476,7 @@ public class DisplayAll extends Application
         catch(IOException e)
         {
             System.err.println("\nProblem loading the Calligraphy J image\n");
+            AlertError.showImageNotFound();
             e.printStackTrace();
         }
     }

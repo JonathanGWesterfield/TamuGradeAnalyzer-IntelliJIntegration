@@ -28,7 +28,8 @@ public class AlertError
         {
             alert.setHeaderText("Subject Not Found");
             alert.setContentText("The Subject that you tried to enter was either mispelled or " +
-                    "does not exist. Please try again.");
+                    "does not exist.\n\nMake sure you type the subject in ALL CAPS with " +
+                    "no spaces.\n\nPlease try again.");
         }
         else if(choice == 2)
         {
@@ -91,18 +92,15 @@ public class AlertError
         alert.setContentText("You don't have any other professors to look at?");
 
         Optional<ButtonType> result = alert.showAndWait();
+
         if (result.get() == ButtonType.OK)
-        {
             return true;
-        }
         else
-        {
             return false;
-        }
+
     }
 
     // to be used in any try/catch blocks if a uncovered exception shows up
-    // TODO: need to figure out how this code works and how to use it
     public static void showSQLException()
     {
         Alert alert = new Alert(AlertType.ERROR);
@@ -221,6 +219,8 @@ public class AlertError
         alert.setHeaderText("Subject Not Chosen");
         alert.setContentText("You Need to choose a Subject, Course Number and Professor." +
                 " Try again.");
+
+        alert.showAndWait();
     }
 
     public static void showNeedChooseCourseNum()
@@ -230,6 +230,8 @@ public class AlertError
         alert.setHeaderText("Course Number Not Chosen");
         alert.setContentText("You Need to choose a Course Number and Professor." +
                 " Try again.");
+
+        alert.showAndWait();
     }
 
     public static void showNeedChooseProfessor()
@@ -238,6 +240,8 @@ public class AlertError
         alert.setTitle("Error!");
         alert.setHeaderText("Professor Not Chosen");
         alert.setContentText("You Need to choose a Professor. Try again.");
+
+        alert.showAndWait();
     }
 
 }
