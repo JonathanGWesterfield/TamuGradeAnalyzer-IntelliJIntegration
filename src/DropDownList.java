@@ -38,8 +38,6 @@ public class DropDownList extends Application
     private ComboBox<Integer> chooseCourse;
     private ComboBox<String> chooseProfessor;
 
-    // this is to let the other classes know to update and get rid of their empty null functions
-    private boolean signalChange = false;
     private String chosenSubject;
     private int chosenCourseNum;
     private String chosenProfessor;
@@ -80,8 +78,7 @@ public class DropDownList extends Application
         }
     }
 
-    //TODO: comment the hell out of this class
-
+    /** Empty default constructor for pleasing Java */
     public DropDownList()
     {
         // empty default constructor
@@ -142,11 +139,6 @@ public class DropDownList extends Application
         return returndbAPI;
     }
 
-    public boolean getSignalChange()
-    {
-        return signalChange;
-    }
-
     public void setNullChosenSubject()
     {
         chosenSubject = null;
@@ -161,8 +153,6 @@ public class DropDownList extends Application
     {
         chosenProfessor = null;
     }
-
-    //TODO: make this class return the grid pane or figure out how to use it in another class
 
     // sets the lists for the initial state when nothing is entered
     private void setNullLists()
@@ -309,6 +299,10 @@ public class DropDownList extends Application
             // simply changing the subject or having empty fields
             if(chooseCourse.getValue() != null)
             {
+                /** This is now redundant because the check is in the main class.
+                 * Also, becauase this droplist is not editable, there can't be
+                 * a case where the user chooses and option that doesn't exist.
+                 */
                 System.err.println("Incorrect Choice was: " + chooseCourse.getValue());
                 AlertError.choiceNotFound(2);
                 return;
@@ -333,7 +327,7 @@ public class DropDownList extends Application
 
             ObservableList<String> data = FXCollections.observableArrayList();
 
-            //setting static subject and course for testing
+            // setting static subject and course for testing
             // ArrayList<String> profList = dbAPI.getCourseProfessors("CSCE", 121);
 
             ArrayList<String> profList = dbAPI.getCourseProfessors(chosenSubject, chosenCourseNum);
@@ -357,7 +351,6 @@ public class DropDownList extends Application
         {
             e.printStackTrace();
             AlertError.showSQLException();
-
         }
     }
 
@@ -365,8 +358,10 @@ public class DropDownList extends Application
     {
         if(!chooseProfessor.getItems().contains(chooseProfessor.getValue()))
         {
-            // a check to make sure the error message doesn't pop up when
-            // simply changing the subject or having empty fields
+            /** This is now redundant because the check is in the main class.
+             * Also, becauase this droplist is not editable, there can't be
+             * a case where the user chooses and option that doesn't exist.
+             */
             if(chooseProfessor.getValue() != null)
             {
                 System.err.println("Incorrect Choice was: " + chooseProfessor.getValue());
@@ -378,35 +373,8 @@ public class DropDownList extends Application
 
         this.chosenProfessor = chooseProfessor.getValue();
 
-        /* This and the called function caused 2 database connections to be created
-        which significantly slowed down the information gathering and it was inefficient
-        try
-        {
-            createdbAPIObject();
-            return;
-        }
-        catch(SQLException e)
-        {
-            e.printStackTrace();
-            AlertError.showSQLException();
-        }
-        catch(ClassNotFoundException e)
-        {
-            e.printStackTrace();
-            AlertError.showClassNotFoundException();
-        }*/
-
         return;
     }
-
-    /*public RefreshedDisplay createdbAPIObject() throws SQLException, ClassNotFoundException
-    {
-
-        returndbAPI = new DatabaseAPI(chosenSubject, chosenCourseNum, chosenProfessor);
-        RefreshedDisplay refreshedDisplay = new RefreshedDisplay(returndbAPI);
-        signalChange = true;
-        return refreshedDisplay;
-    }*/
 }
 
 

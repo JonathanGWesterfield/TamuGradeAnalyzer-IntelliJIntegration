@@ -25,10 +25,12 @@ import java.io.*;
 import java.sql.SQLException;
 import java.util.*;
 
+/** This is the main class that loads up the splashScreen for a couple seconds to confirm the
+ * database connection and also loads up the DisplayAll class which houses the main application
+ */
+
 public class main extends Application
 {
-
-
     protected DisplayAll display;
 
     public static void main(String[] args)
