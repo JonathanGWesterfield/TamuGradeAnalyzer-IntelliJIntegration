@@ -10,14 +10,19 @@ import java.util.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
 
+/**
+ * This entire class is a collection of error messages that can be used anywhere else in this
+ * library. They are all static functions so there is no need for a constructor or a declaration
+ * of the AlertError object in any other class.
+ */
 public class AlertError
 {
 
-    public AlertError()
-    {
-        // default constructor
-    }
-
+    /**
+     * This is for when the user enters a choice in a combo box for the DropDownList class.
+     * This will tell the user what is missing so they can choose their course properly.
+     * @param choice
+     */
     public static void choiceNotFound(int choice)
     {
         Alert alert = new Alert(AlertType.ERROR);
@@ -31,6 +36,11 @@ public class AlertError
                     "does not exist.\n\nMake sure you type the subject in ALL CAPS with " +
                     "no spaces.\n\nPlease try again.");
         }
+        /**
+         * The choices after choice == 1 are unnecessary since only the Subject drop down list
+         * in the DropDownList class has the possibility of a user entering an incorrect choice.
+         * But I'm leaving this here because it doesn't hurt anything. Maybe it will change later.
+         */
         else if(choice == 2)
         {
             alert.setHeaderText("Course Number Not Found");
@@ -46,29 +56,13 @@ public class AlertError
 
         System.out.println();
 
-
         alert.showAndWait();
     }
 
-    //TODO: set this up once the other components are set up to tell the user how to use the software
-    public void showUsageInstructions(int instructionNum)
-    {
-        //TODO: use the information dialog below to set it up
-
-        /*
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("I have a great message for you!");
-
-        alert.showAndWait();
-         */
-        if(instructionNum == 0)
-        {
-
-        }
-    }
-
+    /**
+     * The error for the splash screen in the main function. This alert is for when the application
+     * cannot startup normally. It will tell the user that the application cannot start
+     */
     public static void failedToStart()
     {
         Alert alert = new Alert(AlertType.ERROR);
@@ -101,6 +95,12 @@ public class AlertError
     }
 
     // to be used in any try/catch blocks if a uncovered exception shows up
+
+    /**
+     * Creates a window that will show up if there is a SQL exception. However the code can
+     * be used with any exception. It will create a pop up window that will detail what the
+     * exception is and print out the stack trace in that pop up window.
+     */
     public static void showSQLException()
     {
         Alert alert = new Alert(AlertType.ERROR);
@@ -138,6 +138,11 @@ public class AlertError
         alert.showAndWait();
     }
 
+    /**
+     * An alert to let the user know that the image that is being looked for has not been found.
+     * This is to be used in catch blocks that throw and ImageNotFound FileIO exception. This
+     * also prints out the stack trace.
+     */
     public static void showImageNotFound()
     {
         Alert alert = new Alert(AlertType.ERROR);
@@ -175,6 +180,12 @@ public class AlertError
         alert.showAndWait();
     }
 
+    /**
+     * Creates a window that will show up if there is a ClassNotFound exception.
+     * However the code can be used with any exception. It will create a pop up
+     * window that will detail what the exception is and print out the stack trace
+     * in the pop up window.
+     */
     public static void showClassNotFoundException()
     {
         Alert alert = new Alert(AlertType.ERROR);
@@ -212,6 +223,11 @@ public class AlertError
         alert.showAndWait();
     }
 
+    /**
+     * Error for if the user has not chosen a subject before clicking the 'Generate Report'
+     * button, which means he has not chosen a course number or professor as well.
+     * This error tells the user this so they can choose their course correctly.
+     */
     public static void showNeedChooseSubject()
     {
         Alert alert = new Alert(AlertType.ERROR);
@@ -223,6 +239,11 @@ public class AlertError
         alert.showAndWait();
     }
 
+    /**
+     * Error for if the user has not chosen a Course number before clicking the 'Generate Report'
+     * button, which means he has not chosen a professor as well. This error tells the
+     * user this so they can choose their course correctly.
+     */
     public static void showNeedChooseCourseNum()
     {
         Alert alert = new Alert(AlertType.ERROR);
@@ -234,6 +255,10 @@ public class AlertError
         alert.showAndWait();
     }
 
+    /**
+     * Error for if the user has not chosen a professor before clicking the 'Generate Report'
+     * button. This error tells that this so they can choose their course correctly.
+     */
     public static void showNeedChooseProfessor()
     {
         Alert alert = new Alert(AlertType.ERROR);
@@ -244,6 +269,13 @@ public class AlertError
         alert.showAndWait();
     }
 
+    /**
+     * This error is for if the user has input the search parameters for the course correctly, but
+     * there seems to have been some error after the clicked the 'Generate Report' button. This
+     * error pops up if the task thread in the DisplayAll class fails. The most likely cause for
+     * this would be if their internet connection was suddenly lost, meaning the database
+     * connection would also be broken.
+     */
     public static void failedToGenerateReport()
     {
         Alert alert = new Alert(AlertType.ERROR);
