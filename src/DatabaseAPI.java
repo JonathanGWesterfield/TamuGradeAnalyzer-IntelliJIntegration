@@ -46,7 +46,8 @@ public class DatabaseAPI
     String courseSubject;
     int courseNum;
     String professor;
-    
+
+    /** Main function for testing the class*/
     public static void main(String[] args) {
         String connectionString = "jdbc:mysql://localhost:8889/TamuData";
         String password = "TamuDefaultUserHullabaloo2019WHO0P!"; // password for a default user account
@@ -98,9 +99,10 @@ public class DatabaseAPI
                     System.out.print(rawData.get(i) + " ");
             }
 
-            double avgGPA = db.getAvgGPA("CSCE", 121, "MOORE");*/
-            // db.getNumASem("CSCE", 121, "MOORE", "fall", 2012);
-            // db.getPastSemesterGPAs("CSCE", 121, "MOORE");
+            double avgGPA = db.getAvgGPA("CSCE", 121, "MOORE");
+            db.getNumASem("CSCE", 121, "MOORE", "fall", 2012);
+            db.getPastSemesterGPAs("CSCE", 121, "MOORE"); */
+
             db.closeDBConn();
         }
         catch(SQLException e)
@@ -119,11 +121,9 @@ public class DatabaseAPI
         this.conn = DriverManager.getConnection(connectionString, username, password);
         System.out.println("Database connection established");
 
-        // sets the subject
+        // gets all the subjects for the initial app startup
         getAllSubjectDistinct();
     }
-
-
 
     // constructor that will get all of the info
     DatabaseAPI(String courseSubject, int courseNum, String professor) throws SQLException, ClassNotFoundException
@@ -136,9 +136,7 @@ public class DatabaseAPI
         this.courseNum = courseNum;
         this.professor = professor;
 
-        // create all of the data for the class
-
-        // getAllSubjectDistinct();
+        // create all of the data for the class for the given professor
         getTotalNumStudentsTaught();
         getNumA();
         getNumB();
@@ -156,7 +154,7 @@ public class DatabaseAPI
         getPercentF();
         getPercentQDrops();
 
-         // closes because it won't be used anymore after this
+        getTotalNumStudentsTaught();
     }
 
     public void createDBConn() throws SQLException, ClassNotFoundException
@@ -166,7 +164,6 @@ public class DatabaseAPI
         System.out.println("Database connection established");
         return;
     }
-
 
     //getter functions for all of the data members
     public int getNumberA()
@@ -259,7 +256,12 @@ public class DatabaseAPI
         return subjects;
     }
 
-    /* returns an arraylist of all subjects in database in alphabetical order*/
+    /** Manipuates the 'subject' arraylist data member and stores all of the
+     * subjects in the database in it in alphabetical order.
+     * This is the function that is used for the other classes
+     *
+     * @throws SQLException
+     */
     private void getAllSubjectDistinct() throws SQLException
     {
         String query1 = "SELECT DISTINCT CourseSubject FROM TamuGrades ORDER BY CourseSubject ASC";
@@ -296,6 +298,11 @@ public class DatabaseAPI
         this.subjects = allSubjects;
     }
 
+    /** returns an arraylist of all subjects in database in alphabetical order.
+     *
+     * @return allSubjects which is an arraylist of all of the subjects in the database
+     * @throws SQLException
+     */
     public ArrayList<String> getAllSubjectDistinctList() throws SQLException
     {
         String query1 = "SELECT DISTINCT CourseSubject FROM TamuGrades ORDER BY CourseSubject ASC";
@@ -333,7 +340,12 @@ public class DatabaseAPI
         return allSubjects;
     }
 
-    //returns an arraylist of all course numbers under a specific subject
+    /** returns an arraylist of all course numbers under a specific subject
+     *
+     * @param courseSubject
+     * @return allCourseNums which are all of the courseNumbers for that subject
+     * @throws SQLException
+     */
     public ArrayList<Integer> getAllCourseNumDistinct(String courseSubject) throws SQLException
     {
         String query1 = "SELECT DISTINCT CourseNum FROM TamuGrades " +
@@ -374,7 +386,13 @@ public class DatabaseAPI
         return allCourseNums;
     }
 
-    // Returns an arraylist of the professors in alphabetical order
+    /** Returns an arraylist of the professors in alphabetical order
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @return allCourseProfessors which are all of the professors listed for this course
+     * @throws SQLException
+     */
     public ArrayList<String> getCourseProfessors(String courseSubject, int courseNum) throws SQLException
     {
         String query1 = "SELECT DISTINCT Professor FROM TamuGrades WHERE CourseSubject=\""
@@ -413,7 +431,16 @@ public class DatabaseAPI
         return allCourseProfessors;
     }
 
-    // gets the number of A's for a class for a certain semester and year
+    /** gets the number of A's for a class for a certain semester and year
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @param term
+     * @param year
+     * @return totalNumA which is the number of A's for that semester
+     * @throws SQLException
+     */
     public int getNumASem(String courseSubject, int courseNum, String professor,
                           String term, int year) throws SQLException
     {
@@ -435,7 +462,16 @@ public class DatabaseAPI
         return totalNumA;
     }
 
-    // gets the number of B's for a class for a certain semester and year
+    /** gets the number of B's for a class for a certain semester and year
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @param term
+     * @param year
+     * @return totalNumB which is the number of B's for that semester
+     * @throws SQLException
+     */
     public int getNumBSem(String courseSubject, int courseNum, String professor,
                           String term, int year) throws SQLException
     {
@@ -457,7 +493,16 @@ public class DatabaseAPI
         return totalNumB;
     }
 
-    // gets the number of C's for a class for a certain semester and year
+    /** gets the number of C's for a class for a certain semester and year
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @param term
+     * @param year
+     * @return totalNumC which is the number of C's for that semester
+     * @throws SQLException
+     */
     public int getNumCSem(String courseSubject, int courseNum, String professor,
                           String term, int year) throws SQLException
     {
@@ -479,7 +524,16 @@ public class DatabaseAPI
         return totalNumC;
     }
 
-    // gets the number of D's for a class for a certain semester and year
+    /** gets the number of D's for a class for a certain semester and year
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @param term
+     * @param year
+     * @return totalNumD which is the number of D's for that semester
+     * @throws SQLException
+     */
     public int getNumDSem(String courseSubject, int courseNum, String professor,
                           String term, int year) throws SQLException
     {
@@ -500,9 +554,17 @@ public class DatabaseAPI
         }
         return totalNumD;
     }
-    //TODO: Fix the bug that interrupts after trying to get the number of F's for a Sem
 
-    // gets the number of F's for a class for a certain semester and year
+    /** gets the number of F's for a class for a certain semester and year
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @param term
+     * @param year
+     * @return totalNumF which is the number of F's for that semester
+     * @throws SQLException
+     */
     public int getNumFSem(String courseSubject, int courseNum, String professor,
                           String term, int year) throws SQLException
     {
@@ -524,6 +586,8 @@ public class DatabaseAPI
         return totalNumF;
     }
 
+    /** counts total number of A's given by a professor in a specific subject and course number.
+     * This is the main function used by the other classes */
     private void getNumA() throws SQLException
     {
         int totalNumA = 0;
@@ -543,7 +607,16 @@ public class DatabaseAPI
         this.numberA = totalNumA;
     }
 
-    // counts total number of A's given by a professor in a specific subject and course number
+    /** counts total number of A's given by a professor in a specific subject and course number.
+     * However, this one is just in case I need a random SQL query and can't re-setup the class
+     *
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return totalNumA which is the number of A's for the course
+     * @throws SQLException
+     */
     public int getNumA(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumA = 0;
@@ -562,7 +635,8 @@ public class DatabaseAPI
         return totalNumA;
     }
 
-    // counts total number of B's given by a professor in a specific subject and course number
+    /** counts total number of B's given by a professor in a specific subject and course number.
+     * This is the main function used by the other classes */
     private void getNumB() throws SQLException
     {
         int totalNumB = 0;
@@ -582,7 +656,16 @@ public class DatabaseAPI
         this.numberB = totalNumB;
     }
 
-    // counts total number of B's given by a professor in a specific subject and course number
+    /** counts total number of B's given by a professor in a specific subject and course number.
+     * However, this one is just in case I need a random SQL query and can't re-setup the class
+     *
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return totalNumB which is the number of B's for the course
+     * @throws SQLException
+     */
     public int getNumB(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumB = 0;
@@ -601,7 +684,8 @@ public class DatabaseAPI
         return totalNumB;
     }
 
-    // counts total number of C's given by a professor in a specific subject and course number
+    /** counts total number of C's given by a professor in a specific subject and course number.
+     * This is the main function used by the other classes */
     private void getNumC() throws SQLException
     {
         int totalNumC = 0;
@@ -621,7 +705,16 @@ public class DatabaseAPI
         this.numberC = totalNumC;
     }
 
-    // counts total number of C's given by a professor in a specific subject and course number
+    /** counts total number of C's given by a professor in a specific subject and course number.
+     * However, this one is just in case I need a random SQL query and can't re-setup the class
+     *
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return totalNumC which is the number of C's for the course
+     * @throws SQLException
+     */
     public int getNumC(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumC = 0;
@@ -640,7 +733,8 @@ public class DatabaseAPI
         return totalNumC;
     }
 
-    // counts total number of D's given by a professor in a specific subject and course number
+    /** counts total number of D's given by a professor in a specific subject and course number.
+     * This is the main function used by the other classes */
     private void getNumD() throws SQLException
     {
         int totalNumD = 0;
@@ -660,7 +754,16 @@ public class DatabaseAPI
         this.numberD = totalNumD;
     }
 
-    // counts total number of D's given by a professor in a specific subject and course number
+    /** counts total number of D's given by a professor in a specific subject and course number.
+     * However, this one is just in case I need a random SQL query and can't re-setup the class
+     *
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return totalNumD which is the number of D's for the course
+     * @throws SQLException
+     */
     public int getNumD(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumD = 0;
@@ -679,7 +782,12 @@ public class DatabaseAPI
         return totalNumD;
     }
 
-    // counts total number of D's given by a professor in a specific subject and course number
+    /** counts total number of F's given by a professor in a specific subject and course number.
+     * Stores it in the numberF data member
+     * This is the main function used by the other classes
+     *
+     * @throws SQLException
+     */
     private void getNumF() throws SQLException
     {
         int totalNumF = 0;
@@ -699,7 +807,16 @@ public class DatabaseAPI
         this.numberF = totalNumF;
     }
 
-    // counts total number of D's given by a professor in a specific subject and course number
+    /** counts total number of F's given by a professor in a specific subject and course number.
+     * However, this one is just in case I need a random SQL query and can't re-setup the class
+     *
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return totalNumF which is the number of F's for the course
+     * @throws SQLException
+     */
     public int getNumF(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalNumF = 0;
@@ -718,7 +835,11 @@ public class DatabaseAPI
         return totalNumF;
     }
 
-    // counts total number of QDrops given by a professor in a specific subject and course number
+    /** counts total number of Q Drops given by a professor in a specific subject and course number.
+     * This is the main function used by the other classes
+     *
+     * @throws SQLException
+     */
     private void getNumQDrop() throws SQLException
     {
         int totalQDrop = 0;
@@ -738,7 +859,15 @@ public class DatabaseAPI
         this.numberQ = totalQDrop;
     }
 
-    // counts total number of QDrops given by a professor in a specific subject and course number
+    /** counts total number of Q Drops given by a professor in a specific subject and course number.
+     * However, this one is just in case I need a random SQL query and can't re-setup the class
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return totalQDrop
+     * @throws SQLException
+     */
     public int getNumQDrop(String courseSubject, int courseNum, String professor) throws SQLException
     {
         int totalQDrop = 0;
@@ -757,7 +886,10 @@ public class DatabaseAPI
         return totalQDrop;
     }
 
-    // calculates the average GPA for the professor of this subject and course
+    /** calculates the average GPA for the professor of this subject and course
+     *
+     * @throws SQLException
+     */
     private void getAvgGPA() throws SQLException
     {
         //gets the total number of A's, B's, etc. for this professor
@@ -789,15 +921,23 @@ public class DatabaseAPI
         averageGPA = totalPoints;
     }
 
-    // calculates the average GPA for the professor of this subject and course
+    /** calculates the average GPA for the professor of this subject and course independently
+     * of the this class.
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return totalPoints which is the average GPA
+     * @throws SQLException
+     */
     public double getAvgGPA(String courseSubject, int courseNum, String professor) throws SQLException
     {
         //gets the total number of A's, B's, etc. for this professor
-        int numA = numberA;
-        int numB = numberB;
-        int numC = numberC;
-        int numD = numberD;
-        int numF = numberF;
+        int numA = getNumA(courseSubject, courseNum, professor);
+        int numB = getNumB(courseSubject, courseNum, professor);
+        int numC = getNumC(courseSubject, courseNum, professor);
+        int numD = getNumD(courseSubject, courseNum, professor);
+        int numF = getNumF(courseSubject, courseNum, professor);
         int total = numA + numB + numC + numD + numF;
 
         // weights the numbers
@@ -823,25 +963,29 @@ public class DatabaseAPI
         return totalPoints;
     }
 
-    private void getTotalNumStudentsTaught() throws SQLException
+    /** Counts the number of students a Professor has taught for a particular course
+     * Uses the private data members that already exist when the class is created
+     */
+    private void getTotalNumStudentsTaught()
     {
-        String query = "SELECT SUM(Num_QDrop + NumA + NumB + NumC + NumD + NumF) FROM" +
-                " TamuGrades WHERE CourseSubject=\"" + courseSubject + "\" AND CourseNum=" + courseNum +
-                " AND Professor=\"" + professor + "\" AND Honors=FALSE";
-        System.out.println("\nCounting number of students this professor has taught");
-        Statement getTotalStudents = conn.createStatement();
-        ResultSet result = getTotalStudents.executeQuery(query);
 
-        int totalStudents = 0;
-        while(result.next())
-        {
-            totalStudents = result.getInt(1);
-            System.out.println("The total number of students this professor has taught is " + totalStudents);
-        }
+        System.out.println("\nCounting number of students this professor has taught");
+
+        int totalStudents = numberA + numberB + numberC + numberD + numberF + numberQ;
 
         this.totalNumStudents = totalStudents;
     }
 
+    /** Counts the number of students a Professor has taught for a particular course.
+     * Is used independently of the class in case I it would be best not to re-setup the class.
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return totalStudents which is the total number of students this professor has taught
+     *          for this course
+     * @throws SQLException
+     */
     public int getTotalNumStudentsTaught(String courseSubject, int courseNum,
                                          String professor) throws SQLException
     {
@@ -862,6 +1006,12 @@ public class DatabaseAPI
         return totalStudents;
     }
 
+    /**
+     * Calculates the percentage of A's given in this course using the private data members
+     * calculated when the class is initialized. The main function used for other classes
+     *
+     * @throws SQLException
+     */
     //uses data in class to get percentage of A's
     private void getPercentA() throws SQLException
     {
@@ -873,7 +1023,15 @@ public class DatabaseAPI
         this.percentageA = ((numA / total) * 100);
     }
 
-    // Calculates the percentage of A's given by a teacher
+    /**
+     * Calculates the percentage of A's given by a teacher
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return percentage of A's (double)
+     * @throws SQLException
+     */
     public double getPercentA(String courseSubject, int courseNum, String professor) throws SQLException
     {
         double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
@@ -884,7 +1042,12 @@ public class DatabaseAPI
         return ((numA / total) * 100);
     }
 
-    // Calculates the percentage of B's given by a teacher
+    /**
+     * Calculates the percentage of B's given in this course using the private data members
+     * calculated when the class is initialized. The main function used for other classes
+     *
+     * @throws SQLException
+     */
     private void getPercentB() throws SQLException
     {
         double total = totalNumStudents;
@@ -895,7 +1058,15 @@ public class DatabaseAPI
         this.percentageB = ((numB / total) * 100);
     }
 
-    // Calculates the percentage of B's given by a teacher
+    /**
+     * Calculates the percentage of B's given by a teacher
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return percentage of B's (double)
+     * @throws SQLException
+     */
     public double getPercentB(String courseSubject, int courseNum, String professor) throws SQLException
     {
         double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
@@ -906,7 +1077,12 @@ public class DatabaseAPI
         return ((numB / total) * 100);
     }
 
-    // Calculates the percentage of C's given by a teacher
+    /**
+     * Calculates the percentage of C's given in this course using the private data members
+     * calculated when the class is initialized. The main function used for other classes
+     *
+     * @throws SQLException
+     */
     private void getPercentC() throws SQLException
     {
         double total = totalNumStudents;
@@ -917,7 +1093,15 @@ public class DatabaseAPI
         this.percentageC = ((numC / total) * 100);
     }
 
-    // Calculates the percentage of C's given by a teacher
+    /**
+     * Calculates the percentage of C's given by a teacher
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return percentage of C's (double)
+     * @throws SQLException
+     */
     public double getPercentC(String courseSubject, int courseNum, String professor) throws SQLException
     {
         double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
@@ -928,7 +1112,12 @@ public class DatabaseAPI
         return ((numC / total) * 100);
     }
 
-    // Calculates the percentage of D's given by a teacher
+    /**
+     * Calculates the percentage of D's given in this course using the private data members
+     * calculated when the class is initialized. The main function used for other classes
+     *
+     * @throws SQLException
+     */
     private void getPercentD() throws SQLException
     {
         double total = totalNumStudents;
@@ -939,7 +1128,15 @@ public class DatabaseAPI
         this.percentageD = ((numD / total) * 100);
     }
 
-    // Calculates the percentage of D's given by a teacher
+    /**
+     * Calculates the percentage of D's given by a teacher
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return percentage of D's (double)
+     * @throws SQLException
+     */
     public double getPercentD(String courseSubject, int courseNum, String professor) throws SQLException
     {
         double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
@@ -950,7 +1147,12 @@ public class DatabaseAPI
         return ((numD / total) * 100);
     }
 
-    // Calculates the percentage of F's given by a teacher
+    /**
+     * Calculates the percentage of F's given in this course using the private data members
+     * calculated when the class is initialized. The main function used for other classes
+     *
+     * @throws SQLException
+     */
     private void getPercentF() throws SQLException
     {
         double total = totalNumStudents;
@@ -961,7 +1163,15 @@ public class DatabaseAPI
         this.percentageF = ((numF / total) * 100);
     }
 
-    // Calculates the percentage of F's given by a teacher
+    /**
+     * Calculates the percentage of F's given by a teacher
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return percentage of F's (double)
+     * @throws SQLException
+     */
     public double getPercentF(String courseSubject, int courseNum, String professor) throws SQLException
     {
         double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
@@ -972,7 +1182,12 @@ public class DatabaseAPI
         return ((numF / total) * 100);
     }
 
-    // Calculates the percentage of Q Drops for a teacher
+    /**
+     * Calculates the percentage of Q Drops given in this course using the private data members
+     * calculated when the class is initialized. The main function used for other classes
+     *
+     * @throws SQLException
+     */
     private void getPercentQDrops() throws SQLException
     {
         double total = totalNumStudents;
@@ -983,7 +1198,15 @@ public class DatabaseAPI
         this.percentageQ = ((numQDrops / total) * 100);
     }
 
-    // Calculates the percentage of Q Drops for a teacher
+    /**
+     * Calculates the percentage of Q Drops given by a teacher
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return percentage of Q Drops (double)
+     * @throws SQLException
+     */
     public double getPercentQDrops(String courseSubject, int courseNum, String professor) throws SQLException
     {
         double total = getTotalNumStudentsTaught(courseSubject, courseNum, professor);
@@ -994,8 +1217,19 @@ public class DatabaseAPI
         return ((numQDrops / total) * 100);
     }
 
-    // If there is no result for a year, the function just returns zero
-    // calculates the average GPA for a class for a specific semester
+    /**
+     *
+     * If there is no result for a year, the function just returns zero
+     * Calculates the average GPA for a class for a specific semester
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @param term
+     * @param year
+     * @return
+     * @throws SQLException
+     */
     public double getAvgGPASem(String courseSubject, int courseNum, String professor,
                                String term, int year) throws SQLException
     {
@@ -1038,8 +1272,15 @@ public class DatabaseAPI
         return totalPoints;
     }
 
-    // returns an array of the average GPAs for the last 5 years. Is sized accordingly in case a
-    // professor has taught for less than 5 years
+    /**
+     * returns an array of the average GPAs for the last 5 years. Is sized accordingly in case a
+     * professor has taught for less than 5 years
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<Double> getPastSemesterGPAs(String courseSubject, int courseNum, String professor)
             throws SQLException
     {
@@ -1076,6 +1317,16 @@ public class DatabaseAPI
     }
 
     // gets the semester terms to match the output of the getPastSemesterGPAs function
+
+    /**
+     * gets the semester terms to match the output of the getPastSemesterGPAs function
+     *
+     * @param courseSubject
+     * @param courseNum
+     * @param professor
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<String> getPastSemesters(String courseSubject, int courseNum, String professor)
             throws SQLException
     {
@@ -1111,8 +1362,16 @@ public class DatabaseAPI
         return semesterList;
     }
 
-    // Counts the number of semesters a professor has taught a class for a specific subject
-    // and specific course number
+    /**
+     * Counts the number of semesters a professor has taught a class for a specific subject
+     * and specific course number
+     *
+     * @param subject
+     * @param courseNum
+     * @param professor
+     * @return
+     * @throws SQLException
+     */
     public int getNumSemestersTaught(String subject, int courseNum, String professor) throws SQLException
     {
         String query = "SELECT COUNT(DISTINCT Semester_Term, Semester_Year) FROM " +
@@ -1133,6 +1392,16 @@ public class DatabaseAPI
         return totalSemestersTaught;
     }
 
+    /**
+     * Gets the raw data from the table and returns it in an arraylist in case I want to
+     * display the raw data for the user to view in a non-editable java table
+     *
+     * @param subject
+     * @param courseNum
+     * @param professor
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<String> getProfRawData(String subject, int courseNum, String professor) throws SQLException
     {
         String query = "SELECT professor, NumA, NumB, NumC, NumD, NumF, Num_QDrop, " +
@@ -1173,7 +1442,26 @@ public class DatabaseAPI
         return data;
     }
 
-    //inserts all of the information given into the database table
+    /**
+     * Inserts all of the information given into the database table.
+     * This is now unnecessary since all of the insert functionality has been moved to the
+     * TamuGradeAnalyzer-Insert project
+     *
+     * @param Subject
+     * @param courseNum
+     * @param sectionNum
+     * @param avgGPA
+     * @param professor
+     * @param numA
+     * @param numB
+     * @param numC
+     * @param numD
+     * @param numF
+     * @param numQdrop
+     * @param termSemester
+     * @param termYear
+     * @param honors
+     */
     public void insert(String Subject, int courseNum, int sectionNum, Double avgGPA,
                        String professor, int numA, int numB, int numC, int numD, int numF, int numQdrop,
                        String termSemester, int termYear, boolean honors) // throws java.sql.SQLException
@@ -1226,7 +1514,7 @@ public class DatabaseAPI
     }
 
 }
-/*What is needed make the database on the laptop CONSTRAINT so that duplicate rows aren't added is:
+/**What is needed make the database on the laptop CONSTRAINT so that duplicate rows aren't added is:
 <BEGIN;
 
 ALTER IGNORE TABLE TamuGrades ADD CONSTRAINT TamuGrades_unique
@@ -1236,7 +1524,7 @@ NumA, Numb, NumC, NumD, NumF, Num_QDrop, Semester_Term, Semester_Year, Honors);>
 then use the command <COMMIT>
  */
 
-/* This is for putting the constraint on the Amazon RDS database
+/** This is for putting the constraint on the Amazon RDS database
 BEGIN;
 
 ALTER IGNORE TABLE `TamuData`.`TamuGrades` ADD CONSTRAINT TamuGrades_unique
@@ -1246,7 +1534,7 @@ NumA, Numb, NumC, NumD, NumF, Num_QDrop, Semester_Term, Semester_Year, Honors);
 
 
 // is the code for listing all of the raw data in case I want to use it in a different file
-/* ArrayList<String> rawData = db.getProfRawData("CSCE", 121, "MOORE");
+/** ArrayList<String> rawData = db.getProfRawData("CSCE", 121, "MOORE");
             for(int i = 0; i < rawData.size(); i++)
             {
                 if(i % 10 == 0)

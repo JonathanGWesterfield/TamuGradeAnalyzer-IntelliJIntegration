@@ -32,6 +32,11 @@ public class GradeChart extends Application
         launch(args);
     }
 
+    /**
+     * main function for testing
+     *
+     * @param primaryStage
+     */
     @Override public void start(Stage primaryStage)
     {
         try
@@ -64,14 +69,24 @@ public class GradeChart extends Application
         }
     }
 
-    //TODO: Possibly add a raw data function using a read only function
+    /**
+     * Default empty constructor
+     */
     public GradeChart()
     {
         // default empty constructor
     }
 
-    //WARNING: using the wrong boolean value may result in a nullpointer exception
-    // constructor for this class the takes in all the data
+    /**
+     * WARNING: using the wrong boolean value may result in a nullpointer exception.
+     * Constructor for this class the takes in all the data from the DatabaseAPI object that
+     * is passed in and constructs a corresponding graph and chart with the data.
+     *
+     * @param db
+     * @param isempty
+     * @throws SQLException
+     * @throws ClassNotFoundException
+     */
     public GradeChart(DatabaseAPI db, boolean isempty) throws SQLException, ClassNotFoundException
     {
         if(isempty)
@@ -87,7 +102,13 @@ public class GradeChart extends Application
 
     }
 
-    // class getters
+    // class getter
+
+    /**
+     * class Getter functions: getLineChart, getBarChart
+     *
+     * @return
+     */
     public LineChart<String, Number> getLineChart()
     {
         return lineChart;
@@ -98,6 +119,10 @@ public class GradeChart extends Application
         return barChart;
     }
 
+    /**
+     * Sets up an empty line chart for when the DatabaseAPI object doesn't have a specific
+     * courses information
+     */
     private void setEmptyLineAvgGPA()
     {
         final CategoryAxis xAxis = new CategoryAxis();
@@ -133,6 +158,13 @@ public class GradeChart extends Application
         return;
     }
 
+    /**
+     * Uses the information from the DatabaseAPI object that is passed in and constructs a
+     * line graph with all of the GPA for the past 10 semester or however many are in the database
+     * for that particular teacher.
+     *
+     * @throws SQLException
+     */
     private void setLineAvgGPA() throws SQLException
     {
         final CategoryAxis xAxis = new CategoryAxis();
@@ -177,6 +209,10 @@ public class GradeChart extends Application
         return;
     }
 
+    /**
+     * Creates the empty bar chart for the percentages of A's, B's, etc. Is empty because the
+     * DatabaseAPI object has not specified what course to analyze.
+     */
     private void setbarChart()
     {
         final String numA = "A";
@@ -236,10 +272,15 @@ public class GradeChart extends Application
         return;
     }
 
-    // also add the passing percentage of the class
+    //
 
-    // Would probably work best if the barchart was 350x350
-    // creates a bar chart with the percentage of A's, B's, C's etc.
+    /**
+     * Would probably work best if the barchart was 350x350.
+     * Creates a bar chart with the percentage of A's, B's, C's etc for this professor since
+     * that professor started teaching this course.
+     *
+     * @throws SQLException
+     */
     private void setGradeBarChart() throws SQLException
     {
         final String numA = "A";
@@ -299,20 +340,10 @@ public class GradeChart extends Application
         return;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
     /* This code was to put the value of the data over the bars of the bar graph
-        but it generates a nullpointerexception
+        but it generates a nullpointerexception and I couldn't figure out how to make it work.
+
+        It would be nice if this worked.
 
     private static void displayLabelForData(XYChart.Data<String, Number> data)
     {

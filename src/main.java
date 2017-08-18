@@ -86,8 +86,7 @@ public class main extends Application
 
                 System.out.print("Was able to hide the splashscreen");
 
-                // should free up the space and process for the progress indicator
-                // loadScreen = null;
+                //Loadscreen will go out of scope once function ends so it saves memory
 
                 System.out.println("Trying to create the Main Stage");
 

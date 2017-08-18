@@ -244,4 +244,18 @@ public class AlertError
         alert.showAndWait();
     }
 
+    public static void failedToGenerateReport()
+    {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle("Error!");
+        alert.setHeaderText("Failed to Generate Report");
+        alert.setContentText("Whoops! Looks like I'm having trouble getting it up. Please make sure " +
+                "that you are connected to the internet. You may have lost the connection. " +
+                "Please restart the application after you have done so.");
+
+        System.out.println();
+
+        alert.showAndWait();
+    }
+
 }

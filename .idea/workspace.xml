@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a35f547-0a74-4c71-9349-327ef0987db3" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Preloader/Preloader.iml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Preloader/src/PreloaderScreen.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Preloader/src/PreloaderThread.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/Preloader/src/main.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/AlertError.java" afterPath="$PROJECT_DIR$/src/AlertError.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DatabaseAPI.java" afterPath="$PROJECT_DIR$/src/DatabaseAPI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DisplayAll.java" afterPath="$PROJECT_DIR$/src/DisplayAll.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DisplayData.java" afterPath="$PROJECT_DIR$/src/DisplayData.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/DropDownList.java" afterPath="$PROJECT_DIR$/src/DropDownList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GradeChart.java" afterPath="$PROJECT_DIR$/src/GradeChart.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.java" afterPath="$PROJECT_DIR$/src/main.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -26,25 +36,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DisplayAll.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/DisplayAll.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#11004#11611#0" expanded="true" />
-                <element signature="e#11610#11611#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="28" column="95" lean-forward="false" selection-start-line="28" selection-start-column="95" selection-end-line="28" selection-end-column="95" />
+            <state relative-caret-position="679">
+              <caret line="88" column="87" lean-forward="false" selection-start-line="88" selection-start-column="87" selection-end-line="88" selection-end-column="87" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1120#1121#0" expanded="true" />
@@ -56,11 +52,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DropDownList.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DropDownList.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DropDownList.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="39" column="4" lean-forward="false" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
+            <state relative-caret-position="570">
+              <caret line="393" column="50" lean-forward="false" selection-start-line="393" selection-start-column="50" selection-end-line="393" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GradeChart.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/GradeChart.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="706">
+              <caret line="344" column="8" lean-forward="false" selection-start-line="344" selection-start-column="8" selection-end-line="344" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -69,8 +75,8 @@
       <file leaf-file-name="AlertError.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/AlertError.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1306">
-              <caret line="243" column="28" lean-forward="false" selection-start-line="243" selection-start-column="28" selection-end-line="243" selection-end-column="28" />
+            <state relative-caret-position="1126">
+              <caret line="250" column="54" lean-forward="false" selection-start-line="250" selection-start-column="54" selection-end-line="250" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -79,8 +85,8 @@
       <file leaf-file-name="DatabaseAPI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DatabaseAPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="245">
-              <caret line="62" column="33" lean-forward="false" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="33" />
+            <state relative-caret-position="13801">
+              <caret line="1536" column="3" lean-forward="false" selection-start-line="1536" selection-start-column="3" selection-end-line="1536" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -145,8 +151,8 @@
       <find>display</find>
       <find>setNullChosenProfessorNum</find>
       <find>LoadScreen</find>
-      <find>SQLException e</find>
       <find>LoadScreen</find>
+      <find>SQLException e</find>
     </findStrings>
     <replaceStrings>
       <replace>db.getProfessor()</replace>
@@ -158,8 +164,8 @@
       <replace>barChart</replace>
       <replace>PreloaderScreen</replace>
       <replace>LoadScreen</replace>
-      <replace>setNullChosenProfessor</replace>
       <replace>mainStage</replace>
+      <replace>setNullChosenProfessor</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -192,19 +198,19 @@
         <option value="$PROJECT_DIR$/src/RefreshedDisplay.java" />
         <option value="$PROJECT_DIR$/Preloader/src/LoadScreen.java" />
         <option value="$PROJECT_DIR$/Preloader/src/main.java" />
-        <option value="$PROJECT_DIR$/src/DatabaseAPI.java" />
-        <option value="$PROJECT_DIR$/src/GradeChart.java" />
         <option value="$PROJECT_DIR$/src/StripAndInsert.java" />
         <option value="$PROJECT_DIR$/Preloader/src/PreloaderScreen.java" />
-        <option value="$PROJECT_DIR$/src/DisplayData.java" />
         <option value="$PROJECT_DIR$/Preloader/src/PreloaderThread.java" />
         <option value="$PROJECT_DIR$/src/GenerateDBConn.java" />
         <option value="$PROJECT_DIR$/src/PreloaderThread.java" />
         <option value="$PROJECT_DIR$/src/LoadScreen.java" />
+        <option value="$PROJECT_DIR$/src/DatabaseAPI.java" />
         <option value="$PROJECT_DIR$/src/AlertError.java" />
-        <option value="$PROJECT_DIR$/src/DisplayAll.java" />
         <option value="$PROJECT_DIR$/src/main.java" />
+        <option value="$PROJECT_DIR$/src/DisplayAll.java" />
+        <option value="$PROJECT_DIR$/src/DisplayData.java" />
         <option value="$PROJECT_DIR$/src/DropDownList.java" />
+        <option value="$PROJECT_DIR$/src/GradeChart.java" />
       </list>
     </option>
   </component>
@@ -293,20 +299,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="GradePDFs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tame Grade Distro Analyzer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="TamuGradeAnalyzer-IntelliJIntegration" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Preloader" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -822,7 +814,7 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20874861" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20874861" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32945737" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.251938" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -897,18 +889,18 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/DatabaseAPI.java</url>
-          <line>371</line>
+          <line>383</line>
           <properties class="DatabaseAPI" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/DropDownList.java</url>
-          <line>54</line>
+          <line>53</line>
           <properties />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/DropDownList.java</url>
-          <line>56</line>
+          <line>55</line>
           <properties />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
@@ -1122,14 +1114,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GradeChart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="154" column="86" lean-forward="false" selection-start-line="154" selection-start-column="86" selection-end-line="154" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/RefreshedDisplay.java" />
     <entry file="file://$PROJECT_DIR$/Preloader/src/PreloaderScreen.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1143,14 +1127,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="5" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DisplayData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="897">
-          <caret line="262" column="47" lean-forward="false" selection-start-line="262" selection-start-column="47" selection-end-line="262" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -1196,36 +1172,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DatabaseAPI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="62" column="33" lean-forward="false" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="33" />
+        <state relative-caret-position="13801">
+          <caret line="1536" column="3" lean-forward="false" selection-start-line="1536" selection-start-column="3" selection-end-line="1536" selection-end-column="3" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AlertError.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1306">
-          <caret line="243" column="28" lean-forward="false" selection-start-line="243" selection-start-column="28" selection-end-line="243" selection-end-column="28" />
+        <state relative-caret-position="1126">
+          <caret line="250" column="54" lean-forward="false" selection-start-line="250" selection-start-column="54" selection-end-line="250" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DisplayData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1126">
+          <caret line="321" column="67" lean-forward="false" selection-start-line="321" selection-start-column="67" selection-end-line="321" selection-end-column="67" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DisplayAll.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="961">
+          <caret line="517" column="23" lean-forward="false" selection-start-line="517" selection-start-column="23" selection-end-line="517" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#11004#11611#0" expanded="true" />
-            <element signature="e#11610#11611#0" expanded="true" />
+            <element signature="e#12204#12811#0" expanded="true" />
+            <element signature="e#12810#12811#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="28" column="95" lean-forward="false" selection-start-line="28" selection-start-column="95" selection-end-line="28" selection-end-column="95" />
+        <state relative-caret-position="679">
+          <caret line="88" column="87" lean-forward="false" selection-start-line="88" selection-start-column="87" selection-end-line="88" selection-end-column="87" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1120#1121#0" expanded="true" />
@@ -1238,8 +1222,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DropDownList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="39" column="4" lean-forward="false" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
+        <state relative-caret-position="570">
+          <caret line="393" column="50" lean-forward="false" selection-start-line="393" selection-start-column="50" selection-end-line="393" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GradeChart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="706">
+          <caret line="344" column="8" lean-forward="false" selection-start-line="344" selection-start-column="8" selection-end-line="344" selection-end-column="8" />
           <folding />
         </state>
       </provider>

@@ -56,6 +56,11 @@ public class DisplayAll extends Application
         launch(args);
     }
 
+    /**
+     * Main function for testing
+     *
+     * @param primaryStage
+     */
     @Override public void start(Stage primaryStage)
     {
         try
@@ -91,7 +96,6 @@ public class DisplayAll extends Application
         }
     }
 
-    // default constructor
     public DisplayAll()
     {
         System.out.println("Default constructor has been called");
@@ -99,7 +103,11 @@ public class DisplayAll extends Application
 
     //TODO: fix how the DBAPI is called twice in the beginning
 
-    // constructor
+    /**
+     * Constructor sets up the grid and creates the stage to be used by another class
+     *
+     * @param db
+     */
     public DisplayAll(DatabaseAPI db)
     {
         setCalligraphyJ();
@@ -109,7 +117,11 @@ public class DisplayAll extends Application
         setPrimaryStage();
     }
 
-    // public getter functions
+    /**
+     * public getter functions
+     *
+     * @return
+     */
     public Scene getScene()
     {
         return scene;
@@ -120,19 +132,27 @@ public class DisplayAll extends Application
         return generate;
     }
 
-    // public getter for the stage of this class
+    /**
+     * Public getter for the stage of this class
+     */
     public void showPrimaryStage()
     {
         primaryStage.show();
     }
 
-    // sets the action for the generate button
+    /**
+     * sets the action event for the generate button
+     */
     public void setGenerate()
     {
         generate = new Button("Generate Report");
         generate.setOnAction(e -> createNewDBConn());
     }
 
+    /**
+     * Sets up the primary stage to be used by the other classes.
+     * Holds all of the components of this class on the primaryStage
+     */
     private void setPrimaryStage()
     {
         try
@@ -162,7 +182,9 @@ public class DisplayAll extends Application
         return;
     }
 
-    // sets up the empty scene when it is first opened
+    /**
+     * Sets up the empty scene when it is first opened
+     */
     public void setGrid()
     {
         try
@@ -176,8 +198,8 @@ public class DisplayAll extends Application
 
             setGenerate();
 
-            displayData = new DisplayData(dropList.getReturndbAPI(), true);
-            gradeChart = new GradeChart(dropList.getReturndbAPI(), true);
+            displayData = new DisplayData(this.db, true);
+            gradeChart = new GradeChart(this.db, true);
             // screen = new LoadScreen();
             setEmptyDropListPane();
 
@@ -218,6 +240,9 @@ public class DisplayAll extends Application
             scene = new Scene(pane, 980, 825);
         }
         //TODO: fix runtime exception in the display all after generating report
+        /** I'm not fixing the runtime exception because there doesn't seem to be a way
+         * that I can see to fix it. Luckily, it doesn't impact the performance or
+         * reliability of the application. Oh well. */
         catch(SQLException | ClassNotFoundException e)
         {
             e.printStackTrace();
@@ -225,6 +250,9 @@ public class DisplayAll extends Application
         }
     }
 
+    /**
+     * Sets the exit procedure for the application (which is the primaryStage of this class.
+     */
     public void exit()
     {
         if (!AlertError.confirmExit()) // makes sure user actually wants to quit
@@ -242,6 +270,10 @@ public class DisplayAll extends Application
         this.primaryStage.close(); // closes application window
     }
 
+    /**
+     * The action event for the generate button. Calls the refreshData function to set up
+     * the Gridpane to be used.
+     */
     public void refreshScreen()
     {
         grid = new GridPane();
@@ -260,12 +292,14 @@ public class DisplayAll extends Application
         return;
     }
 
+    /**
+     * Sets up the Gridpane with the update data using the new Database connection
+     */
     public void refreshData()
     {
         setDropListPane();
 
-        // TODO: This is the part that actaully takes the longest so put the progress
-        // indicator
+        // clears the grid to avoid any issues with populating the gridpane
         grid.getChildren().clear();
 
         // sets the vertical and horizontal alignment for the Bar chart
@@ -305,6 +339,12 @@ public class DisplayAll extends Application
         return;
     }
 
+    /**
+     * Uses a task to create the new Database connection using the DatabaseAPI class.
+     * Updates the GradeChart and DisplayData class objects.
+     * It uses this task to do this and also put up a progress indicator to show that the
+     * results are being generated.
+     */
     private void createNewDBConn()
     {
         // makes sure there are no mistakes to save time
@@ -395,14 +435,18 @@ public class DisplayAll extends Application
             public void handle(WorkerStateEvent event)
             {
                 AlertError.showSQLException();
-                exit();
+                AlertError.failedToGenerateReport();
+                System.exit(0);
             }
         });
 
         return;
     }
 
-    // for when the application is first started
+    /**
+     * For when the application is first started. Sets up the empty droplist using
+     * the DropDownList class object and the generate button
+     */
     private void setEmptyDropListPane()
     {
         listPane = new GridPane();
@@ -422,6 +466,9 @@ public class DisplayAll extends Application
         pane.setPadding(new Insets(5, 5, 5, 5));
     }
 
+    /**
+     * Sets up the pane after the database object has been updated.
+     */
     private void setDropListPane()
     {
         listPane.getChildren().clear();
@@ -442,6 +489,10 @@ public class DisplayAll extends Application
         return;
     }
 
+    /**
+     * Sets up the image viewer for the calligraphyJ image and stores it in the
+     * classes CalligraphyJ data memeber
+     */
     private void setCalligraphyJ()
     {
         try
@@ -462,6 +513,10 @@ public class DisplayAll extends Application
         }
     }
 
+    /**
+     * Sets up the image viewer for the Tamu Seal image and stores it in the
+     * classes tamuSeal data memeber
+     */
     private void setTamuSeal()
     {
         try

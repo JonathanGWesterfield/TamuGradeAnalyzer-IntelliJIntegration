@@ -28,12 +28,8 @@ import java.util.Scanner;
 public class DropDownList extends Application
 {
     private DatabaseAPI dbAPI;
-    private DatabaseAPI returndbAPI;
-    GridPane allLists;
-    // Scene scene;
 
     private ComboBox<String> chooseSubject;
-    // private ObservableList<String> subjectData;
 
     private ComboBox<Integer> chooseCourse;
     private ComboBox<String> chooseProfessor;
@@ -48,6 +44,9 @@ public class DropDownList extends Application
     }
 
 
+    /**
+     * A main function for testing
+     */
     @Override public void start(Stage primaryStage)
     {
         try
@@ -78,13 +77,22 @@ public class DropDownList extends Application
         }
     }
 
-    /** Empty default constructor for pleasing Java */
+    /**
+     * Empty default constructor for pleasing Java
+     */
     public DropDownList()
     {
         // empty default constructor
         System.err.println("\nEmpty Default Constructor Called.\nNothing Happening\n\n");
     }
 
+    /**
+     * Class constructor sets up the empty dropdown lists, sets all of the datamembers to null
+     * (for checking purposes in the DisplayAll class) and jumps straight into the
+     * chooseSubject function so that the subject for analysis can be chosen.
+     *
+     * @param db
+     */
     public DropDownList(DatabaseAPI db)
     {
         this.dbAPI = db;
@@ -100,10 +108,15 @@ public class DropDownList extends Application
         setNullLists();
 
         setChooseSubject();
-
-        // setAllLists();
     }
 
+    /**
+     * Class getter functions for getChooseSubject, getChooseCourse, get ChooseProfessor,
+     * getChosenSubject, get ChosenCourseNum, getChosenProfessor, setNullChosenSUbject,
+     * setNullChosenCourseNum, and setNullChosenProfessor.
+     *
+     * @return
+     */
     public ComboBox<String> getChooseSubject()
     {
         return chooseSubject;
@@ -134,11 +147,6 @@ public class DropDownList extends Application
         return chosenProfessor;
     }
 
-    public DatabaseAPI getReturndbAPI()
-    {
-        return returndbAPI;
-    }
-
     public void setNullChosenSubject()
     {
         chosenSubject = null;
@@ -154,7 +162,11 @@ public class DropDownList extends Application
         chosenProfessor = null;
     }
 
-    // sets the lists for the initial state when nothing is entered
+    /**
+     * Sets the lists for the initial state when nothing is entered. Will set the lists to a
+     * default empty state when there is a choice higher in the heirarchy that has not
+     * been determined yet.
+     */
     private void setNullLists()
     {
         if(chosenSubject == null)
@@ -183,6 +195,10 @@ public class DropDownList extends Application
         return;
     }
 
+    /**
+     * Will reset the drop down lists to an empty state for when the Subject is changed and
+     * everything else needs to be cleared for a new search.
+     */
     private void resetLists()
     {
         chooseCourse.getItems().clear();
@@ -198,7 +214,10 @@ public class DropDownList extends Application
         chooseProfessor.setPromptText("Choose Course #");
     }
 
-    // change to combo box
+    /**
+     * Sets up the chooseSubject combobox. This comboBox is editable and will list all of
+     * the subjects in the database.
+     */
     private void setChooseSubject()
     {
         try
@@ -234,7 +253,12 @@ public class DropDownList extends Application
         }
     }
 
-    // gets the selected item from the subject combobox
+
+    /**
+     * Gets the selected item from the subject combobox. Gets the value from the chooseSubject
+     * combo box and stores it into the chosenSubject data member. It then calls the
+     * chooseCourseNum droplist function.
+     */
     private void setChosenSubject()
     {
         if(!chooseSubject.getItems().contains(chooseSubject.getValue()))
@@ -251,7 +275,11 @@ public class DropDownList extends Application
         setChooseCourse();
     }
 
-    // store the course numbers from the dbAPI into the combo box list
+    /**
+     * Store the course numbers from the dbAPI into the combo box list. Then displays the course
+     * numbers to choose from in the drop down list. The action event for this combo box is the
+     * setChosenCourseNum function.
+     */
     private void setChooseCourse()
     {
         try
@@ -291,6 +319,10 @@ public class DropDownList extends Application
         }
     }
 
+    /**
+     * Gets the value from the chooseCourse combo box and then stores it into the
+     * chosenCourseNum data member. This then starts the setChooseProfessor function.
+     */
     private void setChosenCourseNum()
     {
         if(!chooseCourse.getItems().contains(chooseCourse.getValue()))
@@ -317,6 +349,11 @@ public class DropDownList extends Application
         return;
     }
 
+    /**
+     * Sets up the chooseProfessor drop down list. It is populated with all of the professors
+     * for the specified subject and course from the preceding functions.
+     * The action event for this list is the setChosenProfessor function.
+     */
     private void setChooseProfessor()
     {
         try
@@ -342,8 +379,6 @@ public class DropDownList extends Application
             chooseProfessor.setEditable(false);
             chooseProfessor.setVisibleRowCount(12);
 
-            // this.chooseProfessor = prof;
-
             this.chooseProfessor.setOnAction(e -> setChosenProfessor());
 
         }
@@ -354,6 +389,10 @@ public class DropDownList extends Application
         }
     }
 
+    /**
+     * Sets the chosenProfessor and stores it in the respective data member. The value is
+     * obtained from the chooseProfessor ComboBox.
+     */
     private void setChosenProfessor()
     {
         if(!chooseProfessor.getItems().contains(chooseProfessor.getValue()))

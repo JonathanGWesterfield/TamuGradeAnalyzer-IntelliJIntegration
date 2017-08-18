@@ -31,6 +31,10 @@ public class DisplayData extends Application
         launch(args);
     }
 
+    /**
+     * Main function for testing this class
+     * @param primaryStage
+     */
     @Override public void start(Stage primaryStage)
     {
         try
@@ -52,11 +56,21 @@ public class DisplayData extends Application
 
     }
 
+    /**
+     * Default Constructor
+     */
     public DisplayData()
     {
         // default constructor
     }
 
+    /**
+     * Class constructor sets up the label displays for the percentages of the grade
+     * distribution and the number of A's, B's, etc.
+     *
+     * @param database
+     * @param isNull
+     */
     public DisplayData(DatabaseAPI database, boolean isNull)
     {
         if(isNull)
@@ -75,6 +89,10 @@ public class DisplayData extends Application
         setAvgGPA();
     }
 
+    /** class getter functions
+     *
+     * @return
+     */
     public VBox getPercentagesDisplay()
     {
         return percentagesDisplay;
@@ -95,7 +113,10 @@ public class DisplayData extends Application
         return avgGPA;
     }
 
-    // Displays the total number of each grade and the average GPA. Needs to be 200x195
+    /**
+     * Displays the total number of each grade and the average GPA. Needs to be 200x195.
+     * Puts all of the labels into the totalGrades VBox to be used in a different class.
+     */
     private void gradeData()
     {
         VBox data = new VBox(10);
@@ -133,6 +154,11 @@ public class DisplayData extends Application
         this.totalGrades = data;
     }
 
+    /**
+     * An empty VBox for when the app is just started and the Database object has no
+     * information on a specific class. Just fills the labels with a '0' for the
+     * number of grades for each label. Also stored in the totalGrades VBox
+     */
     private void emptyGradeData()
     {
         VBox data = new VBox(10);
@@ -163,7 +189,10 @@ public class DisplayData extends Application
         this.totalGrades = data;
     }
 
-    // displays all of the percentages for the course. Needs to be 210x225
+    /**
+     * Displays all of the percentages for the course. Needs to be 210x225. Displays all
+     * of the grade percentages by putting them into the percentagesDisplay VBox.
+     */
     private void setPercentagesDisplay()
     {
         VBox percentages = new VBox(10);
@@ -198,6 +227,11 @@ public class DisplayData extends Application
         this.percentagesDisplay = percentages;
     }
 
+    /**
+     * An empty VBox for when the app is just started and the Database object has no
+     * information on a specific class. Just fills the labels with a '0' for the
+     * grade percentages for each label. Also stored in the percentagesDisplay VBox
+     */
     private void emptyPercentages()
     {
         VBox percentages = new VBox(10);
@@ -232,8 +266,11 @@ public class DisplayData extends Application
         this.percentagesDisplay = percentages;
     }
 
-    // Displays what course we are analyzing
-    //needs to be 300x85
+    /**
+     * Displays what course we are analyzing. Needs to be 300x85. Sets the label for what
+     * Subject, course number and professor we are gathering the information for. Stores
+     * the information in the courseInfo VBox
+     */
     private void setCourseInfo()
     {
         VBox info = new VBox(10);
@@ -251,6 +288,11 @@ public class DisplayData extends Application
         this.courseInfo = info;
     }
 
+    /**
+     * The empty version of the setCourseInfo function for when the app is just started
+     * and the Database object has no information on a specific course. Also stored in the
+     * courseInfo Vbox.
+     */
     private void emptyCourseInfo()
     {
         VBox info = new VBox(10);
@@ -267,12 +309,18 @@ public class DisplayData extends Application
         this.courseInfo = info;
     }
 
+    /**
+     * The empty label for the average GPA
+     */
     private void setEmptyAvgGPA()
     {
         avgGPA = new Label("Average GPA: ");
         avgGPA.setFont(new Font("Futura", 25));
     }
 
+    /**
+     * Label displaying the averageGPA. Stored in the avgGPA label.
+     */
     private void setAvgGPA()
     {
         DecimalFormat df = new DecimalFormat("##.000");
