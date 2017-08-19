@@ -19,11 +19,15 @@ import java.io.*;
 
 public class DatabaseAPI
 {
-    private String connectionString = "jdbc:mysql://tamudata.cgmm1m5yk0wt.us-east-2." +
-            "rds.amazonaws.com:3306/TamuData";
+    // private String connectionString = "jdbc:mysql://localhost:8889/tamudata";
     private String password = "TamuDefaultUserHullabaloo2019WHO0P!"; // password for a default user account
     private String username = "DefaultUser"; // default username
     private Connection conn;
+
+    private String connectionString = "jdbc:mysql://tamudata.cgmm1m5yk0wt.us-east-2.rds.amazonaws.com:" +
+            "3306/tamudata";
+    // private String password = "8VPIH%qGUxD!^10W2ya3s2K#&NBDmN";
+    // private String username = "TamuGradeAdmin";
 
     private int numberA;
     private int numberB;
@@ -46,6 +50,8 @@ public class DatabaseAPI
     String courseSubject;
     int courseNum;
     String professor;
+
+
 
     /** Main function for testing the class*/
     public static void main(String[] args) {
@@ -137,7 +143,7 @@ public class DatabaseAPI
         this.professor = professor;
 
         // create all of the data for the class for the given professor
-        getTotalNumStudentsTaught();
+
         getNumA();
         getNumB();
         getNumC();
@@ -146,6 +152,8 @@ public class DatabaseAPI
         getNumQDrop();
 
         getAvgGPA();
+
+        getTotalNumStudentsTaught();
 
         getPercentA();
         getPercentB();

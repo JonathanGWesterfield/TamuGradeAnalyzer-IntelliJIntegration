@@ -42,7 +42,7 @@ public class DisplayAll extends Application
     private GradeChart gradeChart;
     private Button generate;
     private DatabaseAPI db;
-    private Stage primaryStage;
+    Stage primaryStage;
     private GridPane listPane;
     private GridPane grid;
     private Scene scene;
@@ -83,6 +83,12 @@ public class DisplayAll extends Application
             });
 
             this.primaryStage.show();
+
+            /*DatabaseAPI db = new DatabaseAPI();
+            DisplayAll newDisplay = new DisplayAll();
+            // newDisplay.showPrimaryStage();
+            primaryStage = newDisplay.primaryStage;
+            primaryStage.show();*/
         }
         catch (FileNotFoundException e)
         {
@@ -141,6 +147,14 @@ public class DisplayAll extends Application
     }
 
     /**
+     * hides the primary stage
+     */
+    public void hidePrimaryStage()
+    {
+        primaryStage.hide();
+    }
+
+    /**
      * sets the action event for the generate button
      */
     public void setGenerate()
@@ -173,6 +187,7 @@ public class DisplayAll extends Application
                 e.consume();
                 exit();
             });
+            return;
         }
         catch (FileNotFoundException e)
         {
