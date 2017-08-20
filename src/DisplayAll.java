@@ -491,7 +491,7 @@ public class DisplayAll extends Application
 
     /**
      * Sets up the image viewer for the calligraphyJ image and stores it in the
-     * classes CalligraphyJ data memeber
+     * classes CalligraphyJ data member
      */
     private void setCalligraphyJ()
     {
@@ -515,7 +515,7 @@ public class DisplayAll extends Application
 
     /**
      * Sets up the image viewer for the Tamu Seal image and stores it in the
-     * classes tamuSeal data memeber
+     * classes tamuSeal data member
      */
     private void setTamuSeal()
     {

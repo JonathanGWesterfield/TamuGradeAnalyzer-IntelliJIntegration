@@ -137,7 +137,6 @@ public class DatabaseAPI
         this.professor = professor;
 
         // create all of the data for the class for the given professor
-        getTotalNumStudentsTaught();
         getNumA();
         getNumB();
         getNumC();
@@ -146,6 +145,8 @@ public class DatabaseAPI
         getNumQDrop();
 
         getAvgGPA();
+
+        getTotalNumStudentsTaught();
 
         getPercentA();
         getPercentB();
