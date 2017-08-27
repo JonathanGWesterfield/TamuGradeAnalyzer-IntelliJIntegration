@@ -81,18 +81,18 @@ public class main extends Application
             @Override
             public void handle(WorkerStateEvent event)
             {
-                // hides the splash screen
-                loadScreen.hideStage();
-
-                System.out.print("Was able to hide the splashscreen");
-
-                //Loadscreen will go out of scope once function ends so it saves memory
+                // Loadscreen will go out of scope once function ends so it saves memory
 
                 System.out.println("Trying to create the Main Stage");
 
                 display = new DisplayAll(splashScreen.getValue());
 
                 display.showPrimaryStage();
+
+                // hides the splash screen
+                loadScreen.hideStage();
+
+                System.out.print("Was able to hide the splashscreen");
 
                 return;
             }

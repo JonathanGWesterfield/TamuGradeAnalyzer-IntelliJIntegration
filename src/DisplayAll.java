@@ -3,31 +3,21 @@
  */
 
 import javafx.scene.control.*;
-import javafx.animation.*;
 import javafx.geometry.Insets;
 import javafx.stage.*;
-import javafx.collections.*;
 import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.image.*;
-import javafx.scene.control.*;
 import javafx.event.*;
 import javafx.scene.text.*;
 import javafx.application.*;
-import javafx.beans.value.*;
-import javafx.event.*;
 import javafx.geometry.*;
-import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.concurrent.*;
-import javax.xml.crypto.Data;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Scanner;
 
 
 /** This class ties in all of the components from the GradeChart, DisplayData, and
@@ -155,14 +145,14 @@ public class DisplayAll extends Application
      */
     private void setPrimaryStage()
     {
-        try
+        /*try
         {
             primaryStage = new Stage(StageStyle.DECORATED);
             this.primaryStage = primaryStage;
 
             // Supposedly changes the scene Icon
             this.primaryStage.getIcons().add(new Image(new FileInputStream(
-                    "resources/Calligraphy J.png")));
+                    "images/Calligraphy J.png")));
 
             this.primaryStage.setScene(scene);
             this.primaryStage.setTitle("Texas A&M Professor Grade Analyzer");
@@ -178,7 +168,25 @@ public class DisplayAll extends Application
         {
             e.printStackTrace();
             AlertError.showImageNotFound();
-        }
+        }*/
+
+        primaryStage = new Stage(StageStyle.DECORATED);
+        this.primaryStage = primaryStage;
+
+        // Supposedly changes the scene Icon
+        this.primaryStage.getIcons().add(new Image(getClass().getResourceAsStream(
+                "images/Calligraphy J.png")));
+
+        this.primaryStage.setScene(scene);
+        this.primaryStage.setTitle("Texas A&M Professor Grade Analyzer");
+
+        // declares the procedure for the exit button
+        this.primaryStage.setOnCloseRequest(e ->
+        {
+            e.consume();
+            exit();
+        });
+
         return;
     }
 
@@ -495,10 +503,13 @@ public class DisplayAll extends Application
      */
     private void setCalligraphyJ()
     {
-        try
+        /*try
         {
             // simple displays ImageView the image as is
-            calligraphyJ = new ImageView(new Image(new FileInputStream("resources/Calligraphy J.png")));
+            calligraphyJ = new ImageView(new Image(new FileInputStream(
+                    "resources/images.images/Calligraphy J.png")));
+            // calligraphyJ = new ImageView(new Image(main.class.getResourceAsStream(
+            //         "Calligraphy J.png")));
             calligraphyJ.setFitWidth(325);
             calligraphyJ.setFitHeight(325);
             calligraphyJ.setPreserveRatio(true);
@@ -510,7 +521,15 @@ public class DisplayAll extends Application
             System.err.println("\nProblem loading the Calligraphy J image\n");
             AlertError.showImageNotFound();
             e.printStackTrace();
-        }
+        }*/
+
+        calligraphyJ = new ImageView(new Image(getClass().getResourceAsStream(
+                "images/Calligraphy J.png")));
+        calligraphyJ.setFitWidth(325);
+        calligraphyJ.setFitHeight(325);
+        calligraphyJ.setPreserveRatio(true);
+        calligraphyJ.setSmooth(true);
+        calligraphyJ.setCache(true);
     }
 
     /**
@@ -519,9 +538,12 @@ public class DisplayAll extends Application
      */
     private void setTamuSeal()
     {
-        try
+        /*try
         {
-            tamuSeal = new ImageView(new Image(new FileInputStream("resources/No Background TAMU Seal.png")));
+            tamuSeal = new ImageView(new Image(new FileInputStream(
+                    "resources/images.images/No Background TAMU Seal.png")));
+            // tamuSeal = new ImageView(new Image(main.class.getResourceAsStream(
+            //         "No Background TAMU Seal.png")));
             tamuSeal.setFitWidth(325);
             tamuSeal.setFitHeight(325);
             tamuSeal.setPreserveRatio(true);
@@ -530,9 +552,18 @@ public class DisplayAll extends Application
         }
         catch(IOException e)
         {
-            System.err.println("\nProblem loading the Calligraphy J image\n");
+            System.err.println("\nProblem loading the Tamu Seal image\n");
             AlertError.showImageNotFound();
             e.printStackTrace();
-        }
+        }*/
+
+
+        tamuSeal = new ImageView(new Image(getClass().getResourceAsStream(
+                "images/No BackGround TAMU Seal.png")));
+        tamuSeal.setFitWidth(325);
+        tamuSeal.setFitHeight(325);
+        tamuSeal.setPreserveRatio(true);
+        tamuSeal.setSmooth(true);
+        tamuSeal.setCache(true);
     }
 }

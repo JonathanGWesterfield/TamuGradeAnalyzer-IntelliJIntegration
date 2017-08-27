@@ -3,22 +3,15 @@
  */
 
 import javafx.application.Application;
-import javafx.application.Preloader;
 import javafx.geometry.*;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import java.io.*;
-import java.util.*;
 
 public class LoadScreen extends Application
 {
@@ -156,10 +149,13 @@ public class LoadScreen extends Application
 
     private void setCalligraphyJ()
     {
-        try
+        /*try
         {
             // simple displays ImageView the image as is
-            calligraphyJ = new ImageView(new Image(new FileInputStream("resources/Calligraphy J.png")));
+            calligraphyJ = new ImageView(new Image(new FileInputStream(
+                    "resources/images.images/Calligraphy J.png")));
+            // calligraphyJ = new ImageView(new Image(main.class.getResourceAsStream(
+            //         "Calligraphy J.png")));
             calligraphyJ.setFitWidth(325);
             calligraphyJ.setFitHeight(325);
             calligraphyJ.setPreserveRatio(true);
@@ -171,14 +167,25 @@ public class LoadScreen extends Application
             System.err.println("\nProblem loading the Calligraphy J image\n");
             AlertError.showImageNotFound();
             e.printStackTrace();
-        }
+        }*/
+
+        calligraphyJ = new ImageView(new Image(getClass().getResourceAsStream(
+                "images/Calligraphy J.png")));
+        calligraphyJ.setFitWidth(325);
+        calligraphyJ.setFitHeight(325);
+        calligraphyJ.setPreserveRatio(true);
+        calligraphyJ.setSmooth(true);
+        calligraphyJ.setCache(true);
     }
 
     private void setTamuSeal()
     {
-        try
+        /*try
         {
-            tamuSeal = new ImageView(new Image(new FileInputStream("resources/No Background TAMU Seal.png")));
+            tamuSeal = new ImageView(new Image(new FileInputStream(
+                    "resources/images.images/No Background TAMU Seal.png")));
+            // tamuSeal = new ImageView(new Image(main.class.getResourceAsStream(
+            //         "No Background TAMU Seal.png")));
             tamuSeal.setFitWidth(325);
             tamuSeal.setFitHeight(325);
             tamuSeal.setPreserveRatio(true);
@@ -187,10 +194,19 @@ public class LoadScreen extends Application
         }
         catch(IOException e)
         {
-            System.err.println("\nProblem loading the Calligraphy J image\n");
+            System.err.println("\nProblem loading the Tamu Seal image\n");
             AlertError.showImageNotFound();
             e.printStackTrace();
-        }
+        }*/
+
+
+        tamuSeal = new ImageView(new Image(getClass().getResourceAsStream(
+                "images/No BackGround TAMU Seal.png")));
+        tamuSeal.setFitWidth(325);
+        tamuSeal.setFitHeight(325);
+        tamuSeal.setPreserveRatio(true);
+        tamuSeal.setSmooth(true);
+        tamuSeal.setCache(true);
     }
 }
 
