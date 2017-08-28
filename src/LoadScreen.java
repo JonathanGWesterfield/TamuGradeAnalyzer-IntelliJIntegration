@@ -162,7 +162,7 @@ public class LoadScreen extends Application
             calligraphyJ.setSmooth(true);
             calligraphyJ.setCache(true);
         }
-        catch(IOException e)
+        catch(FileNotFoundException e)
         {
             System.err.println("\nProblem loading the Calligraphy J image\n");
             AlertError.showImageNotFound();
@@ -192,7 +192,7 @@ public class LoadScreen extends Application
             tamuSeal.setSmooth(true);
             tamuSeal.setCache(true);
         }
-        catch(IOException e)
+        catch(FileNotFoundException e)
         {
             System.err.println("\nProblem loading the Tamu Seal image\n");
             AlertError.showImageNotFound();
