@@ -5,8 +5,19 @@ import java.util.*;
 /**
  * Created by jonathanw on 8/15/17.
  */
+
+/**
+ * This class is now unnecessary because it now belongs to the the TamuGradAnalyzer-Insert
+ * project which now handles all of the functions below. The insert functions will no longer
+ * work because the proper permissions are not granted to the default users, whose username and
+ * password are hardcoded in the DatabaseAPI class
+ */
 public class StripAndInsert
 {
+    /**
+     * main function for testing
+     * @param args
+     */
     public static void main(String[] args)
     {
         try
@@ -36,10 +47,18 @@ public class StripAndInsert
         }
     }
 
-    // unpacks the condensed data and inserts into the database using the DB API
+    /**
+     * unpacks the condensed data from the CondensedData.dat file and inserts into the
+     * database using the DBAPI class
+     *
+     * @param condensedFileName the name of the condensed data file
+     * @param db the object which gives this function database access
+     * @throws FileNotFoundException
+     */
     public static void unpackAndInsert(String condensedFileName, DatabaseAPI db)
             throws FileNotFoundException
     {
+        // creates all the fields that will be pulled from the condensed data file
         System.out.println("\n");
         StringTokenizer tokenizer;
         int courseNum, sectionNum, year, numA, numB, numC, numD, numF, numQdrop;
@@ -60,7 +79,7 @@ public class StripAndInsert
             System.out.println("\nBefore Unpack: " + infoLine);
             tokenizer = new StringTokenizer(infoLine, ";");
 
-            /* There are some dirty inputs that don't have enough information in the line
+            /** There are some dirty inputs that don't have enough information in the line
              * This verifies that there is enough information to be input into the Database */
             try
             {

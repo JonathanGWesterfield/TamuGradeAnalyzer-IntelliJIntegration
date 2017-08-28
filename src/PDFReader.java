@@ -9,6 +9,11 @@ import org.apache.pdfbox.*;
 import java.io.*;
 import java.util.*;
 
+/**
+ * This class is now unnecessary because it now belongs to the the TamuGradAnalyzer-Insert
+ * project which now handles all of the functions below
+ */
+
 /** This class reads from the given pdf's and strips the text from them. it then
  * puts the text into a .dat file for further manipulation
  */

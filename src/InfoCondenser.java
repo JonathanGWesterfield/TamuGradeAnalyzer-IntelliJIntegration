@@ -5,6 +5,11 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * This class is now unnecessary because it now belongs to the the TamuGradAnalyzer-Insert
+ * project which now handles all of the functions below
+ */
+
 /* condenses the information in the GradeData.dat file in order to make updating
 the database possible
 
@@ -240,4 +245,3 @@ public class InfoCondenser
         }
     }
 }
-//DON'T INCLUDE SECTION NUMBERS 200 (HONORS SECTIONS) IN THE TABLE
