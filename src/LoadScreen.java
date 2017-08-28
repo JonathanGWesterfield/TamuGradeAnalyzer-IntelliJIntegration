@@ -22,6 +22,10 @@ public class LoadScreen extends Application
     Stage stage;
 
 
+    /**
+     * main function as well as the public start function for testing
+     * @param args
+     */
     public static void main(String[] args)
     {
         launch(args);
@@ -31,6 +35,9 @@ public class LoadScreen extends Application
         LoadScreen screen = new LoadScreen();
     }
 
+    /**
+     * class constructor
+     */
     public LoadScreen()
     {
         System.out.println("LoadScreen default constructor called");
@@ -41,6 +48,10 @@ public class LoadScreen extends Application
         setStage();
     }
 
+    /**
+     * public getter functions
+     * @return
+     */
     public ImageView getCalligraphyJ()
     {
         return calligraphyJ;
@@ -71,6 +82,11 @@ public class LoadScreen extends Application
         stage.hide();
     }
 
+    /**
+     * Sets up the load screen with the calligraphy J and tamu seal images. Also puts the title
+     * of the application and a few labels with my name, class year, and a statement telling
+     * people to credit me if they use or distribute my app
+     */
     private void setPane()
     {
         Label name = new Label("Texas A&M Professor Grade Analysis Tool");
@@ -123,6 +139,10 @@ public class LoadScreen extends Application
         pane.setMinWidth(300);
     }
 
+    /**
+     * puts the newly created BorderPane on top of a stack pane and then puts a progress indicator
+     * on top of that borderpane
+     */
     private void setStackPane()
     {
         ProgressIndicator progress = new ProgressIndicator();
@@ -138,6 +158,9 @@ public class LoadScreen extends Application
         return;
     }
 
+    /**
+     * puts the newly created stackpane on a stage to be used in a different class
+     */
     private void setStage()
     {
         Scene scene = new Scene(stackPane);
@@ -147,6 +170,9 @@ public class LoadScreen extends Application
         return;
     }
 
+    /**
+     * sets and ImageView for the calligraphy J image so that it can be put on the loadscreen
+     */
     private void setCalligraphyJ()
     {
         /*try
@@ -178,6 +204,9 @@ public class LoadScreen extends Application
         calligraphyJ.setCache(true);
     }
 
+    /**
+     * sets and ImageView for the Tamu Seal image so that it can be put on the loadscreen
+     */
     private void setTamuSeal()
     {
         /*try
