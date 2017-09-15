@@ -7,6 +7,10 @@ The only reason this is named IntelliJIntegration is because I am currently tryi
 This project is now finished (for the most part). It is fully functioning and has been put into an executable jar. All that is needed to
 run the jar is the JRE version 1.8.
 
+# The Runnable Jar
+The runnable .jar file is located in out/Jars/Tamu Grade Analyzer.jar. Feel free to download it by clicking "Download."
+
+
 # What it does
 
 This is a project which will allow me to anaylze the grades that Texas A&M professors give. A gui
