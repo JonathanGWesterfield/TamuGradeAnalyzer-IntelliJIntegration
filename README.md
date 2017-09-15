@@ -32,6 +32,5 @@ The app needs a different way to read in the grade data. Texas A&M reformatted t
 using PDFBox no longer outputs usable information. What is needed to fix this might be an OCR but they are very complicated to work with
 and I did not have time to implement this (in time for the upcoming career fair). As a result, the data for the classes is only up to date
 for up to Spring 2016. The records go back to fall 2013. The code needs to be cleaned up (There is a lot of code that has been commented out
-that is still in there. There are still many classes in there that need to be commented and documented (I didn't do that for the more
-convoluted classes in the project so I forgot how they work). Also there are plenty of ways to make the app better like allowing people
+that is still in there. Also there are plenty of ways to make the app better, like allowing people
 to write reviews for the professors they have, making the UI look nicer and presents information more effectively.
