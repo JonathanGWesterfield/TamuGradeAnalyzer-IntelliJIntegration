@@ -3,6 +3,14 @@
 The only reason this is named IntelliJIntegration is because I am currently trying to learn how to use github through IntelliJ 
 (since it is the main IDE that I prefer to use)
 
+# Final Product
+![](https://github.com/JonathanGWesterfield/TamuGradeAnalyzer-IntelliJIntegration/blob/master/Demo%20Images/TamuGradeAnalyzerScreenShot1.png)
+___
+![](https://github.com/JonathanGWesterfield/TamuGradeAnalyzer-IntelliJIntegration/blob/master/Demo%20Images/TamuGradeAnalyzerScreenShot2.png)
+___
+![](https://github.com/JonathanGWesterfield/TamuGradeAnalyzer-IntelliJIntegration/blob/master/Demo%20Images/TamuGradeAnalyzerScreenShot4.png)
+
+
 # Update as of 8/27/17
 This project is now finished (for the most part). It is fully functioning and has been put into an executable jar. All that is needed to
 run the jar is the JRE version 1.8.
