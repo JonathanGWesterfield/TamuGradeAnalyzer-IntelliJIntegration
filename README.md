@@ -3,19 +3,11 @@
 The only reason this is named IntelliJIntegration is because I am currently trying to learn how to use github through IntelliJ 
 (since it is the main IDE that I prefer to use)
 
-# Final Product
-![](https://github.com/JonathanGWesterfield/TamuGradeAnalyzer-IntelliJIntegration/blob/master/Demo%20Images/TamuGradeAnalyzerScreenShot1.png)
-___
-![](https://github.com/JonathanGWesterfield/TamuGradeAnalyzer-IntelliJIntegration/blob/master/Demo%20Images/TamuGradeAnalyzerScreenShot2.png)
-___
-![](https://github.com/JonathanGWesterfield/TamuGradeAnalyzer-IntelliJIntegration/blob/master/Demo%20Images/TamuGradeAnalyzerScreenShot4.png)
-
-
 # Update as of 8/27/17
 This project is now finished (for the most part). It is fully functioning and has been put into an executable jar. All that is needed to
 run the jar is the JRE version 1.8.
 
-# The Runnable Jar
+# Download
 The runnable .jar file is located in out/Jars/Tamu Grade Analyzer.jar. Feel free to download it by clicking "Download."
 
 # Documentation
@@ -34,6 +26,13 @@ professor has taught that course. I plan to distribute this application freely t
 wish decent database hosting services were free. The data for the classes is only up to date
 for up to Spring 2016. The records go back to fall 2013 as I thought that anything further back than that would be outdated and
 irrelevant.
+
+# Final Product
+![](https://github.com/JonathanGWesterfield/TamuGradeAnalyzer-IntelliJIntegration/blob/master/Demo%20Images/TamuGradeAnalyzerScreenShot1.png)
+___
+![](https://github.com/JonathanGWesterfield/TamuGradeAnalyzer-IntelliJIntegration/blob/master/Demo%20Images/TamuGradeAnalyzerScreenShot2.png)
+___
+![](https://github.com/JonathanGWesterfield/TamuGradeAnalyzer-IntelliJIntegration/blob/master/Demo%20Images/TamuGradeAnalyzerScreenShot4.png)
 
 # The Back End
 
