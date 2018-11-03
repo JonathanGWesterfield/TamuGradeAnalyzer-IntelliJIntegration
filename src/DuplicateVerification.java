@@ -39,6 +39,8 @@ needs to be skipped over or removed from the list of files to be analyzed
                 System.out.println("List of Files: " + listOfFiles.get(i) + " Before mod");
             }
 
+            // parses through every name in the array and compares it to what is in the
+            // match verification file
             for(int i = 0; i < matchList.size(); i++)
             {
                 for(int j = listOfFiles.size() - 1; j >= 0; j--)
