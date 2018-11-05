@@ -9,6 +9,7 @@ run the jar is the JRE version 1.8.
 
 # Download
 The runnable .jar file is located in out/Jars/Tamu Grade Analyzer.jar. Feel free to download it by clicking "Download."
+However, you may need to call it from the command line. There have been recent issues where it doesn't run by simply clicking on it.
 
 # Documentation
 
