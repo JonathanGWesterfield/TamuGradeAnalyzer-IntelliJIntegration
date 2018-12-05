@@ -3,6 +3,9 @@
 The only reason this is named IntelliJIntegration is because I am currently trying to learn how to use github through IntelliJ 
 (since it is the main IDE that I prefer to use)
 
+# Update as of 12/4/18
+This project no longer works. The Amazon AWS free instance went over its data usage and started charging me so I had to take down the database. 
+
 # Update as of 8/27/17
 This project is now finished (for the most part). It is fully functioning and has been put into an executable jar. All that is needed to
 run the jar is the JRE version 1.8.
